@@ -1,0 +1,9 @@
+<%= simple_form_for(r) do |f| %>
+	<%= f.error_notification %>
+
+	<% form_element_names.each do |e| %>
+		<%= f.send e %>
+	<% end %>
+
+  <%= f.actions %>
+<% end %>

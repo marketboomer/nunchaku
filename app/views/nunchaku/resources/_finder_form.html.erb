@@ -1,0 +1,19 @@
+<%= search_form_for filter, url: collection_path,
+                    builder: SimpleForm::FormBuilder,
+                    html: {class: 'form-inline'} do |f| %>
+
+  <div class="input-group">
+    <span class="input-group-addon"><%= search_icon %></span>
+
+		<%= text_field_tag 	:term,
+			                  params[:term],
+			                  class: 'search-query form-control',
+	                      style: 'width: 100%;',
+			                  placeholder: t(:search_for, :models => human(resource_class).pluralize)
+		%>
+
+    <span class="input-group-btn">
+		  <%= f.button :submit, t(:find), class: 'btn btn-info' %>
+    </span>
+  </div>
+<% end %>

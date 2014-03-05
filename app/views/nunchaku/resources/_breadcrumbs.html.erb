@@ -1,0 +1,21 @@
+<ul class="breadcrumb">
+  <% association_chain.each_with_index do |r, i| %>
+    <li>
+      <%= link_to_unless_current r.class.model_name.human.pluralize,
+                  polymorphic_path(association_chain.take(i) + [r.class]) %>
+    </li>
+    <li>
+      <%= link_to_unless_current r.decorate, polymorphic_path(association_chain.take(i + 1)) %>
+    </li>
+  <% end %>
+
+  <% if resource? %>
+    <li class="active">
+      <%= link_to_unless_current resource_class.model_name.human.pluralize,
+                  polymorphic_path(association_chain + [resource_class]) %>
+    </li>
+    <li class="active"><%= resource %></li>
+  <% else %>
+    <li class="active"><%= resource_class.model_name.human.pluralize %></li>
+  <% end %>
+</ul>
