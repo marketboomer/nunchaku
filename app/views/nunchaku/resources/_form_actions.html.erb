@@ -1,0 +1,13 @@
+<div class="form-actions pull-right">
+  <%= f.button :submit, :class => 'btn btn-primary submit' %>
+
+  <% if f.deletable? %>
+    <%= link_to(resource_path, :class => 'btn btn-danger',
+                               :role => 'button',
+                               :method => :delete,
+                               :data => { confirm: t(:confirm) }) do %>
+      <i class="icon-trash"></i><%= t(:delete) %> <%= f.object.class.model_name.human %>
+    <% end %>
+  <% end %>
+</div>
+<div class="clearfix"></div>

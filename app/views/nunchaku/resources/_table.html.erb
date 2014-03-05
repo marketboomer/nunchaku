@@ -1,0 +1,20 @@
+<table id="<%= resource_class.name.underscore %>_table" class="table table-bordered table-condensed table-hover" >
+  <%=
+    render :partial => 'table_header',
+           :locals => {
+             :resource_class => resource_class,
+             :column_names => column_names
+           }
+  %>
+
+  <%=
+    render :partial => 'table_body',
+           :locals => {
+             :collection => collection,
+             :resource_class => resource_class,
+             :column_names => column_names
+           }
+  %>
+
+  <%= render 'table_footer' %>
+</table>

@@ -1,0 +1,17 @@
+(function() {
+  var modal = $("<%= escape_javascript(render('modal')) %>").appendTo("body"),
+      form = $("<%= escape_javascript(render('file_form')) %>").closest("form");
+  
+  modal.children().wrapAll(form.clone().empty());
+
+  $("<h3><%= I18n.t(:import) %> <%= resource_class.model_name.human.downcase %></h3>")
+    .appendTo(modal.find(".modal-header"));
+  form.find(".form-actions").detach().children()
+    .appendTo(modal.find(".modal-footer"));
+  form.children().appendTo(modal.find(".modal-body"));
+
+  modal.modal()
+       .on('hidden', function() {
+         $(this).remove();
+       });
+})();

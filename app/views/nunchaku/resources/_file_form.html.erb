@@ -1,0 +1,13 @@
+<%= form_tag 	[:import, with_chain(resource_class)].flatten, 
+							:class => 'form form-horizontal', 
+							:method => :post, 
+							:multipart => true do %>
+
+  <div class="input-group">
+    <%= file_field_tag :file %>
+  </div>
+
+  <div class="form-actions pull-right">
+    <%= submit_tag "#{t(:import)}", :class => 'btn btn-primary' %>
+  </div>
+<% end %>

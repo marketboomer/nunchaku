@@ -1,0 +1,21 @@
+<% content_for :header do %>
+	<%= content_header %>
+<% end %>
+
+<div class="content_well well">
+	<div class="row">
+		<div class="col-md-7">
+			<%= render 'finder_form' %>
+		</div>
+
+		<div class="col-md-5">	
+			<%= render 'pagination' %>
+		</div>
+	</div>
+
+	<%= render :partial => 'table', :locals => { :column_names => column_names } %>
+</div>
+
+<% content_for :footer do %>
+	<%= render 'content_footer' %>
+<% end %>
