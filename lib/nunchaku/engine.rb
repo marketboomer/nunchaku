@@ -8,10 +8,9 @@ require 'less-rails-bootstrap'
 require 'less-rails-fontawesome'
 require 'bootstrap-datepicker-rails'
 require 'select2-rails'
-require 'bootstrap-x-editable-rails'
 require 'sorted'
 require 'csv'
-  
+
 module Nunchaku
   class Engine < ::Rails::Engine
     isolate_namespace Nunchaku

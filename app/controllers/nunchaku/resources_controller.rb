@@ -1,4 +1,4 @@
-class Nunchaku::ResourcesController < ActionController::Base
+class Nunchaku::ResourcesController < Nunchaku::ApplicationController
   include Nunchaku::Resources
 
   AUTOCOMPLETE_LIMIT = 50
