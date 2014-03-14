@@ -20,10 +20,9 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 4.0"
 
-  s.add_dependency "therubyracer", "~> 0.12"
-  s.add_dependency "less-rails", "~> 2.4"
-  s.add_dependency "less-rails-bootstrap", "~> 3.0"
-  s.add_dependency "less-rails-fontawesome"
+  s.add_dependency 'sass-rails', '~> 4.0.0'
+  s.add_dependency 'bootstrap-sass', '~> 3.1.1'
+  s.add_dependency "font-awesome-sass"
 
   s.add_dependency "awesome_nested_set", "~> 2.1"
   s.add_dependency "state_machine", "~> 1.2"
