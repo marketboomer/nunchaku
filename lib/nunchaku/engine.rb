@@ -3,9 +3,9 @@ require 'core_ext/hash'
 require 'super_resources'
 require 'cancan'
 require 'acts_as_list'
-require 'less-rails'
-require 'less-rails-bootstrap'
-require 'less-rails-fontawesome'
+require 'sass-rails'
+require 'bootstrap-sass'
+require 'font-awesome-sass'
 require 'bootstrap-datepicker-rails'
 require 'select2-rails'
 require 'sorted'
@@ -17,8 +17,5 @@ module Nunchaku
       g.test_framework :rspec, :fixture => false, :view_specs => false
       g.fixture_replacement :factory_girl, :dir => 'spec/factories'
     end
-
-    config.assets.paths << 'app/assets/fonts'
-    config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
   end
 end
