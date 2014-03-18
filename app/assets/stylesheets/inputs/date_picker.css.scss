@@ -1,9 +1,4 @@
-/*
- * Include and customize styles for the bootstrap-datepicker plugin
- *
- *=require bootstrap-datepicker
- *=require_self
- */
+@import 'bootstrap-datepicker';
 
 // Text inputs for date picker are hidden by default and displayed by javascript
 // --------------------------------------------------------------------------------
