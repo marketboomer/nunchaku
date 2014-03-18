@@ -1,4 +1,4 @@
-module Nunchaku::FullTextSearchable
+module Nunchaku::FuzzySearchable
   extend ActiveSupport::Concern
 
   included do
@@ -9,7 +9,7 @@ module Nunchaku::FullTextSearchable
 
   module ClassMethods
 
-    def full_text_search terms, opts = {}
+    def fuzzy_search terms, opts = {}
       return all if terms.blank?
       col = opts[:column] || 'search_text'
       where(terms.map { |term| "#{table_name}.#{col} ILIKE ?" }.join(' AND '), *(terms.map { |t| "%#{t}%" }))
@@ -18,7 +18,7 @@ module Nunchaku::FullTextSearchable
     def ordered_search terms, opts = {}
       sort, order, default_sort = opts[:sort], opts[:order], opts[:default_sort]
       select_clause(sort, default_sort)
-      .full_text_search(terms, opts)
+      .fuzzy_search(terms, opts)
       .order_clause(sort, order, default_sort)
     end
 
@@ -52,7 +52,7 @@ module Nunchaku::FullTextSearchable
     end
 
     # By default, concatenate text or string values that arent locale, search_text or prefixed with concatenated, put them in search_text and hanize
-    def full_text_search_cols
+    def fuzzy_search_cols
       columns_hash.reject do |k,v|
         ['search_text', 'locale'].include?(v.name) || (v.name.split('_').first == 'concatenated') || ![:string, :text].include?(v.type)
       end.map { |k,v| k }
@@ -62,7 +62,7 @@ module Nunchaku::FullTextSearchable
 
   def concatenate
     return unless self.class.attribute_names.include? 'search_text'
-    self.search_text = self.class.full_text_search_cols.map { |att| send(att).to_s }.reject(&:blank?).join(' ').hanize
+    self.search_text = self.class.fuzzy_search_cols.map { |att| send(att).to_s }.reject(&:blank?).join(' ').hanize
   end
 
 end
