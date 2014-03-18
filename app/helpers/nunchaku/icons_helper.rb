@@ -23,6 +23,18 @@ module Nunchaku::IconsHelper
     send "#{resource.class.name.underscore}_icon", *args
   end
 
+  def help_icon(*args)
+    icon :question, *args
+  end
+
+  def sign_in_icon(*args)
+    icon :sign_in, *args
+  end
+
+  def sign_out_icon(*args)
+    icon :sign_out, *args
+  end
+
   def search_icon(*args)
     icon :search, *args
   end
