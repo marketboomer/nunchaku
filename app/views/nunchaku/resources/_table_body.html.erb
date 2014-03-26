@@ -1,6 +1,6 @@
 <tbody
-  <% if association_chain.any? %>
-    chain="<%= polymorphic_path association_chain %>"
+  <% if nests.any? %>
+    chain="<%= polymorphic_path nests %>"
   <% end %>
 >
   <%=
