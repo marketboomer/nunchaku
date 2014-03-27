@@ -1,4 +1,4 @@
-module Nunchaku::Translated
+module Nunchaku::FuzzySearched
 
   extend ActiveSupport::Concern
 

@@ -1,6 +1,6 @@
 module Nunchaku::Translatable
   extend ActiveSupport::Concern
-  include Nunchaku::FullTextSearchable
+  include Nunchaku::FuzzySearchable
 
   included do
     has_many :translations, :dependent => :destroy, :class_name => translation_class_name
@@ -69,7 +69,7 @@ module Nunchaku::Translatable
       where(terms.map { |term| "#{translation_table_name}.search_text ILIKE ?" }.join(' AND '), *(terms.map { |t| "%#{t}%" }))
     end
 
-    def full_text_search terms, opts = {}
+    def fuzzy_search terms, opts = {}
       locale = opts[:locale] || I18n.locale
       if terms.empty?
         t_join(locale).where("#{translation_table_name}.id IS NOT NULL") # Vital for performance of order by with limit
@@ -79,7 +79,7 @@ module Nunchaku::Translatable
     end
 
     def translated_search(terms, locale=I18n.locale)
-      full_text_search(terms, :locale => locale).t(locale)
+      fuzzy_search(terms, :locale => locale).t(locale)
     end
 
     def parent_targets
