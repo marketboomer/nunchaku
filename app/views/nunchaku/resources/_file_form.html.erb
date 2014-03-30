@@ -1,4 +1,4 @@
-<%= form_tag 	[:import, with_chain(resource_class)].flatten, 
+<%= form_tag 	[:import, with_nesting(resource_class)].flatten, 
 							:class => 'form form-horizontal', 
 							:method => :post, 
 							:multipart => true do %>
