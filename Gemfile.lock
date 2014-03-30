@@ -1,3 +1,11 @@
+GIT
+  remote: git@github.com:habanerohq/super_resources.git
+  revision: 3810e77fd9bb25a37b1d2ed05f3769b81ba2c9d6
+  branch: version_2_0_0
+  specs:
+    super_resources (1.0.0)
+      responders
+
 PATH
   remote: .
   specs:
@@ -20,11 +28,6 @@ PATH
       sorted
       state_machine (~> 1.2)
       super_resources
-
-PATH
-  remote: ../super_resources
-  specs:
-    super_resources (1.0.0)
 
 GEM
   remote: https://rubygems.org/
