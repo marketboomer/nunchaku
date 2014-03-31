@@ -1,9 +1,10 @@
 GIT
   remote: git@github.com:habanerohq/super_resources.git
-  revision: feff6d328cb1150577483fab11e6d235ae841008
-  branch: full_paths
+  revision: 3810e77fd9bb25a37b1d2ed05f3769b81ba2c9d6
+  branch: version_2_0_0
   specs:
     super_resources (1.0.0)
+      responders
 
 PATH
   remote: .
