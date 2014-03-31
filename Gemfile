@@ -14,4 +14,4 @@ gemspec
 # gem 'debugger'
 
 gem 'super_resources', 	:git => 'git://github.com/habanerohq/super_resources.git',
-                       	:branch => 'full_paths'
+                       	:branch => 'version_2_0_0'

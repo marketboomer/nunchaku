@@ -16,6 +16,6 @@ module Nunchaku::RedirectsForDetailRecord
   protected
 
   def location_after_change_action
-    with_chain(controller_name)
+    with_nesting(controller_name)
   end
 end
