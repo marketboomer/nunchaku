@@ -1,0 +1,43 @@
+<% content_for :header do %>
+  <%= content_header %>
+<% end %>
+
+<div class="content_well well">
+  <div class="row">
+    <div class="col-md-8 col-xs-8">
+      <ol id="<%= resource_instance_name %>_list">
+        <% collection.each do |r| %>
+          <li id="<%= "#{resource_instance_name}_#{r.id}" %>" class="<%= resource_instance_name %>" target="<%= r.id %>"><%= r %></li>
+        <% end %>
+      </ol>
+    </div>
+
+    <div class="col-md-4 col-xs-4">
+      <div class="instruction_well">
+        <%= t('instructions.sort') %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :footer do %>
+  <%= render 'content_footer' %>
+<% end %>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+	  $('#<%= resource_instance_name %>_list').sortable({
+      placeholder: "ui-state-highlight",
+      zIndex: 2700,
+      opacity: 0.7,
+      helper: 'clone',
+      revert: true,
+
+			update: function(event, ui) {
+				$.post('/<%= resource_class.name.pluralize.underscore %>/sort', $('#<%= resource_instance_name %>_list').sortable('serialize'));
+			}
+		});
+
+    $('#<%= resource_instance_name %>_list').disableSelection();
+  });
+</script>

@@ -43,6 +43,10 @@ module Nunchaku::IconsHelper
     icon :save, *args
   end
 
+  def sort_icon(*args)
+    icon :sort, *args
+  end
+
   def comment_icon(*args)
     icon :comment_o, *args
   end

@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   # runtime dependencies .......................................................
 
   s.add_dependency "rails", "~> 4.0"
+  s.add_dependency "jquery-ui-rails"
   s.add_dependency 'sass-rails', '~> 4.0.0'
   s.add_dependency 'bootstrap-sass', '~> 3.1.1'
   s.add_dependency "font-awesome-sass"
