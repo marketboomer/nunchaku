@@ -14,6 +14,6 @@ module Nunchaku::Moving
   protected
 
   def collection_hash
-    @collection_hash ||= Hash[ resource_class.where(:id => params[resource_instance_name]).all.map { |o| [o.id,o] } ]
+    @collection_hash ||= Hash[ resource_class.where(:id => params[resource_instance_name]).map { |o| [o.id,o] } ]
   end
 end
