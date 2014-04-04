@@ -1,2 +1,13 @@
+/*
+ *= require_self
+ *= require jquery.ui.all
+ */
+
 @import "../inputs/enhanced_select";
 @import "../inputs/date_picker";
+
+.ui-sortable {
+  li:hover {
+    cursor: -webkit-grab; cursor: -moz-grab;
+  }
+}

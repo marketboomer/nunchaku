@@ -11,7 +11,7 @@ module Nunchaku::ResourcesButtonHelper
 
   def new_resource_button_text(klass = resource_class)
     object_name = klass.name.underscore
- 
+
     translate("helpers.button.#{object_name}.new",
               :model => human(klass),
               :default => [
@@ -20,7 +20,13 @@ module Nunchaku::ResourcesButtonHelper
               ]).titleize
   end
 
-  def update_button(return_link, disabled)
+  def sort_button(disabled=false)
+    link_to [:sortable, nests, resource_class].flatten, :class => 'btn navbar-btn btn-warning', :disabled => disabled do
+      sort_icon << ' ' << t(:sort)
+    end
+  end
+
+  def update_button(return_link, disabled=false)
     link_to return_link, :class => 'btn navbar-btn btn-success', :disabled => disabled do
       update_icon << ' ' << t(:update)
     end
@@ -32,9 +38,10 @@ module Nunchaku::ResourcesButtonHelper
     end
   end
 
-  def done_button(return_link, disabled)
+  def done_button(return_link, disabled=false)
     link_to return_link, :class => 'btn navbar-btn btn-success', :disabled => disabled do
       t(:done)
     end
   end
+
 end
