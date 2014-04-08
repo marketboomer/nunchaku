@@ -171,7 +171,8 @@ module Nunchaku::Translatable
 
   def update_existing_translations
     update_translations
-    restore_original if locale_was == 'en' && locale != 'en'# We don't want to overwrite the parent if it is already English locale!
+    # We don't want to overwrite the parent if it is already English locale!
+    restore_original if locale_was.to_s == 'en' && locale.to_s != 'en' # I18n.default returns a symbol, hence to_s
   end
 
   def restore_original
