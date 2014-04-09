@@ -1,7 +1,7 @@
 (function() {
   var modal = $("<%= escape_javascript(render('modal')) %>").appendTo("body"),
       form = $("<%= escape_javascript(render('form')) %>").closest("form");
-  
+
   modal.children().wrapAll(form.clone().empty());
 
   $("<h3><%= I18n.t(:edit) %> <%= resource_class.model_name.human.downcase %></h3>")
@@ -14,4 +14,6 @@
        .on('hidden', function() {
          $(this).remove();
        });
+
+  $(".select2-container").width("100%");
 })();
