@@ -1,6 +1,10 @@
 module Nunchaku::Moving
   extend ActiveSupport::Concern
 
+  included do
+    helper_method :movable_collection
+  end
+
   def sort
     params[resource_instance_name].each_with_index do |id, i|
       r = collection_hash[id.to_i]
@@ -12,6 +16,10 @@ module Nunchaku::Moving
   end
 
   protected
+
+  def movable_collection
+    collection.except(:limit)
+  end
 
   def collection_hash
     @collection_hash ||= Hash[ resource_class.where(:id => params[resource_instance_name]).map { |o| [o.id,o] } ]
