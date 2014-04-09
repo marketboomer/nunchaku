@@ -1,5 +1,6 @@
 require 'core_ext/string'
 require 'core_ext/hash'
+require 'responders'
 require 'super_resources'
 require 'cancan'
 require 'acts_as_list'
