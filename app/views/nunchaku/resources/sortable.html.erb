@@ -6,7 +6,7 @@
   <div class="row">
     <div class="col-md-8 col-xs-8">
       <ol id="<%= resource_instance_name %>_list">
-        <% collection.each do |r| %>
+        <% movable_collection.each do |r| %>
           <li id="<%= "#{resource_instance_name}_#{r.id}" %>" class="<%= resource_instance_name %>" target="<%= r.id %>"><%= r %></li>
         <% end %>
       </ol>
