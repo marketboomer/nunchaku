@@ -17,5 +17,9 @@ module Nunchaku::ResourcesHelper
 
   def nested_collection_name(klass = resource_class)
     nested? ? parent.decorate.to_s : human(klass).pluralize
-  end  
+  end
+
+  def nested_resource_path resource
+    polymorphic_path resource
+  end
 end
