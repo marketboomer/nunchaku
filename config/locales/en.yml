@@ -1,0 +1,38 @@
+# encoding: UTF-8
+en:
+  instructions:
+    sort: Drag an item to its new position, to re-arrange the list.
+
+  flash:
+    actions:
+      create:
+        notice: "We created the %{resource_type} '%{resource_name}'"
+      update:
+        notice: "We updated the %{resource_type} '%{resource_name}'"
+      destroy:
+        notice: "We destroyed the %{resource_type} '%{resource_name}'"
+        alert: "We could not destroy the %{resource_type} '%{resource_name}'"
+
+  admin: Admin
+  back: Back
+  cancel: Cancel
+  cancelled: cancelled
+  close: Close
+  closed: Closed
+  closed_at: Closed %{at}
+  complete: complete
+  confirm: Are you sure?
+  delete: Delete
+  done: Done
+  edit: Edit
+  find: Find
+  help: Help
+  import: Import
+  item: Item
+  new: New
+  new_model: New %{model}
+  open: open
+  search_by: Search by %{models}
+  search_for: Search for %{models}
+  sort: Sort
+  update: Update
