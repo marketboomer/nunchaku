@@ -10,10 +10,16 @@ module Nunchaku::ResourcesInputHelper
   	"#{resource_class.name}FormBuilder".constantize
 
   	rescue NameError => e
-    	action_name.in?(%w(show)) ? Nunchaku::DisabledFormBuilder : Nunchaku::ResourceFormBuilder
+      default_builder
   end
 
   def form_element_names
   	decorator_class.form_element_names
+  end
+
+  protected
+
+  def default_builder
+    action_name.in?(%w(show)) ? Nunchaku::DisabledFormBuilder : Nunchaku::ResourceFormBuilder
   end
 end
