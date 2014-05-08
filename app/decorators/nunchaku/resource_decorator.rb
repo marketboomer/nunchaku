@@ -22,6 +22,10 @@ class Nunchaku::ResourceDecorator < Draper::Decorator
     def human_names(attrs_nonhuman = columns_names)
       h.human_attrs(source_class, attrs_nonhuman)
     end
+
+    def report_name
+      ''
+    end
   end
 
   def resource_class
