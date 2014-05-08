@@ -1,0 +1,41 @@
+<% content_for :header do %>
+    <div class="page-header page-header-tabbed">
+      <ul class="breadcrumb">
+        <li class="active"><%= decorator_class.report_name %></li>
+      </ul>
+    </div>
+<% end %>
+
+<div class="content_well well">
+  <div class="row">
+    <div class="col-md-7">
+      <%= render "report_finder_form" rescue nil %>
+    </div>
+    <%= paginate paged_collection %>
+  </div>
+
+  <table class="table table-bordered table-striped table-condensed table-hover">
+    <%=
+        render :partial => 'table_header',
+               :locals => {
+                       :resource_class => resource_class,
+                       :column_names => decorator_class.column_names
+               }
+    %>
+
+    <%=
+        render :partial => 'table_body',
+               :locals => {
+                       :collection => decorator_class.decorate_collection(collection),
+                       :resource_class => resource_class,
+                       :column_names => decorator_class.column_names
+               }
+    %>
+
+    <%= render 'table_footer' %>
+  </table>
+</div>
+
+<% content_for :footer do %>
+    <%= render 'report_content_footer' %>
+<% end %>
