@@ -150,4 +150,8 @@ module Nunchaku::IconsHelper
   def chevron_right_icon(*args)
     icon :chevron_right, *args
   end
+
+  def calender_icon(*args)
+    icon :calendar, *args
+  end
 end

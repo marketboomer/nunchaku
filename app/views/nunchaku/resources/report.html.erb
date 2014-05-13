@@ -8,10 +8,12 @@
 
 <div class="content_well well">
   <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-10">
       <%= render "report_finder_form" rescue nil %>
     </div>
-    <%= paginate paged_collection %>
+    <div class="col-md-2">
+      <%= paginate paged_collection %>
+    </div>
   </div>
 
   <table class="table table-bordered table-striped table-condensed table-hover">
