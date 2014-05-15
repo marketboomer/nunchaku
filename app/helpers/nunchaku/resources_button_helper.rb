@@ -44,4 +44,10 @@ module Nunchaku::ResourcesButtonHelper
     end
   end
 
+  def report_export_button(format = :csv)
+    content_tag(:div, :class => 'btn navbar-btn btn-info') do
+      link_to export_icon, params.merge(:format => format)
+    end
+  end
+
 end
