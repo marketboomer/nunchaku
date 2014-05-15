@@ -14,7 +14,7 @@ module Nunchaku::Filtered
   end
 
   def apply_filter(relation)
-    relation.scoped.scoped(filter_scope).search(filter_params).result(distinct_params)
+    relation.where(filter_scope).search(filter_params).result(distinct_params)
   end
 
   def filter_params_name

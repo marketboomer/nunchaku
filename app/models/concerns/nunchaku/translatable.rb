@@ -15,12 +15,16 @@ module Nunchaku::Translatable
       table_name.singularize + '_translations'
     end
 
+    def translation_base_class
+      self
+    end
+
     def translation_table_exists?
       ActiveRecord::Base.connection.table_exists? translation_table_name
     end
 
     def translation_class_name
-      "#{self.name}Translation" if translation_table_exists?
+      "#{translation_base_class.name}Translation" if translation_table_exists?
     end
 
     def translation_class
@@ -28,7 +32,7 @@ module Nunchaku::Translatable
     end
 
     def translation_foreign_key
-      "#{self.name.split('::').last.underscore}_id"
+      "#{translation_base_class.name.split('::').last.underscore}_id"
     end
 
     def translatable_attributes
