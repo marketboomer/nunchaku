@@ -1,9 +1,0 @@
-<% if user_signed_in? -%>
-  <%= link_to '/users/sign_out', :method => :delete do -%>
-    <%= sign_out_icon -%> <%= t(:sign_out) -%>
-  <% end -%>
-<% else -%>
-  <%= link_to '/users/sign_in' do -%>
-    <%= sign_in_icon %> <%= t(:sign_in) -%>
-  <% end -%>
-<% end -%>

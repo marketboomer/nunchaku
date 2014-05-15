@@ -30,6 +30,6 @@ module Nunchaku::TableDecorator
     end
   end
 
-  def tints
+  def tints(*args)
   end
 end
