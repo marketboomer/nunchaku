@@ -128,7 +128,7 @@ module Nunchaku::Translatable
     return self unless t # Just return the object if for some strange reason there is no translation
     assign_attributes(
         t.attributes.delete_if do |k, v|
-          k.in?(self.class.excluded_attributes) || k.in?(self.class.derived_translation_attributes)
+          (self.class.excluded_attributes + self.class.derived_translation_attributes).include?(k)
         end
     )
     self
@@ -148,7 +148,7 @@ module Nunchaku::Translatable
   # Concatenate all text or string values that arent locale, search_text or prefixed with concatenated, put them in search_text and hanize
   def concatenate
     cols = self.class.columns_hash.reject do |k, v|
-      v.name.in?('search_text', 'locale') || (v.name.split('_').first == 'concatenated') || !v.type.in?(:string, :text)
+      %w(search_text locale).include?(v.name) || (v.name.split('_').first == 'concatenated') || ![:string, :text].include?(v.type)
     end
     self.search_text = cols.map { |k, v| send(v.name).to_s }.reject(&:blank?).join(' ').hanize
   end
@@ -159,7 +159,7 @@ module Nunchaku::Translatable
     translation = self.class.translation_class.where(self.class.translation_foreign_key => id, 'locale' => locale).first_or_initialize
     translation.assign_attributes(
         attributes.delete_if do |k, v|
-          !k.in?(self.class.translation_class.column_names) || k.in?(self.class.excluded_attributes)
+          !self.class.translation_class.column_names.include?(k) || self.class.excluded_attributes.include?(k)
         end
     )
     set_sort_attributes(translation)
