@@ -40,15 +40,11 @@ module Nunchaku::Translatable
     end
 
     def excluded_attributes # Attributes which are not to be copied either from or to translations:
-      ( %w(id lock_version updated_at created_at) + parent_attributes ) << translation_foreign_key
+      %w(id lock_version slug updated_at created_at) << translation_foreign_key
     end
 
     def sort_attributes
       %w(search_text)
-    end
-
-    def parent_attributes
-      sort_attributes.map { |a| "parent_#{a}" }
     end
 
     # Each model must define its own derived attributes to populate them via the update callback:
@@ -162,15 +158,8 @@ module Nunchaku::Translatable
           !self.class.translation_class.column_names.include?(k) || self.class.excluded_attributes.include?(k)
         end
     )
-    set_sort_attributes(translation)
     self.class.derived_translation_attributes.each { |att| translation.send("#{att}=", send(att)) }
     translation.save
-  end
-
-  def set_sort_attributes trans
-    self.class.sort_attributes.each do |att|
-      trans.send("parent_#{att}=", send(att)) if trans.attributes.has_key?("parent_#{att}")
-    end
   end
 
   def update_existing_translations
