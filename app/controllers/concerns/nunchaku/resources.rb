@@ -22,4 +22,14 @@ module Nunchaku::Resources
   def nullify_empty_params
     params.deep_blank_to_nulls!
   end
+
+  def resource_from_params(resource_name)
+    unless (spi = resource_params_id(resource_name)).blank?
+      resource_name.to_s.classify.safe_constantize.find(spi)
+    end
+  end
+
+  def resource_params_id(resource_name)
+    params["#{resource_name.classify.demodulize.underscore}_id"]
+  end
 end
