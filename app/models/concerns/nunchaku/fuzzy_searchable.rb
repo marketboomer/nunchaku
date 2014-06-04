@@ -51,10 +51,10 @@ module Nunchaku::FuzzySearchable
       end.compact.reject { |c| attribute_names.include?(c) }
     end
 
-    # By default, concatenate text or string values that arent locale, search_text or prefixed with concatenated, put them in search_text and hanize
+    # By default, concatenate text or string values that arent coincatenations, put them in search_text and hanize
     def fuzzy_search_cols
       columns_hash.reject do |k,v|
-        ['search_text', 'locale'].include?(v.name) || (v.name.split('_').first == 'concatenated') || ![:string, :text].include?(v.type)
+        ['search_text', 'locale', 'sort_text', 'slug'].include?(v.name) || (v.name.split('_').first == 'concatenated') || ![:string, :text].include?(v.type)
       end.map { |k,v| k }
     end
 
