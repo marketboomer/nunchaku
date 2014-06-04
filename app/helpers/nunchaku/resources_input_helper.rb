@@ -17,6 +17,22 @@ module Nunchaku::ResourcesInputHelper
   	decorator_class.form_element_names
   end
 
+  def with_edit(resource, attr_name, options={}, &block)
+    options.reverse_merge!(
+      :behaviour => 'editable',
+      :name => attr_name,
+      :resource => resource.class.name.demodulize.underscore,
+      :type => 'text',
+      :pk => resource.id,
+      :url => resource_path(resource),
+      :mode => 'inline',
+      :'original-title' => "Edit #{attr_name.to_s.humanize}"
+    )
+
+    link_text = block_given? ? yield : resource.send(attr_name)
+    link_to link_text, '#', :data => options
+  end
+
   protected
 
   def default_builder
