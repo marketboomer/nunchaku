@@ -6,6 +6,8 @@ module Nunchaku::ResourcesSummaryHelper
       rescue ActionView::MissingTemplate => e
       end
     end
+
+    nil
   end
 
   def summary_location(name)
