@@ -27,7 +27,15 @@ module Nunchaku::FuzzySearched
   end
 
   def search_terms
-    params[:term].blank? ? [] : params[:term].split(' ').map{ |t| t.hanize }.reject{ |t| t.size < 3 }
+    params[:term].blank? ? [] : params[:term].split(' ').map{ |t| t.hanize }.reject{ |t| stop?(t) }
+  end
+
+  def stop? word
+    word.size < 3 || stop_words.include?(word)
+  end
+
+  def stop_words
+    []
   end
 
 end

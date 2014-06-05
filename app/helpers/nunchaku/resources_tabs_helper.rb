@@ -7,6 +7,8 @@ module Nunchaku::ResourcesTabsHelper
         rescue ActionView::MissingTemplate => e
         end
       end
+
+      nil
     end
   end
 

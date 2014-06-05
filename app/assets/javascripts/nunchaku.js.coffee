@@ -7,9 +7,18 @@
 #
 #= require bootstrap
 #= require bootstrap-datepicker
+#= require bootstrap3-editable/bootstrap-editable
 #= require select2
 #= require_tree .
 #= require_self
 
 $ ->
 	$(".select2-container").width("100%")
+
+$ ->
+  $("a[data-behaviour='editable']").editable
+    params: (params) ->
+      params['_method'] = 'put'
+      params["#{$(this).data('resource')}[#{params.name}]"] = params.value
+
+      params

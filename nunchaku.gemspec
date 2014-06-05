@@ -38,6 +38,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'chosen-rails'
   s.add_dependency 'select2-rails'
   s.add_dependency 'bootstrap-datepicker-rails'
+  s.add_dependency 'bootstrap-x-editable-rails'
 
   s.add_dependency 'super_resources'
 
