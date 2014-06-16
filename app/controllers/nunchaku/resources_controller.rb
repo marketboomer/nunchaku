@@ -9,12 +9,7 @@ class Nunchaku::ResourcesController < Nunchaku::ApplicationController
 
 
   def autocomplete
-    if collection.respond_to? :translated_search
-      search_scope = collection.translated_search(search_terms)
-    else # Assume resource is FuzzySearchable
-      search_scope = collection.fuzzy_search(search_terms)
-    end
-    respond_with search_scope.limit(AUTOCOMPLETE_LIMIT).map { |a| {:id => a.id, :text => a.to_s } }
+    respond_with autocomplete_collection.map { |a| {:id => a.id, :text => a.to_s } }
   end
 
   protected
@@ -31,5 +26,13 @@ class Nunchaku::ResourcesController < Nunchaku::ApplicationController
 
   def decorator_context
     nil
+  end
+
+  def autocomplete_collection
+    collection_translated_or_else_fuzzy.limit(AUTOCOMPLETE_LIMIT)
+  end
+
+  def collection_translated_or_else_fuzzy
+    collection.send (collection.respond_to?(:translated_search) ? :translated_search : :fuzzy_search), search_terms
   end
 end
