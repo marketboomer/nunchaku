@@ -3,7 +3,13 @@
 		<%= page_title %>
 
 		<div class="pull-right small">
-			<%= human(parent.source.class) if nested? %>
+			<%=
+				if nested?
+					human(parent.source.class)
+				else
+					human(resource_class)
+				end
+			%>
 		</div>
 	</h2>
 </div>
