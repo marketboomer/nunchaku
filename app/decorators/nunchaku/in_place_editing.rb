@@ -18,6 +18,8 @@ module Nunchaku::InPlaceEditing
   end
 
   def with_element_options(element_name)
+    abort h.resource_params_name
+
     {
       :behaviour => 'editable',
       :mode => 'inline',
@@ -25,7 +27,7 @@ module Nunchaku::InPlaceEditing
       :toggle => 'mouseenter',
       :showbuttons => false,
       :name => element_name,
-      :resource => h.resource_instance_name,
+      :resource => h.resource_params_name,
       :type => element_type(element_name).to_s,
       :pk => resource.id,
       :url => "#{h.resource_path(resource)}.json"

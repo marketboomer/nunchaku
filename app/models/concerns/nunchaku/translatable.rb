@@ -7,6 +7,7 @@ module Nunchaku::Translatable
     before_save :concatenate
     before_save :update_existing_translations, unless: Proc.new { |it| it.new_record? }
     after_save :update_translations, if: Proc.new { |it| it.id_changed? }
+    validates :locale, :presence => true 
   end
 
   module ClassMethods
