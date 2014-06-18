@@ -21,7 +21,7 @@ module Nunchaku::ResourcesInputHelper
     options.reverse_merge!(
       :behaviour => 'editable',
       :name => attr_name,
-      :resource => resource.class.name.demodulize.underscore,
+      :resource => resource_params_name,
       :type => 'text',
       :pk => resource.id,
       :url => resource_path(resource),

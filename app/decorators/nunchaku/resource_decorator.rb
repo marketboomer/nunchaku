@@ -1,6 +1,5 @@
 class Nunchaku::ResourceDecorator < Draper::Decorator
   include Nunchaku::TableDecorator
-  include Nunchaku::InPlaceEditing
 
   delegate_all
 
