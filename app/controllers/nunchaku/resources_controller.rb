@@ -9,7 +9,7 @@ class Nunchaku::ResourcesController < Nunchaku::ApplicationController
 
 
   def autocomplete
-    respond_with autocomplete_collection.map { |a| {:id => a.id, :text => a.to_s } }
+    respond_with autocomplete_collection.limit(AUTOCOMPLETE_LIMIT).map { |a| {:id => a.id, :text => a.to_s } }
   end
 
   protected
@@ -29,7 +29,7 @@ class Nunchaku::ResourcesController < Nunchaku::ApplicationController
   end
 
   def autocomplete_collection
-    collection_translated_or_else_fuzzy.limit(AUTOCOMPLETE_LIMIT)
+    collection_translated_or_else_fuzzy
   end
 
   def collection_translated_or_else_fuzzy
