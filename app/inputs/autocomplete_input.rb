@@ -18,6 +18,7 @@ class AutocompleteInput < ::SimpleForm::Inputs::StringInput
           ajax: {
             url: "#{url}",
             dataType: 'json',
+            quietMillis: 1000,
             data: function (term) {
               return {
                 term: term
