@@ -15,3 +15,5 @@ gemspec
 
 gem 'super_resources', 	:git => 'git://github.com/habanerohq/super_resources.git',
                        	:branch => 'version_2_0_0'
+
+gem 'polyamorous',       github: 'activerecord-hackery/polyamorous'
