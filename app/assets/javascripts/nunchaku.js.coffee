@@ -22,3 +22,14 @@ $ ->
       params["#{$(this).data('resource')}[#{params.name}]"] = params.value
 
       params
+
+window.nunchaku = {}
+
+window.nunchaku.selection_affects_other = (selector, other, url) ->
+  $(selector).change ->
+    me = $(this)[0]
+    $.get(url,
+      selection: me.value
+    ).done (data) ->
+      $(other).replaceWith()
+      return
