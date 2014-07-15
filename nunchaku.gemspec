@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 4.1"
   s.add_dependency 'uglifier', '>= 1.3.0'
   s.add_dependency 'coffee-rails', '~> 4.0.0'
-  s.add_dependency 'jquery-ui-rails'
+  s.add_dependency 'jquery-ui-rails', '~> 4.2.0' # Locked to prevent jquery.ui.all not found errors
   s.add_dependency 'jquery-rails'
   s.add_dependency 'jbuilder', '~> 1.2'
 
@@ -44,7 +44,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'select2-rails'
   s.add_dependency 'bootstrap-datepicker-rails'
   s.add_dependency 'bootstrap-x-editable-rails'
-
+  s.add_dependency 'gritter'
+  s.add_dependency 'wicked_pdf'
   s.add_dependency 'super_resources'
 
   # development dependencies ...................................................
