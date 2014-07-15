@@ -16,6 +16,8 @@ require 'font-awesome-sass'
 require 'bootstrap-datepicker-rails'
 require 'bootstrap-x-editable-rails'
 require 'select2-rails'
+require 'gritter'
+require 'wicked_pdf'
 require 'sorted'
 require 'csv'
 
