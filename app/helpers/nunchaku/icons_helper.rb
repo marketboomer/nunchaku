@@ -12,15 +12,15 @@ module Nunchaku::IconsHelper
     end
   end
 
-  def activity_icon(resource, *args)
-    resource_icon(resource.subject, *args)
-
-    rescue NameError
-      icon :flag, *args
-  end
-
   def resource_icon(resource, *args)
     send "#{resource.class.name.underscore}_icon", *args
+
+  rescue NameError
+    icon :flag, *args
+  end
+
+  def activity_icon(*args)
+    icon :paw, *args
   end
 
   def preview_icon(*args)
