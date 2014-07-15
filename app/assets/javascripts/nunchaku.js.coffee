@@ -3,12 +3,13 @@
 #
 #= require jquery
 #= require jquery_ujs
-#= require jquery.ui.sortable
+#= require jquery.ui.all
 #
 #= require bootstrap
 #= require bootstrap-datepicker
 #= require bootstrap3-editable/bootstrap-editable
 #= require select2
+#= require gritter
 #= require_tree .
 #= require_self
 

@@ -12,7 +12,7 @@ module Nunchaku::Moving
       r.save
     end
 
-    flash[:notice] = t("flash.#{resource_class.name.underscore.pluralize.gsub('/', '.')}.sort.notice", { :resource_types =>  human(resource_class).pluralize })
+    gflash :notice => t("flash.#{resource_class.name.underscore.pluralize.gsub('/', '.')}.sort.notice", { :resource_types =>  human(resource_class).pluralize })
   end
 
   protected
