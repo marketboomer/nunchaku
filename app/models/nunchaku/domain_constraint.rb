@@ -5,7 +5,7 @@ module Nunchaku
     end
 
     def matches?(request)
-      request.subdomain.include?(@domain)
+      request.host.include?(@domain)
     end
   end
 end
