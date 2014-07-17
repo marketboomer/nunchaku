@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'bootstrap-sass', '~> 3.1.1'
   s.add_dependency "font-awesome-sass"
 
-  s.add_dependency "awesome_nested_set", "~> 2.1"
+  s.add_dependency 'awesome_nested_set', '3.0.0.rc.5'
   s.add_dependency "state_machine", "~> 1.2"
 
   s.add_dependency 'acts_as_list'
