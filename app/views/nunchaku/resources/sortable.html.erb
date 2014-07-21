@@ -34,7 +34,7 @@
       revert: true,
 
 			update: function(event, ui) {
-				$.post('/<%= resource_class.name.pluralize.underscore %>/sort', $('#<%= resource_params_name %>_list').sortable('serialize'));
+				$.post('sort', $('#<%= resource_params_name %>_list').sortable('serialize'));
 			}
 		});
 
