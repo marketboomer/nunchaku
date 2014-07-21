@@ -26,13 +26,9 @@ $ ->
 
 window.nunchaku = {}
 
-window.nunchaku.selection_affects_other = (selector, other, url, param_callback) ->
-  $(selector).change ->
-    params =
-      if typeof param_callback is "undefined"
-        selection: $(this)[0].value
-      else
-        param_callback()
-    $.get(url, params).done (data) ->
+window.nunchaku.selection_affects_other = (selector, other, url) ->
+  $(document).off "change", selector
+  $(document).on "change", selector, ->
+    $.get(url, selection: $(this)[0].value).done (data) ->
       $(other).replaceWith data
       return
