@@ -1,0 +1,33 @@
+<%= wicked_pdf_stylesheet_link_tag 'nunchaku/reports' %>
+
+<% content_for :header do %>
+    <div class="page-header page-header-tabbed">
+      <ul class="breadcrumb">
+        <li class="active"><%= decorator_class.report_name %></li>
+      </ul>
+    </div>
+<% end %>
+
+<div class="content_well well">
+
+  <table class="table table-bordered table-striped table-condensed table-hover">
+    <%=
+        render :partial => 'table_header.html.erb',
+               :locals => {
+                       :resource_class => resource_class,
+                       :column_names => decorator_class.column_names
+               }
+    %>
+
+    <%=
+        render :partial => 'table_body.html.erb',
+               :locals => {
+                       :collection => decorator_class.decorate_collection(collection),
+                       :resource_class => resource_class,
+                       :column_names => decorator_class.column_names
+               }
+    %>
+
+    <%= render 'table_footer.html.erb' %>
+  </table>
+</div>
