@@ -3,9 +3,11 @@
     <%= link_to_unless_current resource_class.model_name.human.pluralize, polymorphic_path(resource_class) %>
   </li>
 
-  <% (r || parent).self_and_ancestors.each do |saa| %>
-    <li>
-      <%= link_to_unless_current saa.decorate, saa %>
-    </li>
+  <% if nests.any? %>
+    <% (r || parent).self_and_ancestors.each do |saa| %>
+      <li>
+        <%= link_to_unless_current saa.decorate, saa %>
+      </li>
+    <% end %>
   <% end %>
 </ul>
