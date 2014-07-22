@@ -4,8 +4,8 @@
   </li>
 
   <% (r || parent).self_and_ancestors.each do |saa| %>
-    <li>
-      <%= link_to_unless_current saa.decorate, saa %>
-    </li>
-  <% end %>
+      <li>
+        <%= link_to_unless_current saa.decorate, saa %>
+      </li>
+  <% end if nested? %>
 </ul>
