@@ -91,6 +91,10 @@ module Nunchaku::IconsHelper
     icon :upload, *args
   end
 
+  def pdf_icon(*args)
+    icon 'file-pdf-o', *args
+  end
+
   def print_icon(*args)
     icon :print, *args
   end
