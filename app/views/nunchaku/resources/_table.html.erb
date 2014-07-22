@@ -1,6 +1,6 @@
 <table id="<%= resource_class.name.underscore %>_table" class="table table-bordered table-condensed table-hover" >
   <%=
-    render :partial => 'table_header',
+    render :partial => 'table_header.html.erb',
            :locals => {
              :decorator_class => decorator_class,
              :column_names => column_names
@@ -8,7 +8,7 @@
   %>
 
   <%=
-    render :partial => 'table_body',
+    render :partial => 'table_body.html.erb',
            :locals => {
              :collection => collection,
              :resource_class => resource_class,
