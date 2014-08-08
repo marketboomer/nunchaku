@@ -2,9 +2,9 @@ module Nunchaku::TableDecorator
   extend ActiveSupport::Concern
 
   module ClassMethods
-    def table_heading(column)
+    def table_heading(column, links=true)
       label = source_class.human_attribute_name(column.to_sym).titleize
-
+      return label unless links
       case      
       when respond_to?("#{column}_heading")
         send("#{column}_heading", label)
