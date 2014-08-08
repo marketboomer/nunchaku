@@ -3,13 +3,14 @@ module Nunchaku::ResourcesPdfHelper
   # Generic SQL solution for large reports that assumes all totals are basic sums against columns from resource class.
   # If this isn't true you will have to roll your own version on a per report (possibly per total) basis.
   def report_totals
-    totals_collection = c.unscope(:select, :order, :includes).select(select_totals)
-    sql_result = totals_collection.take(1).first
-    h = {}
-    decorator_class.total_columns.each do |col|
-      h[col] = sql_result.send("#{col}_sum")
+    decorator_class.total_columns.inject({}) do |h, col|
+      h[col] = totals_collection.take(1).first.send("#{col}_sum")
+      h
     end
-    h
+  end
+
+  def totals_collection
+    c.unscope(:select, :order, :includes).select(select_totals)
   end
 
   def select_totals
