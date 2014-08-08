@@ -1,0 +1,7 @@
+<tr class="totals">
+  <% column_names.each do |column| %>
+    <td class="cell total <%= column %>">
+      <%= report_totals[column].to_f.round(2) if report_totals[column] %>
+    </td>
+  <% end %>
+</tr>

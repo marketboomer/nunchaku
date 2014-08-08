@@ -50,4 +50,14 @@ module Nunchaku::ResourcesButtonHelper
     end
   end
 
+  def pdf_button
+    content_tag(:div, :class => 'btn navbar-btn btn-info') do
+      pdf_link
+    end
+  end
+
+  def pdf_link
+    link_to pdf_icon, params.merge(:format => :pdf)
+  end
+
 end
