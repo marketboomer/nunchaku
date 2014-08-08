@@ -1,0 +1,8 @@
+<tr class="totals">
+  <% column_names.each do |column| %>
+    <td class="cell total <%= column %>">
+
+      <%= number_to_currency(report_totals[column]) if report_totals[column] %>
+    </td>
+  <% end %>
+</tr>

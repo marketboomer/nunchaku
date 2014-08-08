@@ -5,6 +5,7 @@ module Nunchaku::ResourcesHelper
   include Nunchaku::ResourcesButtonHelper
   include Nunchaku::ResourcesTabsHelper
   include Nunchaku::ResourcesCsvHelper
+  include Nunchaku::ResourcesPdfHelper
   include Nunchaku::DebugHelper
 
   def create_or_update_resource_path(object)
