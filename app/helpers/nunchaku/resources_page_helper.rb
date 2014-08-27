@@ -1,8 +1,6 @@
 module Nunchaku::ResourcesPageHelper
   def content_header(resource = nil)
-    content_tag(:div, :class => 'page-header page-header-tabbed') do
-      render :partial => 'content_header', :locals => { :resource => resource }
-    end
+    render :partial => 'content_header', :locals => { :resource => resource }
   end
 
   def page_title

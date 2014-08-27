@@ -1,21 +1,23 @@
-<ul class="breadcrumb">
-  <% nests.each_with_index do |r, i| %>
-    <li>
-      <%= link_to_unless_current r.class.model_name.human.pluralize,
-                  engine_path(nests.take(i) + [r.class]) %>
-    </li>
-    <li>
-      <%= link_to_unless_current r.decorate, engine_path(nests.take(i + 1)) %>
-    </li>
-  <% end %>
+<div class="page-breadcrumbs">
+  <ul class="breadcrumb">
+    <% nests.each_with_index do |r, i| %>
+      <li>
+        <%= link_to_unless_current r.class.model_name.human.pluralize,
+                    engine_path(nests.take(i) + [r.class]) %>
+      </li>
+      <li>
+        <%= link_to_unless_current r.decorate, engine_path(nests.take(i + 1)) %>
+      </li>
+    <% end %>
 
-  <% if resource? %>
-    <li class="active">
-      <%= link_to_unless_current resource_class.model_name.human.pluralize,
-                  engine_path(nests + [resource_class]) %>
-    </li>
-    <li class="active"><%= resource %></li>
-  <% else %>
-    <li class="active"><%= resource_class.model_name.human.pluralize %></li>
-  <% end %>
-</ul>
+    <% if resource? %>
+      <li class="active">
+        <%= link_to_unless_current resource_class.model_name.human.pluralize,
+                    engine_path(nests + [resource_class]) %>
+      </li>
+      <li class="active"><%= resource %></li>
+    <% else %>
+      <li class="active"><%= resource_class.model_name.human.pluralize %></li>
+    <% end %>
+  </ul>
+</div>
