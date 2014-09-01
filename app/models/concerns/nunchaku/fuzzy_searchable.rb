@@ -45,9 +45,8 @@ module Nunchaku::FuzzySearchable
 
     def default_targets default_sort
       default_sort.to_s.split(/,/).map do |order_string|
-        if m = order_string.match(SQL_REGEX)
-          m[2].nil? ? m[1] : m[2]
-        end
+        m = order_string.match(SQL_REGEX)
+        m[2] || m[1] if m
       end.compact.reject { |c| attribute_names.include?(c) }
     end
 
