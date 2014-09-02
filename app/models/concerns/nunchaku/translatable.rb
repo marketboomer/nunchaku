@@ -142,14 +142,6 @@ module Nunchaku::Translatable
     self.class.translation_class.where(self.class.translation_foreign_key => id, 'locale' => locale).exists?
   end
 
-  # Concatenate all text or string values that arent locale, search_text or prefixed with concatenated, put them in search_text and hanize
-  def concatenate
-    cols = self.class.columns_hash.reject do |k, v|
-      %w(search_text locale).include?(v.name) || (v.name.split('_').first == 'concatenated') || ![:string, :text].include?(v.type)
-    end
-    self.search_text = cols.map { |k, v| send(v.name).to_s }.reject(&:blank?).join(' ').hanize
-  end
-
   private
 
   def update_translations

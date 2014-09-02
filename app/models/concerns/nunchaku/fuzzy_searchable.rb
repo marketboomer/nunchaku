@@ -53,15 +53,22 @@ module Nunchaku::FuzzySearchable
     # By default, concatenate text or string values that arent coincatenations, put them in search_text and hanize
     def fuzzy_search_cols
       columns_hash.reject do |k,v|
-        ['search_text', 'locale', 'sort_text', 'slug'].include?(v.name) || (v.name.split('_').first == 'concatenated') || ![:string, :text].include?(v.type)
+        %w(search_text locale slug).include?(v.name) || (v.name.split('_').first == 'concatenated') || ![:string, :text].include?(v.type)
       end.map { |k,v| k }
     end
 
+    def stop_words
+      []
+    end
   end
 
   def concatenate
     return unless self.class.attribute_names.include? 'search_text'
-    self.search_text = self.class.fuzzy_search_cols.map { |att| send(att).to_s }.reject(&:blank?).join(' ').hanize
+    self.search_text = self.class.fuzzy_search_cols.map { |att| send(att).to_s.hanize }.uniq.reject{ |w| stop?(w) }.join(' ')
+  end
+
+  def stop? word
+    word.size < 3 || self.class.stop_words.include?(word)
   end
 
 end
