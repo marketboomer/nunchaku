@@ -64,7 +64,7 @@ module Nunchaku::FuzzySearchable
 
   def concatenate
     return unless self.class.attribute_names.include? 'search_text'
-    self.search_text = self.class.fuzzy_search_cols.map { |att| send(att).to_s.hanize }.uniq.reject{ |w| stop?(w) }.join(' ')
+    self.search_text = self.class.fuzzy_search_cols.map { |att| send(att).to_s.hanize.split(' ') }.flatten.uniq.reject{ |w| stop?(w) }.join(' ')
   end
 
   def stop? word
