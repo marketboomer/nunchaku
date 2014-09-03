@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   # runtime dependencies .......................................................
 
   s.add_dependency 'acts_as_list'
-  s.add_dependency 'awesome_nested_set', '3.0.0.rc.5'
+  s.add_dependency 'closure_tree'
   s.add_dependency 'bootstrap-datepicker-rails'
   s.add_dependency 'bootstrap-sass', '~> 3.1.1'
   s.add_dependency 'bootstrap-x-editable-rails'

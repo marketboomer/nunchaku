@@ -26,8 +26,12 @@ module Nunchaku::FuzzySearched
     term if term.in? ['asc','desc']
   end
 
+  def search_param
+    :term
+  end
+
   def search_terms
-    params[:term].blank? ? [] : params[:term].split(' ').map{ |t| t.hanize }.reject{ |t| stop?(t) }
+    params[search_param].blank? ? [] : params[search_param].split(' ').map(&:hanize).uniq.reject{ |t| stop?(t) }
   end
 
   def stop? word
@@ -35,7 +39,7 @@ module Nunchaku::FuzzySearched
   end
 
   def stop_words
-    []
+    resource_class.stop_words
   end
 
 end

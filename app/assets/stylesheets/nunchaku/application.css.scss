@@ -2,11 +2,7 @@
  *= require_self
  *= require jquery.ui.all
  *= require bootstrap3-editable/bootstrap-editable
- *= require gritter
  */
-
-@import "../inputs/enhanced_select";
-@import "../inputs/date_picker";
 
 .ui-sortable {
   li:hover {

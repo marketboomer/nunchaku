@@ -1,0 +1,9 @@
+<thead>
+  <tr>
+	  <% column_names.each do |column| %>
+	    <th class="cell <%= column %>">
+				<%= decorator_class.table_heading(column, false) %>
+	    </th>
+	  <% end %>
+  </tr>
+</thead>

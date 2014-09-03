@@ -45,24 +45,30 @@ module Nunchaku::FuzzySearchable
 
     def default_targets default_sort
       default_sort.to_s.split(/,/).map do |order_string|
-        if m = order_string.match(SQL_REGEX)
-          m[2].nil? ? m[1] : m[2]
-        end
+        m = order_string.match(SQL_REGEX)
+        m[2] || m[1] if m
       end.compact.reject { |c| attribute_names.include?(c) }
     end
 
     # By default, concatenate text or string values that arent coincatenations, put them in search_text and hanize
     def fuzzy_search_cols
       columns_hash.reject do |k,v|
-        ['search_text', 'locale', 'sort_text', 'slug'].include?(v.name) || (v.name.split('_').first == 'concatenated') || ![:string, :text].include?(v.type)
+        %w(search_text locale slug).include?(v.name) || (v.name.split('_').first == 'concatenated') || ![:string, :text].include?(v.type)
       end.map { |k,v| k }
     end
 
+    def stop_words
+      []
+    end
   end
 
   def concatenate
     return unless self.class.attribute_names.include? 'search_text'
-    self.search_text = self.class.fuzzy_search_cols.map { |att| send(att).to_s }.reject(&:blank?).join(' ').hanize
+    self.search_text = self.class.fuzzy_search_cols.map { |att| send(att).to_s.hanize.split(' ') }.flatten.uniq.reject{ |w| stop?(w) }.join(' ')
+  end
+
+  def stop? word
+    word.size < 3 || self.class.stop_words.include?(word)
   end
 
 end
