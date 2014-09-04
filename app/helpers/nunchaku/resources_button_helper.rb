@@ -60,4 +60,10 @@ module Nunchaku::ResourcesButtonHelper
     link_to pdf_icon, params.merge(:format => :pdf)
   end
 
+  def print_button
+    content_tag(:div, :class => 'btn navbar-btn btn-info') do
+      link_to print_icon,'javascript:print();'
+    end
+  end
+
 end
