@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'chosen-rails'
   s.add_dependency 'coffee-rails', '~> 4.0.0'
   s.add_dependency 'draper'
-  s.add_dependency 'font-awesome-sass'
+  s.add_dependency 'font-awesome-sass', '~> 4.1.0'
   s.add_dependency 'gritter'
   s.add_dependency 'has_scope'
   s.add_dependency 'jbuilder', '~> 1.2'
