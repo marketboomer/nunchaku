@@ -1,6 +1,6 @@
-<tr id="<%= resource_class.name.underscore %>_<%= resource.id %>">
+<tr id="<%= resource_class.name.underscore %>_<%= resource.id %>" class="<%= resource.tints %>">
 	<% column_names.each do |column| %>
-	  <td class="cell <%= column %> <%= resource.tints(column) %>">
+	  <td class="cell <%= column %>">
 			<%= resource.table_cell(column) %>
 	  </td>
 	<% end %>

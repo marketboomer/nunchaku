@@ -1,7 +1,7 @@
 module Nunchaku::IconsHelper
 
   def icon(icon_type)
-    content_tag(:i, nil, :class => "fa fa-#{icon_type.to_s.dasherize}")
+    content_tag(:i, nil, :class => "menu-icon fa fa-#{icon_type.to_s.dasherize}")
   end
 
   def new_icon(klass=resource_class, *args)

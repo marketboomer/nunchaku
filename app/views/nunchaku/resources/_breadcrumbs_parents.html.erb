@@ -1,13 +1,15 @@
-<ul class="breadcrumb">
-  <li>
-    <%= link_to_unless_current resource_class.model_name.human.pluralize, polymorphic_path(resource_class) %>
-  </li>
+<div class="page-breadcrumbs">
+  <ul class="breadcrumb">
+    <li>
+      <%= link_to_unless_current resource_class.model_name.human.pluralize, polymorphic_path(resource_class) %>
+    </li>
 
-  <% if (p = (r || parent)).present? %>
-    <% p.self_and_ancestors.reverse.each do |saa| %>
-      <li>
-        <%= link_to_unless_current saa.decorate, saa %>
-      </li>
+    <% if (p = (r || parent)).present? %>
+      <% p.self_and_ancestors.reverse.each do |saa| %>
+        <li>
+          <%= link_to_unless_current saa.decorate, saa %>
+        </li>
+      <% end %>
     <% end %>
-  <% end %>
-</ul>
+  </ul>
+</div>
