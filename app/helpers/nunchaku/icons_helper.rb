@@ -84,11 +84,11 @@ module Nunchaku::IconsHelper
   end
 
   def import_icon(*args)
-    icon :download, *args
+    icon :upload, *args
   end
 
   def export_icon(*args)
-    icon :upload, *args
+    icon :download, *args
   end
 
   def pdf_icon(*args)
