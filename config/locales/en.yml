@@ -32,6 +32,7 @@ en:
   new: New
   new_model: New %{model}
   open: open
+  search: Search
   search_by: Search by %{models}
   search_for: Search for %{models}
   sort: Sort
