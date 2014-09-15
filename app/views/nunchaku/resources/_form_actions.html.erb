@@ -6,7 +6,7 @@
                                :role => 'button',
                                :method => :delete,
                                :data => { confirm: t(:confirm) }) do %>
-      <i class="icon-trash"></i><%= t(:delete) %> <%= f.object.class.model_name.human %>
+      <%= trash_icon %> <%= t(:delete) %> <%= f.object.class.model_name.human %>
     <% end %>
   <% end %>
 </div>

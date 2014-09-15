@@ -1,7 +1,7 @@
 module Nunchaku::ResourcesInputHelper
   def simple_form_for(object, options={}, &block)
     options.reverse_merge!  :builder => builder,
-                            :url => create_or_update_resource_path(object)
+                            :url => create_or_update_resource_path(object, options[:without_nesting])
 
     super(object, options, &block)
   end

@@ -84,7 +84,7 @@ module Nunchaku::IconsHelper
   end
 
   def trash_icon(*args)
-    icon :trash, *args
+    icon :trash_o, *args
   end
 
   def plus_sign(*args)

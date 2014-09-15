@@ -8,8 +8,12 @@ module Nunchaku::ResourcesHelper
   include Nunchaku::ResourcesPdfHelper
   include Nunchaku::DebugHelper
 
-  def create_or_update_resource_path(object)
-    object.persisted? ? resource_path(object) : collection_path
+  def create_or_update_resource_path(object, without_nesting=false)
+    unless object.persisted?
+      collection_path
+    else
+      without_nesting ? object : resource_path(object)
+    end
   end
 
   def cancel_path
