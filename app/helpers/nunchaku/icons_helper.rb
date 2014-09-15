@@ -19,6 +19,22 @@ module Nunchaku::IconsHelper
     icon :flag, *args
   end
 
+  def title_icon(*args)
+    icon :child, *args
+  end
+
+  def email_icon(*args)
+    icon :envelope_o, *args
+  end
+
+  def telephone_icon(*args)
+    icon :phone, *args
+  end
+
+  def globe_icon(*args)
+    icon :globe, *args
+  end
+
   def activity_icon(*args)
     icon :paw, *args
   end
