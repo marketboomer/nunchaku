@@ -14,6 +14,15 @@ class Nunchaku::ResourcesController < Nunchaku::ApplicationController
 
   protected
 
+  def resource_params
+    params.require(resource_params_name) \
+      .permit(permitted_params)
+  end
+
+  def permitted_params
+    []
+  end
+
   def transactions_filter
     ActiveRecord::Base.transaction do
       yield
@@ -36,3 +45,4 @@ class Nunchaku::ResourcesController < Nunchaku::ApplicationController
     collection.send (collection.respond_to?(:translated_search) ? :translated_search : :fuzzy_search), search_terms
   end
 end
+
