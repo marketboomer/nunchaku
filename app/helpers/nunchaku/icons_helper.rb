@@ -99,6 +99,10 @@ module Nunchaku::IconsHelper
     icon :edit, *args
   end
 
+  def done_icon(*args)
+    icon :check, *args
+  end
+
   def import_icon(*args)
     icon :upload, *args
   end
