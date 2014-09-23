@@ -58,17 +58,26 @@ module Nunchaku::FuzzySearchable
     end
 
     def stop_words
-      []
+        %w(and are but for not the was will with each 1each 1.0 2.0 3.0 4.0 5.0 6.0 12.0 24.0 box can pack packet carton)
+    end
+
+    def search_string string
+      string.hanize.split(separator).uniq.reject{ |w| stop?(w) }.join(' ')
+    end
+
+    def stop? word
+      word.size < 3 || stop_words.include?(word)
+    end
+
+    def separator
+      /[\s\.,-\/#!$%\*;:{}=\-_`~()\?\[\]]/
     end
   end
 
   def concatenate
-    return unless self.class.attribute_names.include? 'search_text'
-    self.search_text = self.class.fuzzy_search_cols.map { |att| send(att).to_s.hanize.split(' ') }.flatten.uniq.reject{ |w| stop?(w) }.join(' ')
-  end
-
-  def stop? word
-    word.size < 3 || self.class.stop_words.include?(word)
+    klass = self.class
+    return unless klass.attribute_names.include? 'search_text'
+    self.search_text = klass.search_string(klass.fuzzy_search_cols.map { |att| send(att).to_s }.join(' '))
   end
 
 end
