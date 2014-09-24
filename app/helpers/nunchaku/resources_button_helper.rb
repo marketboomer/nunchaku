@@ -40,7 +40,7 @@ module Nunchaku::ResourcesButtonHelper
 
   def done_button(return_link, disabled=false)
     link_to return_link, :class => 'btn navbar-btn btn-success', :disabled => disabled do
-      t(:done)
+      check_icon << ' ' << t(:done)
     end
   end
 

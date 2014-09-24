@@ -178,4 +178,8 @@ module Nunchaku::IconsHelper
   def calender_icon(*args)
     icon :calendar, *args
   end
+
+  def check_icon(*args)
+    icon :check, *args
+  end
 end
