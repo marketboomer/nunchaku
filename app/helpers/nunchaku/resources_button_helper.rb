@@ -5,7 +5,7 @@ module Nunchaku::ResourcesButtonHelper
     options.reverse_merge! :class => 'btn navbar-btn btn-success', :remote => true
 
     link_to((path || new_resource_path), options) do
-      new_icon << ' ' << t(:new)
+      new_icon << ' ' << button_text(:new)
     end
   end
 
@@ -22,25 +22,29 @@ module Nunchaku::ResourcesButtonHelper
 
   def sort_button(disabled=false)
     link_to [:sortable, nests, resource_class].flatten, :class => 'btn navbar-btn btn-warning', :disabled => disabled do
-      sort_icon << ' ' << t(:sort)
+      sort_icon << ' ' << button_text(:sort)
     end
   end
 
   def update_button(return_link, disabled=false)
     link_to return_link, :class => 'btn navbar-btn btn-success', :disabled => disabled do
-      update_icon << ' ' << t(:update)
+      update_icon << ' ' << button_text(:update)
     end
   end
 
   def back_button(return_link)
     link_to return_link, :class => 'btn navbar-btn btn-default' do
-      back_icon << ' ' << t(:back)
+      back_icon << ' ' << button_text(:back)
     end
   end
 
   def done_button(return_link, disabled=false)
     link_to return_link, :class => 'btn navbar-btn btn-success', :disabled => disabled do
+<<<<<<< HEAD
       check_icon << ' ' << t(:done)
+=======
+      check_icon << ' ' << button_text(:done)
+>>>>>>> 9d61b5c112b02c40ab570926799820b6727e0636
     end
   end
 
@@ -66,4 +70,9 @@ module Nunchaku::ResourcesButtonHelper
     end
   end
 
+  protected
+
+  def button_text(symbol)
+    content_tag(:span, t(symbol), :class => 'hidden-xs hidden-sm')
+  end
 end
