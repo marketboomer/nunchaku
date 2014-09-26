@@ -7,8 +7,7 @@ module Nunchaku::Moving
 
   def sort
     ids = params[resource_params_name].map { |id| id.to_i }
-    moved = moved_id(ids)
-    item = resource_class.find(moved)
+    item = resource_class.find(moved_id(ids))
     item.insert_at(moved_to(ids,item)) # Using acts_as_list
 
     gflash :notice => t("flash.#{resource_class.name.underscore.pluralize.gsub('/', '.')}.sort.notice", { :resource_types =>  human(resource_class).pluralize })
