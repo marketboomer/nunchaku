@@ -6,22 +6,32 @@ module Nunchaku::Moving
   end
 
   def sort
-    params[resource_params_name].each_with_index do |id, i|
-      r = collection_hash[id.to_i]
-      r.position = i + 1
-      r.save
-    end
+    ids = params[resource_params_name].map { |id| id.to_i }
+    item = first_moved_item(ids)
+    item.insert_at(moved_to(ids,item)) # Using acts_as_list
 
     gflash :notice => t("flash.#{resource_class.name.underscore.pluralize.gsub('/', '.')}.sort.notice", { :resource_types =>  human(resource_class).pluralize })
   end
 
   protected
 
+  def first_moved_item ids
+    ids.each_with_index do |id, i|
+      return resource_class.find(collection_array[i]) if collection_array[i] != id
+    end
+    nil
+  end
+
+  def moved_to ids, item
+    ids.index(item.id) + 1
+  end
+
   def movable_collection
     collection.except(:limit)
   end
 
-  def collection_hash
-    @collection_hash ||= Hash[ resource_class.where(:id => params[resource_params_name]).map { |o| [o.id,o] } ]
+  def collection_array
+    @collection_array ||= resource_class.where(:id => params[resource_params_name]).order(:position).pluck(:id)
   end
+
 end
