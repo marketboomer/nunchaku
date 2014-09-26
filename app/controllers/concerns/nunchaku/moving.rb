@@ -6,32 +6,38 @@ module Nunchaku::Moving
   end
 
   def sort
-    ids = params[resource_params_name].map { |id| id.to_i }
-    item = resource_class.find(moved_id(ids))
-    item.insert_at(moved_to(ids,item)) # Using acts_as_list
+    item = resource_class.find(moved_id)
+    item.insert_at(moved_to(item)) # Using acts_as_list
 
     gflash :notice => t("flash.#{resource_class.name.underscore.pluralize.gsub('/', '.')}.sort.notice", { :resource_types =>  human(resource_class).pluralize })
   end
 
   protected
 
-  def moved_id ids
-    offset = first_changed_index(ids)
-    new_candidate = ids[offset]
-    old_candidate = original_ids[offset]
-    new_delta = (ids.index(new_candidate) - original_ids.index(new_candidate)).abs
-    old_delta = (ids.index(old_candidate) - original_ids.index(old_candidate)).abs
-    new_delta > old_delta ? new_candidate : old_candidate
+  def moved_id
+    moved_candidate(first_changed_index)
   end
 
-  def first_changed_index ids
-    ids.each_with_index do |id, i|
+  def moved_candidate(offset)
+    delta(sorted_ids[offset]) > delta(original_ids[offset]) ? sorted_ids[offset] : original_ids[offset]
+  end
+
+  def delta(candidate)
+    (sorted_ids.index(candidate) - original_ids.index(candidate)).abs
+  end
+
+  def first_changed_index
+    sorted_ids.each_with_index do |id, i|
       return i if original_ids[i] != id
     end
   end
 
-  def moved_to ids, item
-    ids.index(item.id) + 1
+  def moved_to item
+    sorted_ids.index(item.id) + 1
+  end
+
+  def sorted_ids
+    @sorted_ids ||= params[resource_params_name].map { |id| id.to_i }
   end
 
   def original_ids
