@@ -10,6 +10,13 @@
   }
 }
 
-.form-group.boolean {
-  margin-left: 20px !important;
+.collection_check_boxes {
+  padding: 0 1.5em 0.5em 0.5em;
+}
+
+
+.form-group {
+  .boolean {
+    margin-left: 20px !important;
+  }
 }
