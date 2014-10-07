@@ -14,6 +14,7 @@ en:
         alert: "We could not destroy the %{resource_type} '%{resource_name}'"
 
   admin: Admin
+  all: All
   back: Back
   cancel: Cancel
   cancelled: cancelled
@@ -29,6 +30,7 @@ en:
   help: Help
   import: Import
   item: Item
+  missing: missing
   new: New
   new_model: New %{model}
   open: open
