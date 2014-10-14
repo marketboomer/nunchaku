@@ -72,6 +72,7 @@ module Nunchaku::Translatable
 
     def fuzzy_search terms, opts = {}
       locale = opts[:locale] || I18n.locale
+      terms = terms.first(8)
       if terms.empty?
         t_join(locale).where("#{translation_table_name}.id IS NOT NULL") # Vital for performance of order by with limit
       else

@@ -11,6 +11,7 @@ module Nunchaku::FuzzySearchable
 
     def fuzzy_search terms, opts = {}
       return all if terms.blank?
+      terms = terms.first(8)
       col = opts[:column] || 'search_text'
       where(terms.map { |term| "#{table_name}.#{col} ILIKE ?" }.join(' AND '), *(terms.map { |t| "%#{t}%" }))
     end
@@ -62,7 +63,7 @@ module Nunchaku::FuzzySearchable
     end
 
     def search_string string
-      string.hanize.split(separator).uniq.reject{ |w| stop?(w) }.join(' ')
+      string.hanize.split(separator).uniq.reject{ |w| stop?(w) }.first(8).join(' ')
     end
 
     def stop? word
