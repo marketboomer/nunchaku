@@ -1,7 +1,6 @@
 module Nunchaku::ResourcesHelper
   include Nunchaku::ResourcesPageHelper
   include Nunchaku::ResourcesInputHelper
-  include Nunchaku::ResourcesSummaryHelper
   include Nunchaku::ResourcesButtonHelper
   include Nunchaku::ResourcesTabsHelper
   include Nunchaku::ResourcesCsvHelper
