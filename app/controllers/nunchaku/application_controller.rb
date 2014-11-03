@@ -11,4 +11,8 @@ class Nunchaku::ApplicationController < ApplicationController
   def engine_precedence
     [Nunchaku::Engine]
   end
+
+  def controller
+    self
+  end
 end
