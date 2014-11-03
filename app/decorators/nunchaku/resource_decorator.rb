@@ -10,6 +10,10 @@ class Nunchaku::ResourceDecorator < Draper::Decorator
       self
     end
 
+    def index_widgets
+      %w(table)
+    end
+
     def column_names
       source_class.attribute_names - %w(id created_at updated_at lock_version)
     end
