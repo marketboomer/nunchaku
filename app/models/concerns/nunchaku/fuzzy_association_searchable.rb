@@ -1,6 +1,6 @@
 module Nunchaku::FuzzyAssociationSearchable
   extend ActiveSupport::Concern
-  include Nunchaku::FuzzySearchable
+  include Nunchaku::FuzzySearch
 
   module ClassMethods
 
