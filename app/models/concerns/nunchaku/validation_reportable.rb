@@ -1,6 +1,6 @@
 module Nunchaku
   module ValidationReportable
-    require 'new_relic/agent/agent'
+    require 'new_relic/agent'
     extend ActiveSupport::Concern
 
     included do
