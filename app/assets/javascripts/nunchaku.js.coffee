@@ -30,3 +30,6 @@ window.nunchaku.selection_affects_other = (selector, other, url) ->
     $.get(url, selection: $(this)[0].value).done (data) ->
       $(other).replaceWith data
       return
+
+window.nunchaku.is_empty = (value) ->
+  typeof (value) is "undefined" or not value? or value is ""

@@ -26,8 +26,13 @@ module Nunchaku::TableDecorator
     unless column.in?(self.class.edit_in_table)
       send(column)
     else
-      h.text_field_tag("#{resource.class.name.underscore}_#{column}[#{resource.id}]", send(column), :model_id => resource.id, :class => "#{resource.class.name.underscore.gsub('/', '_')}_#{column}_input")
+      h.text_field_tag("#{resource.class.name.underscore}_#{column}[#{resource.id}]", send(column), table_cell_edit_options(column))
     end
+  end
+
+
+  def table_cell_edit_options column
+    {:model_id => resource.id, :class => "#{resource.class.name.underscore.gsub('/', '_')}_#{column}_input"}
   end
 
   def tints(*args)
