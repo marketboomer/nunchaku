@@ -2,6 +2,10 @@ module Nunchaku::BootstrapHelper
   LABEL_STYLES = %w(success warning important info inverse)
   BADGE_STYLES = LABEL_STYLES
 
+  def tooltip(options, &block)
+    content_tag(:span, options.reverse_merge('data-toggle' => :tooltip), &block)
+  end
+
   def flash_content
     content_tag(:div, :class => 'flash_contents navbar-fixed-bottom') do
       flash.map do |name, msg|
@@ -60,4 +64,3 @@ module Nunchaku::BootstrapHelper
     content_tag(:li, options) { link_to(*args, &block) }
   end
 end
-
