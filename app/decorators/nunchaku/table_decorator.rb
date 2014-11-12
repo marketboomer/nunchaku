@@ -34,10 +34,10 @@ module Nunchaku::TableDecorator
 
   def table_cell(column)
     h.tooltip(:title => h.t("tooltip.#{resource.class.name.underscore}.#{column}.cell", :default => ''), 'data-placement' => 'left') do
-      unless column.in?(self.class.edit_in_table)
-        send(column)
-      else
+      if column.in?(self.class.edit_in_table)
         h.text_field_tag(editable_cell_id(column), send(column), editable_cell_options(column))
+      else
+        send(column)
       end
     end
   end
