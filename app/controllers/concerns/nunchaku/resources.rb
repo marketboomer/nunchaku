@@ -21,7 +21,15 @@ module Nunchaku
     protected
 
     def collection
-      !nested? && decorator_class.index_widgets.include?('tree') ? super.roots : super
+      treed_index? ? super.roots : super
+    end
+
+    def treed_index?
+      !nested? && decorator_class.index_widgets.include?('tree')
+    end
+
+    def paged_formats
+      treed_index? ? (super + [:json]) : super
     end
 
     def nullify_empty_params

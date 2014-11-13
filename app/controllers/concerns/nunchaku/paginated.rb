@@ -8,7 +8,11 @@ module Nunchaku::Paginated
   protected
 
   def collection
-    memoize_collection { request.format.html? ? super.page(current_page).per(per_page) : super }
+    memoize_collection { paged_formats.include?(request.format.symbol) ? super.page(current_page).per(per_page) : super }
+  end
+
+  def paged_formats
+    %i(html)
   end
 
   def paged_collection
