@@ -1,4 +1,4 @@
-module Nunchaku::BootstrapHelper
+module Nunchaku::ThemeHelper
   LABEL_STYLES = %w(success warning important info inverse)
   BADGE_STYLES = LABEL_STYLES
 
@@ -20,38 +20,18 @@ module Nunchaku::BootstrapHelper
     "btn-#{ @fc[name.to_sym] || name }"
   end
 
-  def bootstrap_label(string, options={})
+  def button_label(string, options={})
     options[:class] = (options[:class] || '').split(' ').unshift('label label-primary').join(' ')
     options[:style] = 'font-size: 1em;'
     content_tag(:span, string, options)
   end
 
-  LABEL_STYLES.each do |style|
-    class_eval <<-RUBY_EVAL
-      def bootstrap_#{style}_label(*args)
-        options = args.extract_options!
-        options[:class] = (options[:class] || '').split(' ').unshift('label-#{style}').join(' ')
-        bootstrap_label(*args << options)
-      end
-    RUBY_EVAL
-  end
-
-  def bootstrap_badge(string, options={})
+  def button_badge(string, options={})
     options[:class] = (options[:class] || '').split(' ').unshift('badge').join(' ')
     content_tag(:span, string, options)
   end
 
-  BADGE_STYLES.each do |style|
-    class_eval <<-RUBY_EVAL
-      def bootstrap_#{style}_badge(*args)
-        options = args.extract_options!
-        options[:class] = (options[:class] || '').split(' ').unshift('badge-#{style}').join(' ')
-        bootstrap_badge(*args << options)
-      end
-    RUBY_EVAL
-  end
-
-  def bootstrap_tab(*args, &block)
+  def theme_tab(*args, &block)
     if block_given?
       url, options = *args
     else
@@ -62,5 +42,25 @@ module Nunchaku::BootstrapHelper
     options[:class] = 'active' if current_page?(url_for(url))
 
     content_tag(:li, options) { link_to(*args, &block) }
+  end
+
+  BADGE_STYLES.each do |style|
+    class_eval <<-RUBY_EVAL
+      def theme_#{style}_badge(*args)
+        options = args.extract_options!
+        options[:class] = (options[:class] || '').split(' ').unshift('badge-#{style}').join(' ')
+        button_badge(*args << options)
+      end
+    RUBY_EVAL
+  end
+
+  LABEL_STYLES.each do |style|
+    class_eval <<-RUBY_EVAL
+      def theme_#{style}_label(*args)
+        options = args.extract_options!
+        options[:class] = (options[:class] || '').split(' ').unshift('label-#{style}').join(' ')
+        button_label(*args << options)
+      end
+    RUBY_EVAL
   end
 end
