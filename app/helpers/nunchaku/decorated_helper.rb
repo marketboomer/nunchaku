@@ -9,7 +9,7 @@ module Nunchaku::DecoratedHelper
 
   def collection_with_decorator
     @_decorated_collection ||=
-      decorator_class.decorate_collection(collection_without_decorator, , :context => decorator_context)
+      decorator_class.decorate_collection(collection_without_decorator, :context => decorator_context)
   end
 
   def resource_with_decorator

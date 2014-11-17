@@ -29,14 +29,6 @@ class Nunchaku::ResourceDecorator < Draper::Decorator
     def report_name
       ''
     end
-
-    def activities_info
-      []
-    end
-
-    def activity_message(json)
-      activities_info.map {|i| json[i] ? json[i] : i}.join(' ')
-    end
   end
 
   def resource_class
