@@ -1,6 +1,6 @@
 module Nunchaku::ApplicationHelper
   include Nunchaku::LocaleHelper
-  include Nunchaku::BootstrapHelper
+  include Nunchaku::ThemeHelper
   include Nunchaku::IconsHelper
 
   def engine_name
@@ -20,5 +20,5 @@ module Nunchaku::ApplicationHelper
 
   def path_prefix(klass)
     klass.name.deconstantize.underscore
-  end  
+  end
 end
