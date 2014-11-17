@@ -7,13 +7,6 @@ class Nunchaku::ResourcesController < Nunchaku::ApplicationController
 
 	helper_method :collection_fields, :decorator_context
 
-
-  class << self
-    def blacklisted_activities
-      %w(message_numbers my_dashboard_count index)
-    end
-  end
-
   def autocomplete
     respond_with autocomplete_collection.limit(AUTOCOMPLETE_LIMIT).map { |a| {:id => a.id, :text => a.to_s } }
   end
