@@ -7,7 +7,6 @@ class Nunchaku::ResourcesController < Nunchaku::ApplicationController
 
 	helper_method :collection_fields, :decorator_context
 
-
   def autocomplete
     respond_with autocomplete_collection.limit(AUTOCOMPLETE_LIMIT).map { |a| {:id => a.id, :text => a.to_s } }
   end
