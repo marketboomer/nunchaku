@@ -33,7 +33,7 @@ class Nunchaku::ResourcesController < Nunchaku::ApplicationController
   end
 
   def decorator_context
-    nil
+    {}
   end
 
   def autocomplete_collection
