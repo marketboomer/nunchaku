@@ -17,5 +17,22 @@
 }
 
 .collection_check_boxes {
-  padding: 0 1.5em 0.5em 0.5em;
+  padding: 0 1.5em 0 0.5em;
+}
+
+.form-control{
+  height: auto !important;
+  span {
+    display: inline-block;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .collection_check_boxes {
+    padding: 0 1em 0.25em 0.25em;
+  }
+  label,
+  .collection_check_boxes {
+    font-size: 0.8em;
+  }
 }
