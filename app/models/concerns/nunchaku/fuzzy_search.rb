@@ -21,8 +21,12 @@ module Nunchaku
       end
 
       def select_clause(sort, default_sort)
-        all_targets = ["#{self.table_name}.*", order_targets(sort)] + default_targets(default_sort)
+        all_targets = select_fields + [order_targets(sort)] + default_targets(default_sort)
         select all_targets.reject(&:blank?).join(',')
+      end
+
+      def select_fields
+        ["#{self.table_name}.*"]
       end
 
       def order_targets(field)
