@@ -13,6 +13,11 @@
   .cell.preview {
     text-align: center;
   }
+
+  table, tr, td, th, tbody, thead, tfoot {
+      page-break-after: always;
+      page-break-inside: avoid;
+  }
 </style>
 <%= render 'body_css' %>
 <%= render 'cell_css' %>
