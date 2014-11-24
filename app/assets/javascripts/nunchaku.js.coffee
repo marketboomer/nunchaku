@@ -13,6 +13,7 @@
 
 $ ->
 	$(".select2-container").width("100%")
+	$('.tree-item-name span').tooltip()
 
 $ ->
   $("a[data-behaviour='editable']").editable

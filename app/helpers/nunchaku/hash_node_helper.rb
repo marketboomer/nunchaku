@@ -1,24 +1,28 @@
 module Nunchaku
   module HashNodeHelper
 
-    def leaf_or_branch(k, v)
-      v.kind_of?(Hash) || v.kind_of?(Array) ? branch(k, v) : leaf(k, v)
+    def leaf_or_branch(node, key)
+      node[key].kind_of?(Hash) || node[key].kind_of?(Array) ? branch(node, key) : leaf(node, key)
     end
 
-    def leaf(k, v)
+    protected
+
+    def leaf(node, key)
       content_tag(:div, :class => 'tree-item') do
         content_tag(:div, :class => 'tree-item-name') do
-          "#{k}: #{v}"
+          "#{leaf_tip(node, key)}: #{node[key]}".html_safe
         end
       end
     end
 
-    def branch(k, v)
+    def branch(node, key)
+      v = node[key]
+
       content_tag(:div, :class => 'tree-folder') do
         [
           content_tag(:div, :class => 'tree-folder-header') do
             content_tag(:div, :class => 'tree-folder-name') do
-              [ k, ('*' if v.kind_of?(Array)) ].compact.join(' ')
+              [ key, ('*' if v.kind_of?(Array)) ].compact.join(' ')
             end
           end,
 
@@ -33,6 +37,38 @@ module Nunchaku
           end
         ].join.html_safe
       end
+    end
+
+    def leaf_tip(node, key)
+      tooltip(:title => leaf_title(node, key)) do
+        key.to_s
+      end
+    end
+
+    def leaf_title(node, key)
+      [
+        leaf_title_type(node, key),
+        leaf_title_description(node, key)
+      ].compact.join(', ')
+    end
+
+    def leaf_title_type(node, key)
+      t = node[key].class.name.underscore.humanize
+
+      if t == 'Nil class'
+        ch = node[:type].safe_constantize.columns_hash
+
+        t = ch[key].try(:type) if ch.present?
+
+        t ||= node[key]
+      end
+
+      t ||= 'string'
+    end
+
+    def leaf_title_description(node, key)
+      ltd = t("tooltip.#{node[:type].underscore}.#{key}.description", :default => '')
+      ltd unless ltd.empty?
     end
   end
 end
