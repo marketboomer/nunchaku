@@ -21,7 +21,11 @@ module Nunchaku
       protected
 
       def output_one(root)
-        (whitelist(root) - blacklist).inject({}) { |m, w| m[w] = output_for(root, w); m }
+        { :type => type(root) }.merge((whitelist(root) - blacklist).inject({}) { |m, w| m[w] = output_for(root, w); m })
+      end
+
+      def type(root)
+        root.class.name
       end
 
       def whitelist(root)
