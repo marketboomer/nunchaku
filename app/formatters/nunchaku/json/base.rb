@@ -21,7 +21,11 @@ module Nunchaku
       protected
 
       def output_one(root)
-        (whitelist(root) - blacklist).inject({}) { |m, w| m[w] = output_for(root, w); m }
+        { :type => type(root) }.merge((whitelist(root) - blacklist).inject({}) { |m, w| m[w] = output_for(root, w); m })
+      end
+
+      def type(root)
+        root.class.name
       end
 
       def whitelist(root)
@@ -35,14 +39,14 @@ module Nunchaku
       def output_for(root, method)
         r = root.class.reflections[method.to_sym]
 
-        if (f = formatter_for(r) if r)
+        if (f = formatter_class_for(r) if r)
           f.new.output(root.send(method))
         else
           root.send(method)
         end
       end
 
-      def formatter_for(reflection)
+      def formatter_class_for(reflection)
         "#{reflection.try(:class_name).deconstantize}::Json::#{reflection.try(:class_name).demodulize}".safe_constantize
       end
     end
