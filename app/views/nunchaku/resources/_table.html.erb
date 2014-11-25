@@ -1,4 +1,4 @@
-<table id="<%= resource_class.name.underscore %>_table" class="table table-bordered table-condensed table-hover" >
+<table id="<%= resource_class.name.underscore %>_table" class="<%= decorator_class.table_style %> table-bordered table-condensed table-hover" >
   <%=
     render :partial => 'table_header',
            :locals => {

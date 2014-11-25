@@ -29,7 +29,10 @@ class AutocompleteInput < ::SimpleForm::Inputs::StringInput
             }
           }
         });
+        input.parent().find('span.select2-chosen').text(input.parent().find('span.help-block').text());
+        input.parent().find('span.help-block').text('');
       })();
+
     JS
   end
 
