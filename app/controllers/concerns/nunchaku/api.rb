@@ -3,9 +3,11 @@ module Nunchaku
     extend ActiveSupport::Concern
 
     include HashNodeHelper
+    include DocumentationHeaderHelper
 
     included do
       helper 'nunchaku/hash_node'
+      helper 'nunchaku/documentation_header'
       helper_method :formatted_resource
     end
 
