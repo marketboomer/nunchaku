@@ -34,3 +34,23 @@ window.nunchaku.selection_affects_other = (selector, other, url) ->
 
 window.nunchaku.is_empty = (value) ->
   typeof (value) is "undefined" or not value? or value is ""
+
+window.nunchaku.editable_field = (selector, ajax_callback) ->
+  $(selector).each (i) ->
+    $(this).attr "tabindex", i + 1
+    return
+
+  $(selector).change ->
+    ajax_callback $(this)
+    return
+
+  $(selector).keydown (e) ->
+    if e.which is 13 or e.which is 40 or e.which is 38
+      index = $(selector).index(this)
+      $(selector + ":eq(" + ((if e.which is 38 then index - 1 else index + 1)) + ")").focus()
+    return
+
+  $(selector).focusin ->
+    $(this).select()
+
+  return
