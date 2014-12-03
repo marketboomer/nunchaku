@@ -24,6 +24,9 @@ $ ->
       params
 
 window.nunchaku = {}
+window.nunchaku.enter_key = 13
+window.nunchaku.up_key = 38
+window.nunchaku.down_key = 40
 
 window.nunchaku.selection_affects_other = (selector, other, url) ->
   $(document).off "change", selector
@@ -34,3 +37,23 @@ window.nunchaku.selection_affects_other = (selector, other, url) ->
 
 window.nunchaku.is_empty = (value) ->
   typeof (value) is "undefined" or not value? or value is ""
+
+window.nunchaku.editable_field = (selector, ajax_callback) ->
+  $(selector).each (i) ->
+    $(this).attr "tabindex", i + 1
+    return
+
+  $(selector).change ->
+    ajax_callback $(this)
+    return
+
+  $(selector).keydown (e) ->
+    if e.which is window.nunchaku.enter_key or e.which is window.nunchaku.up_key or e.which is window.nunchaku.down_key
+      index = $(selector).index(this)
+      $(selector + ":eq(" + ((if e.which is window.nunchaku.up_key then index - 1 else index + 1)) + ")").focus()
+    return
+
+  $(selector).focusin ->
+    $(this).select()
+
+  return
