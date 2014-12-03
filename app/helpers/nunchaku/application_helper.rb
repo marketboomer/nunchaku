@@ -4,7 +4,7 @@ module Nunchaku::ApplicationHelper
   include Nunchaku::IconsHelper
 
   def engine_name
-    controller.class.name.split('::').first.downcase
+    controller.class.name.split('::').first.underscore
   end
 
   def engine_path(*args)
