@@ -29,6 +29,10 @@ class Nunchaku::ResourceDecorator < Draper::Decorator
     def report_name
       ''
     end
+
+    def table_style
+      'table'
+    end
   end
 
   def resource_class
