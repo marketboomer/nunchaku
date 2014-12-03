@@ -24,6 +24,9 @@ $ ->
       params
 
 window.nunchaku = {}
+window.nunchaku.enter_key = 13
+window.nunchaku.up_key = 38
+window.nunchaku.down_key = 40
 
 window.nunchaku.selection_affects_other = (selector, other, url) ->
   $(document).off "change", selector
@@ -45,9 +48,9 @@ window.nunchaku.editable_field = (selector, ajax_callback) ->
     return
 
   $(selector).keydown (e) ->
-    if e.which is 13 or e.which is 40 or e.which is 38
+    if e.which is window.nunchaku.enter_key or e.which is window.nunchaku.up_key or e.which is window.nunchaku.down_key
       index = $(selector).index(this)
-      $(selector + ":eq(" + ((if e.which is 38 then index - 1 else index + 1)) + ")").focus()
+      $(selector + ":eq(" + ((if e.which is window.nunchaku.up_key then index - 1 else index + 1)) + ")").focus()
     return
 
   $(selector).focusin ->
