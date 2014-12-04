@@ -48,7 +48,12 @@ window.nunchaku.editable_field = (selector, ajax_callback) ->
     return
 
   $(selector).keydown (e) ->
-    if e.which is window.nunchaku.enter_key or e.which is window.nunchaku.up_key or e.which is window.nunchaku.down_key
+    if e.which is window.nunchaku.enter_key
+      $(selector + ":eq(" + ($(selector).index(this) + 1) + ")").focus()
+    return
+
+  $(selector).keyup (e) ->
+    if e.which is window.nunchaku.up_key or e.which is window.nunchaku.down_key
       index = $(selector).index(this)
       $(selector + ":eq(" + ((if e.which is window.nunchaku.up_key then index - 1 else index + 1)) + ")").focus()
     return
