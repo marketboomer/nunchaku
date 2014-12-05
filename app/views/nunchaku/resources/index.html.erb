@@ -14,7 +14,7 @@
 	</div>
 
   <% decorator_class.index_widgets.each do |w| %>
-    <div class="col-xs-<%= 12 / decorator_class.index_widgets.size %>">
+    <div class="col-xs-<%= decorator_class.index_widget_width(w) %>">
 			<%= render :partial => w, :locals => { :column_names => column_names } %>
     </div>
   <% end %>

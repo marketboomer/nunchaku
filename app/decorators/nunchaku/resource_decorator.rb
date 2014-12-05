@@ -11,7 +11,17 @@ class Nunchaku::ResourceDecorator < Draper::Decorator
     end
 
     def index_widgets
-      %w(table)
+      index_widget_proportions.stringify_keys.keys
+    end
+
+    def index_widget_width(w)
+      index_widget_proportions[w.to_sym]
+    end
+
+    def index_widget_proportions
+      {
+        :table => 12
+      }
     end
 
     def column_names
