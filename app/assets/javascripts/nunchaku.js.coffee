@@ -39,6 +39,7 @@ window.nunchaku.is_empty = (value) ->
   typeof (value) is "undefined" or not value? or value is ""
 
 window.nunchaku.editable_field = (selector, ajax_callback) ->
+  $(selector).off "change keydown keyup focusin"
   $(selector).each (i) ->
     $(this).attr "tabindex", i + 1
     return
