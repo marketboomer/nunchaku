@@ -31,6 +31,8 @@ en:
   import: Import
   item: Item
   missing: missing
+  more_records: More
+  no_more_records: No more records
   new: New
   new_model: New %{model}
   open: open
