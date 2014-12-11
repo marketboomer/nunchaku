@@ -10,7 +10,7 @@
   <%=
     render :partial => 'table_body',
            :locals => {
-             :collection => collection,
+             :collection => collection.take(sweet_ux_count),
              :resource_class => resource_class,
              :column_names => column_names
            }

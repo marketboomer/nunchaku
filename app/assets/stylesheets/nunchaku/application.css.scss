@@ -27,6 +27,10 @@
   }
 }
 
+.cell.maybe_more_records {
+  text-align: right;
+}
+
 @media only screen and (max-width: 880px) {
   .collection_check_boxes {
     padding: 0 1em 0.25em 0.25em;
