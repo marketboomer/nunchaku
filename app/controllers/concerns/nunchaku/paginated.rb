@@ -2,7 +2,7 @@ module Nunchaku::Paginated
   extend ActiveSupport::Concern
 
   included do
-    helper_method :paged_collection, :current_page, :read_ahead_count, :sweet_ux_count
+    helper_method :paged_collection, :current_page, :read_ahead_count, :sweet_ux_count, :per_page
   end
 
   protected
