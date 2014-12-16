@@ -1,9 +1,14 @@
 <style type='text/css'>
   th {
     font-weight: bold;
+    border-left: 1px solid black;
   }
   body {
     font-family: Helvetica, Arial, sans-serif;
+  }
+  tr, td {
+    border: solid 1px black;
+    padding: 2px;
   }
   .cell.edit,
   .cell.quantity,
@@ -15,8 +20,11 @@
   }
 
   table, tr, td, th, tbody, thead, tfoot {
-      page-break-after: always;
       page-break-inside: avoid;
+  }
+  .report-footer {
+    position: fixed;
+    bottom: 0;
   }
 </style>
 <%= render 'body_css' %>
