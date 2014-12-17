@@ -63,3 +63,30 @@ window.nunchaku.editable_field = (selector, ajax_callback) ->
     $(this).select()
 
   return
+
+
+$ ->
+  $(".maybe_more_records a").click (event) ->
+    event.preventDefault()
+    window.nunchaku.view_more()
+
+
+window.nunchaku.view_more = () ->
+  more = $(".maybe_more_records a")
+  url = more.attr('href')
+
+  $.ajax
+    type: "GET"
+    url: url
+    dataType: "html"
+    success: (result) ->
+      dom = $(result)
+      rows = dom.find("tr")
+      $("tbody:eq(0)").append rows
+      if dom.last().children().length > 0
+        new_url = dom.last().children().first().attr('href')
+        more.attr('href', new_url)
+      else
+        $("td.maybe_more_records").children().replaceWith(dom.last().html())
+        $ ->
+      window.nunchaku.editable_field(".inventory_stock_count_quantity_input", window.inventory.update_stock_count)
