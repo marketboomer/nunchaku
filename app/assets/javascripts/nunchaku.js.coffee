@@ -88,5 +88,4 @@ window.nunchaku.view_more = () ->
         more.attr('href', new_url)
       else
         $("td.maybe_more_records").children().replaceWith(dom.last().html())
-        $ ->
       window.nunchaku.editable_field(".inventory_stock_count_quantity_input", window.inventory.update_stock_count)
