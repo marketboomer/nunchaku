@@ -35,6 +35,12 @@ module Nunchaku::ResourcesInputHelper
 
   protected
 
+  def form_heading(action)
+    t("form.#{resource_class.name.underscore}.heading.#{action.to_s}",
+      :default => "#{I18n.t(action)} #{resource_class.model_name.human.titleize}"
+    )
+  end
+
   def default_builder
     action_name.in?(%w(show)) ? Nunchaku::DisabledFormBuilder : Nunchaku::ResourceFormBuilder
   end
