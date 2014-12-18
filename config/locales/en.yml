@@ -40,4 +40,5 @@ en:
   search_by: Search by %{models}
   search_for: Search for %{models}
   sort: Sort
+  submit: Submit
   update: Update
