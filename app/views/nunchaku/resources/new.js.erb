@@ -4,7 +4,7 @@
 
   modal.children().wrapAll(form.clone().empty());
 
-  $("<h3><%= I18n.t(:new) %> <%= resource_class.model_name.human.downcase %></h3>")
+  $("<h3><%= form_heading(:new) %></h3>")
     .appendTo(modal.find(".modal-header"));
   form.find(".form-actions").detach().children()
     .appendTo(modal.find(".modal-footer"));
