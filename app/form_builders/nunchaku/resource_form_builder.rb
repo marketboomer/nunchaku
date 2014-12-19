@@ -1,4 +1,13 @@
 class Nunchaku::ResourceFormBuilder < SimpleForm::FormBuilder
+
+  def just_some_text(key)
+    template.label_tag t(key)
+  end
+
+  def t(key)
+    template.t("form.#{object.class.name.underscore}.#{key}")
+  end
+
   def association(*args)
   	options = args.extract_options!
 
