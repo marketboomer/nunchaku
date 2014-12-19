@@ -1,8 +1,5 @@
 # encoding: UTF-8
 en:
-  instructions:
-    sort: Drag an item to its new position, to re-arrange the list.
-
   flash:
     actions:
       create:
@@ -12,6 +9,14 @@ en:
       destroy:
         notice: "We destroyed the %{resource_type} '%{resource_name}'"
         alert: "We could not destroy the %{resource_type} '%{resource_name}'"
+
+  helpers:
+    submit:
+      create: "Save"
+      update: "Update"
+
+  instructions:
+    sort: Drag an item to its new position, to re-arrange the list.
 
   admin: Admin
   all: All
