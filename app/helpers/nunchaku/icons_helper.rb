@@ -31,6 +31,14 @@ module Nunchaku::IconsHelper
     icon :phone, *args
   end
 
+  def full_name_icon(*args)
+    icon :child, *args
+  end
+
+  def position_icon(*args)
+    icon :institution, *args
+  end
+
   def globe_icon(*args)
     icon :globe, *args
   end

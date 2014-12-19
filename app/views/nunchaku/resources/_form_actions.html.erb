@@ -1,5 +1,5 @@
 <div class="form-actions pull-right">
-  <%= f.submit t(:submit), :class => 'btn btn-primary submit' %>
+  <%= f.button :submit, :class => 'btn btn-primary submit' %>
 
   <% if f.deletable? %>
     <%= link_to(resource_path, :class => 'btn btn-danger',
