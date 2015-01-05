@@ -7,14 +7,6 @@ module Nunchaku
         Rails.cache.fetch(key) { block.call }
       end
 
-      def clear_cache_for_key(key)
-        Rails.cache.delete(key)
-      end
-
-      def clear_cache_for_user(user)
-        Rails.cache.delete_matched("user#{user.id}_*")
-      end
-
       protected
 
       def user_cache_key_fragment(user)
