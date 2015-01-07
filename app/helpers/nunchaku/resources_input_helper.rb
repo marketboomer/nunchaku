@@ -7,10 +7,18 @@ module Nunchaku::ResourcesInputHelper
   end
 
   def builder
-  	"#{resource_class.name}FormBuilder".constantize
+    builder_class_for(resource_class.name)
+  end
 
-  	rescue NameError => e
+  def builder_class_for(name)
+    "#{name}FormBuilder".constantize
+
+    rescue NameError => e
       default_builder
+  end
+
+  def builder_for(name)
+    builder_class_for(name).new(name.demodulize.underscore.to_sym, name.safe_constantize.new, self, {})
   end
 
   def form_element_names
