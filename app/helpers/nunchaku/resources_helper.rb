@@ -30,4 +30,8 @@ module Nunchaku::ResourcesHelper
   def nested_resource_path resource
     polymorphic_path resource
   end
+
+  def diagnosing?
+    controller.class.name.include?('Diagnostics')
+  end
 end

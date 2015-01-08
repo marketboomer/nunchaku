@@ -66,6 +66,18 @@ module Nunchaku::ResourcesButtonHelper
     end
   end
 
+  def diagnose_button
+    if diagnosing?
+      link_to [with_nesting(resource_collection_name)].flatten, :class => 'btn navbar-btn btn-default' do
+        diagnose_icon << ' ' << button_text(:return)
+      end
+    else
+      link_to [:diagnostics, with_nesting(resource_collection_name)].flatten, :class => 'btn navbar-btn btn-default' do
+        diagnose_icon << ' ' << button_text(:diagnose)
+      end
+    end
+  end
+
   protected
 
   def button_text(symbol)

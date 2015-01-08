@@ -194,4 +194,8 @@ module Nunchaku::IconsHelper
   def check_icon(*args)
     icon :check, *args
   end
+
+  def diagnose_icon(*args)
+    icon :stethoscope, *args
+  end
 end
