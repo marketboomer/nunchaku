@@ -1,0 +1,34 @@
+<%= simple_form_for(controller.send(:build_resource)) do |f| %>
+  <% f.as_row_form = true %>
+  
+  <%= f.error_notification %>
+
+  <table id="<%= resource_class.name.underscore %>_table" class="<%= decorator_class.table_style %> table-bordered table-condensed table-hover" >
+    <%=
+      render :partial => 'table_header',
+             :locals => {
+               :decorator_class => decorator_class,
+               :column_names => decorator_class.form_column_names
+             }
+    %>
+
+    <%=
+      render :partial => 'form_row',
+      :locals => {
+        :f => f,
+        :column_names => decorator_class.form_column_names
+      }
+    %>
+
+    <%=
+      render :partial => 'table_body',
+             :locals => {
+               :collection => collection.take(sweet_ux_count),
+               :resource_class => resource_class,
+               :column_names => decorator_class.form_column_names
+             }
+    %>
+
+    <%= render 'table_footer' %>
+  </table>
+<% end %>

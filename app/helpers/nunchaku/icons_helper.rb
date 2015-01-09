@@ -198,4 +198,8 @@ module Nunchaku::IconsHelper
   def diagnose_icon(*args)
     icon :stethoscope, *args
   end
+
+  def repair_icon(*args)
+    icon :medkit, *args
+  end
 end
