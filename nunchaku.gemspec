@@ -45,6 +45,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'super_resources'
   s.add_dependency 'uglifier', '>= 1.3.0'
   s.add_dependency 'wicked_pdf'
+  s.add_dependency 'sourcify'
 
   # development dependencies ...................................................
   s.add_development_dependency 'capybara', '~> 2.2'
