@@ -10,7 +10,7 @@ module Nunchaku
     protected
 
     def report_errors
-      e = Nunchaku::ValidationException.new({:object => self, :errors => errors})
+      e = Nunchaku::ValidationError.new({:object => self, :errors => errors})
       NewRelic::Agent.notice_error(e.message) if newrelic_started?
       raise e
     end
