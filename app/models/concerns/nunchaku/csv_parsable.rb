@@ -34,7 +34,7 @@ module Nunchaku
     end
 
     def bom
-      @bom ||= csv_content[0..3].encode("ASCII-8BIT")
+      @bom ||= csv_content.b[0..3]
     end
 
     def col_sep
