@@ -3,7 +3,7 @@ module Nunchaku
     extend ActiveSupport::Concern
 
     included do
-      attr_accessor :csv_file
+      attr_accessor :csv_file # any IO based class that responds to read()
     end
 
     def csv_parse(options = {}, &block)
@@ -15,7 +15,11 @@ module Nunchaku
     private
 
     def csv_encoded_content
-      @csv_encoded_content ||= (strip_bom << @csv_file.read).force_encoding(encoding).encode("UTF-8")
+      @csv_encoded_content ||= (strip_bom << csv_content[4..csv_content.length]).force_encoding(encoding).encode("UTF-8")
+    end
+
+    def csv_content
+      @csv_content ||= self.csv_file.read
     end
 
     def strip_bom
@@ -30,7 +34,7 @@ module Nunchaku
     end
 
     def bom
-      @bom ||= @csv_file.read(4).encode("ASCII-8BIT")
+      @bom ||= csv_content[0..3].encode("ASCII-8BIT")
     end
 
     def col_sep
