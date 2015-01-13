@@ -10,7 +10,7 @@ module Nunchaku
       protected
 
       def user_cache_key_fragment(user)
-        "user#{user.id}_organisation#{user.current_access_organisation.id}"
+        "user#{user.id}_organisation#{user.current_access_organisation.try(:id)}"
       end
     end
   end
