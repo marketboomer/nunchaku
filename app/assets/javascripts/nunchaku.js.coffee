@@ -90,3 +90,4 @@ window.nunchaku.view_more = ->
         $("td.maybe_more_records").children().replaceWith dom.last().html()
       window.nunchaku.view_more_callback() if window.nunchaku.view_more_callback?
       return
+
