@@ -36,8 +36,7 @@ module Nunchaku
     end
 
     def soft_delete
-      self.is_deleted = true
-      save!
+      update_attributes!(:is_deleted => true)
     end
   end
 end
