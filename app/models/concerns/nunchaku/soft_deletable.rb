@@ -18,8 +18,7 @@ module Nunchaku
     end
 
     def delete
-      return if new_record?
-      soft_delete
+      soft_delete unless new_record?
     end
 
     def name_unique?
