@@ -17,7 +17,7 @@ module Nunchaku::ApplicationHelper
   end
 
   def markdown(text)
-    BlueCloth.new(text).to_html.html_safe
+    Kramdown::Document.new(text).to_html.html_safe
   end
 
   protected

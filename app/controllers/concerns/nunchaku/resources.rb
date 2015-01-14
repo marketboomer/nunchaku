@@ -21,7 +21,7 @@ module Nunchaku
     protected
 
     def collection
-      treed_index? ? super.roots : super
+      treed_index? ? super.roots : super.preload(preloaded_associations)
     end
 
     def treed_index?
@@ -44,6 +44,10 @@ module Nunchaku
 
     def resource_params_id(resource_name)
       params["#{resource_name.classify.demodulize.underscore}_id"]
+    end
+
+    def preloaded_associations
+      nil
     end
   end
 end

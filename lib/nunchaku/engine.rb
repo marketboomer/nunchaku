@@ -21,7 +21,7 @@ require 'gritter'
 require 'wicked_pdf'
 require 'sorted'
 require 'csv'
-require 'bluecloth'
+require 'kramdown'
 
 module Nunchaku
   class Engine < ::Rails::Engine
