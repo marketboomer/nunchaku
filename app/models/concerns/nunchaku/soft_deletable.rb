@@ -25,14 +25,14 @@ module Nunchaku
       false
     end
 
-    def name_field
+    def name_column
       :name
     end
 
     protected
 
     def rename
-      assign_attributes(name_field => "#{send(name_field)} - DELETED") if name_unique?
+      assign_attributes(name_column => "#{send(name_column)} - DELETED") if name_unique?
     end
 
     def soft_delete
