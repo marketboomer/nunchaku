@@ -91,3 +91,7 @@ window.nunchaku.view_more = ->
       window.nunchaku.view_more_callback() if window.nunchaku.view_more_callback?
       return
 
+window.nunchaku.closeModal = ->
+  $('.modal').remove()
+  $('.modal-backdrop').remove()
+  $('.modal-open').removeClass('modal-open')
