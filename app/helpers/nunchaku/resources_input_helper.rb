@@ -25,6 +25,10 @@ module Nunchaku::ResourcesInputHelper
   	decorator_class.form_element_names
   end
 
+  def form_options
+    decorator_class.try(:form_options)
+  end
+
   def with_edit(resource, attr_name, options={}, &block)
     options.reverse_merge!(
       :behaviour => 'editable',
@@ -48,7 +52,7 @@ module Nunchaku::ResourcesInputHelper
     :default => "#{I18n.t(action)} #{resource_class.model_name.human.titleize}"
     )
   end
-  
+
   def default_builder
     action_name.in?(%w(show)) ? Nunchaku::DisabledFormBuilder : Nunchaku::ResourceFormBuilder
   end

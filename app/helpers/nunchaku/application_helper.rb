@@ -16,6 +16,10 @@ module Nunchaku::ApplicationHelper
     polymorphic_path(args)
   end
 
+  def markdown(text)
+    Kramdown::Document.new(text).to_html.html_safe
+  end
+
   protected
 
   def path_prefix(klass)

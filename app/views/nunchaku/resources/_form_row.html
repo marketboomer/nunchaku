@@ -1,0 +1,7 @@
+<tr class="form_row <%= f.object.class.name.underscore %>">
+	<% column_names.each do |c| %>
+	  <td class="cell form_cell <%= c %>">
+			<%= f.send c %>
+	  </td>
+	<% end %>
+</tr>

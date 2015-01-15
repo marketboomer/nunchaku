@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'bootstrap-sass', '~> 3.1.1'
   s.add_dependency 'bootstrap-x-editable-rails'
   # s.add_dependency 'chosen-rails'
+  s.add_dependency 'kramdown'
   s.add_dependency 'coffee-rails', '~> 4.0.0'
   s.add_dependency 'draper'
   s.add_dependency 'font-awesome-sass', '~> 4.1.0'
@@ -44,6 +45,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'super_resources'
   s.add_dependency 'uglifier', '>= 1.3.0'
   s.add_dependency 'wicked_pdf'
+  s.add_dependency 'sourcify'
 
   # development dependencies ...................................................
   s.add_development_dependency 'capybara', '~> 2.2'
