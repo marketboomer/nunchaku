@@ -29,8 +29,13 @@ class AutocompleteInput < ::SimpleForm::Inputs::StringInput
             }
           }
         });
-        input.parent().find('span.select2-chosen').text(input.parent().find('span.help-block').text());
-        input.parent().find('span.help-block').text('');
+        if (input.parent().find('span.help-block').length == 0)
+          input.parent().find('span.select2-chosen').text(input.attr('hint'));
+        else {
+          input.parent().find('span.select2-chosen').text(input.parent().find('span.help-block').text());
+          input.parent().find('span.help-block').text('');
+        }
+
       })();
 
     JS

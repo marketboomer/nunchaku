@@ -194,4 +194,16 @@ module Nunchaku::IconsHelper
   def check_icon(*args)
     icon :check, *args
   end
+
+  def diagnose_icon(*args)
+    icon :stethoscope, *args
+  end
+
+  def repair_icon(*args)
+    icon :medkit, *args
+  end
+
+  def impersonate_icon(*args)
+    icon :certificate, *args
+  end
 end
