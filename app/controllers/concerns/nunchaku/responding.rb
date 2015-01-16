@@ -3,7 +3,7 @@ module Nunchaku::Responding
 
   included do
 	  responders :flash, :http_cache
-    respond_to :json, :js, :html
+    respond_to :json, :js, :html, :tree
 	end
   
   protected
