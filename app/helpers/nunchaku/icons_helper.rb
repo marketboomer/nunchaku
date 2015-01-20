@@ -202,4 +202,8 @@ module Nunchaku::IconsHelper
   def repair_icon(*args)
     icon :medkit, *args
   end
+
+  def impersonate_icon(*args)
+    icon :certificate, *args
+  end
 end
