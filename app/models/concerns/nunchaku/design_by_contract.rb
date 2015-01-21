@@ -2,13 +2,6 @@ module Nunchaku
   module DesignByContract
     extend ActiveSupport::Concern
 
-    def assert_invariant
-      if invariant_fails?
-        log_invariant_failure
-        raise AssertionError.new(self), 'invariant fails'
-      end
-    end
-
     def invariant_passes?
       !invariant_fails?
     end
@@ -19,19 +12,54 @@ module Nunchaku
 
     protected
 
+    def require_pre(args, clauses)
+    end
+
+    def ensure_post(args, clauses)
+    end
+
+    def assert_invariant(level=:warn)
+      if invariant_fails?
+        log_invariant_failure(level)
+
+        raise AssertionError.new(self), 'invariant fails'
+      end
+    end
+
     def invariant
       {}
     end
 
-    def log_invariant_failure
-      invariant_eval.reject { |k, v| v }.each do |k, v|
-        logger.fatal { I18n.t("#{self.class.name.underscore}.invariant.fail.#{k}") }
-        logger.fatal { "in #{invariant[k].source_location.join(':')}" }
-      end
-    end
+    private
 
     def invariant_eval
       @invariant_eval ||= invariant.map { |k, v| [k, v.call(self)] }.to_h
+    end
+
+    def assertion_eval(clauses, args)
+      clauses.map { |k, v| [k, v.call(self, args)] }.to_h
+    end
+
+    def log_invariant_failure(level=:warn)
+      invariant_eval.reject { |k, v| v }.each do |k, v|
+        log_failure(invariant, key, level=:warn)
+      end
+
+      logger.send(level) { ' ' * 4 + inspect }
+    end
+
+    def log_clause_failure(clauses, args, evald_clauses, level=:warn)
+      evald_clauses.reject { |k, v| v }.each do |k, v|
+        log_failure(clauses, key, level=:warn)
+      end
+
+      logger.send(level) { ' ' * 4 + 'Input arguments' + args.inspect }
+      logger.send(level) { ' ' * 4 + inspect }
+    end
+
+    def log_failure(clauses, key, level=:warn)
+      logger.send(level) { ' ' * 4 + I18n.t("#{self.class.name.underscore}.assertion.fail.#{k}") }
+      logger.send(level) { ' ' * 4 + "in #{clauses[k].source_location.join(':')}" }
     end
   end
 
