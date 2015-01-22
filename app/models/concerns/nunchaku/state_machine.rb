@@ -11,6 +11,10 @@ module Nunchaku
         events_to_states.keys
       end
 
+      def state_questions
+        states.map { |s| "#{s}?"}
+      end
+
       def state_after(event)
         [ events_to_states[event.to_sym] ].flatten.first.to_s
       end
