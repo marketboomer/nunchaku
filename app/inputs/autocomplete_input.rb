@@ -1,6 +1,6 @@
 class AutocompleteInput < ::SimpleForm::Inputs::StringInput
 
-  def input
+  def input(*args)
     super << javascript
   end
 
