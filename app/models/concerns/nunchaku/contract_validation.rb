@@ -7,6 +7,10 @@ module Nunchaku
       validate :assert_invariant
     end
 
+    def error_sentence
+      errors.full_messages.to_sentence
+    end
+    
     protected
 
     def assert_invariant

@@ -32,6 +32,10 @@ module Nunchaku
 
     private
 
+    def reset_eval
+      @invariant_eval = nil
+    end
+    
     def invariant_eval
       @invariant_eval ||= invariant.map { |k, v| [k, v.call(self)] }.to_h
     end
