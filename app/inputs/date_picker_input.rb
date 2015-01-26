@@ -1,10 +1,10 @@
 class DatePickerInput < SimpleForm::Inputs::DateTimeInput
-  def input
+  def input(*args)
     text_field << date_select << javascript
   end
 
   def input_html_options
-    super.tap do |h| 
+    super.tap do |h|
       (h[:data] ||= {}).merge!(:handle => handle)
       h[:class] = (h[:class] || '') << ' search_query form-control'
     end

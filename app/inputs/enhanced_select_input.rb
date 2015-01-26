@@ -1,5 +1,5 @@
 class EnhancedSelectInput < ::SimpleForm::Inputs::CollectionSelectInput
-  def input
+  def input(*args)
     collection_field << javascript
   end
 
