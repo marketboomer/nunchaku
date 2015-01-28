@@ -12,22 +12,30 @@
              }
     %>
 
-    <%=
-      render :partial => 'form_row',
-      :locals => {
-        :f => f,
-        :column_names => decorator_class.form_column_names
-      }
-    %>
 
-    <%=
-      render :partial => 'table_body',
-             :locals => {
+  <tbody
+    <% if nests.any? %>
+      chain="<%= nested_resource_path nests %>"
+    <% end %>
+    >
+      <%=
+        render :partial => 'form_row',
+        :locals => {
+          :f => f,
+          :column_names => decorator_class.form_column_names
+        }
+      %>
+      <%=
+        render :partial => 'table_row',
                :collection => collection.take(sweet_ux_count),
-               :resource_class => resource_class,
-               :column_names => decorator_class.form_column_names
-             }
-    %>
+               :as => :resource,
+               :locals => {
+                 :resource_class => resource_class,
+                 :column_names => decorator_class.form_column_names
+               }
+      %>
+  </tbody>
+
 
     <%= render 'table_footer' %>
   </table>
