@@ -1,6 +1,6 @@
-<%= simple_form_for(controller.send(:build_resource)) do |f| %>
+<%= simple_form_for(controller.send(:build_resource), :html => form_options) do |f| %>
   <% f.as_row_form = true %>
-  
+
   <%= f.error_notification %>
 
   <table id="<%= resource_class.name.underscore %>_table" class="<%= decorator_class.table_style %> table-bordered table-condensed table-hover" >
@@ -32,3 +32,4 @@
     <%= render 'table_footer' %>
   </table>
 <% end %>
+<%= render 'input_js.html.erb' %>
