@@ -43,5 +43,9 @@ class Nunchaku::ResourcesController < Nunchaku::ApplicationController
   def collection_translated_or_else_fuzzy
     collection.send (collection.respond_to?(:translated_search) ? :translated_search : :fuzzy_search), search_terms
   end
+
+  def autocomplete?
+    controller.action_name == 'autocomplete'
+  end
 end
 
