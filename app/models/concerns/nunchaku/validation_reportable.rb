@@ -18,6 +18,7 @@ module Nunchaku
     private
 
     def newrelic_started?
+      return false if Rails.env.development? || Rails.env.test?
       begin
         NewRelic::Agent.agent
         true
