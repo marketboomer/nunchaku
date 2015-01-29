@@ -19,9 +19,11 @@ module Nunchaku
 
       resource.save!
 
-      gflash :notice => { :value => t("flash_unrest.#{engine_name}.#{resource_instance_name.pluralize}.#{resource.state}.notice", interpolation_options), :class_name => 'notice' }
+      gflash :notice => {:value => t("flash_unrest.#{resource.general_class.name.underscore.gsub('/', '.').pluralize}.#{resource.state}.notice", interpolation_options), :class_name => 'notice'}
 
     rescue
+      resource.update_column(:state, resource.state)
+
       gflash :error => { :value => resource.errors.full_messages.to_sentence, :class_name=>'error' }
     ensure
       respond_with with_nesting(:transfers)
