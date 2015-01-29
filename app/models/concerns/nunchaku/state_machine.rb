@@ -48,5 +48,9 @@ module Nunchaku
     def next_events
       [ self.class.states_to_events[state.to_sym] ].flatten.compact
     end
+
+    def general_class
+      self.class
+    end
   end
 end
