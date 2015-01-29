@@ -26,7 +26,7 @@ module Nunchaku
 
       gflash :error => { :value => resource.errors.full_messages.to_sentence, :class_name=>'error' }
     ensure
-      respond_with with_nesting(:transfers)
+      respond_with with_nesting(controller_name)
     end
   end
 end
