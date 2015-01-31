@@ -25,6 +25,8 @@ module Nunchaku
 
       ae = assertion_eval(clauses, args)
 
+      log_now ae.to_yaml, :debug
+      
       if ae.values.include?(false)
         log_clause_failure(clauses, args, ae)
 
