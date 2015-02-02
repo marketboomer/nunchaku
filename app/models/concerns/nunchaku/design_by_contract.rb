@@ -19,6 +19,8 @@ module Nunchaku
     end
 
     def assert_invariant(level=:warn)
+      log_now "Asserting invariant for  #{self.object_id} #{self.class.name}: #{self}", :info
+
       if invariant_fails?
         log_invariant_failure(level)
 
@@ -35,35 +37,45 @@ module Nunchaku
     def reset_eval
       @invariant_eval = nil
     end
-    
+
     def invariant_eval
       @invariant_eval ||= invariant.map { |k, v| [k, v.call(self)] }.to_h
+
+      log_now @invariant_eval.to_yaml, :debug
+
+      @invariant_eval
     end
 
     def assertion_eval(clauses, args)
       clauses.map { |k, v| [k, v.call(self, args)] }.to_h
     end
 
-    def log_invariant_failure(level=:warn)
+    def log_invariant_failure
       invariant_eval.reject { |k, v| v }.each do |k, v|
-        log_failure(invariant, key, level=:warn)
+        log_failure(invariant, key)
       end
 
-      logger.send(level) { ' ' * 4 + inspect }
+      log_now to_yaml
     end
 
-    def log_clause_failure(clauses, args, evald_clauses, level=:warn)
+    def log_clause_failure(clauses, args, evald_clauses)
       evald_clauses.reject { |k, v| v }.each do |k, v|
-        log_failure(clauses, key, level=:warn)
+        log_failure(clauses, key)
       end
 
-      logger.send(level) { ' ' * 4 + 'Input arguments' + args.inspect }
-      logger.send(level) { ' ' * 4 + inspect }
+      log_now "Input arguments #{args.to_yaml}"
+
+      log_now to_yaml
     end
 
-    def log_failure(clauses, key, level=:warn)
-      logger.send(level) { ' ' * 4 + I18n.t("#{self.class.name.underscore}.assertion.fail.#{k}") }
-      logger.send(level) { ' ' * 4 + "in #{clauses[k].source_location.join(':')}" }
+    def log_failure(clauses, key)
+      log_now I18n.t("#{self.class.name.underscore}.assertion.fail.#{k}")
+
+      log_now "in #{clauses[k].source_location.join(':')}"
+    end
+
+    def log_now(text, level=:warn)
+      logger.send(level) { ' ' * 4 + text }
     end
   end
 

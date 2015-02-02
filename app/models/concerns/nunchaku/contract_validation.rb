@@ -10,13 +10,15 @@ module Nunchaku
     def error_sentence
       errors.full_messages.to_sentence
     end
-    
+
     protected
 
     def assert_invariant
       super
     rescue
       add_invariant_errors
+      
+      log_now error_sentence, :debug
     end
 
     def add_invariant_errors
