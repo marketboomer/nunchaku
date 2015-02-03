@@ -11,6 +11,15 @@ class Nunchaku::ResourcesController < Nunchaku::ApplicationController
     respond_with autocomplete_collection.limit(AUTOCOMPLETE_LIMIT).map { |a| {:id => a.id, :text => a.to_s } }
   end
 
+  def destroy(options = {}, &block)
+    if destroy_resource
+      options[:location] ||= collection_url
+    else
+      gflash :error => {:value => [resource.to_s, resource.errors.full_messages.join(', ')].join(': '), :class_name => 'error', :sticky => true}
+    end
+    respond_with(*(with_nesting(resource) << options), &block)
+  end
+
   protected
 
   def resource_params
