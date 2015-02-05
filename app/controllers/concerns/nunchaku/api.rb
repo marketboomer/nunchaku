@@ -11,6 +11,12 @@ module Nunchaku
       helper_method :formatted_resource
     end
 
+    class << self
+      def resource_class_name
+        super.gsub('::Api', '').singularize
+      end
+    end
+
     def show(options = {}, &block)
       if request.format.json?
         respond_with(formatted_resource)
@@ -27,10 +33,6 @@ module Nunchaku
 
     def formatter_class(format)
       "#{resource_class_name.deconstantize}::#{format.to_s.titleize}::#{resource_class_name.demodulize}".safe_constantize
-    end
-
-    def resource_class_name
-      super.gsub('::Api', '').singularize
     end
   end
 end
