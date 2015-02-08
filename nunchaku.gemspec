@@ -40,7 +40,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'sass-rails', '~> 4.0.0'
   s.add_dependency 'select2-rails'
   s.add_dependency 'simple_form'
-  s.add_dependency 'sorted'
+  s.add_dependency 'sorted', '~> 1.0.1'
   s.add_dependency 'state_machine', '~> 1.2'
   s.add_dependency 'super_resources'
   s.add_dependency 'uglifier', '>= 1.3.0'
