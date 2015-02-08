@@ -17,6 +17,8 @@ module Nunchaku
       super
     rescue
       add_invariant_errors
+      
+      log_now error_sentence, :debug
     end
 
     def assert_clauses(assertion_type, method, clauses, args={})
