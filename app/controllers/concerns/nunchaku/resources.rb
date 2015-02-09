@@ -7,6 +7,7 @@ module Nunchaku
     include Filtered
     include Paginated
     include Decorated
+    include Autocompleting
 
     included do
       helper 'nunchaku/resources'
@@ -25,7 +26,7 @@ module Nunchaku
     end
 
     def treed_index?
-      !nested? && decorator_class.index_widgets.include?('tree')
+      index? && !nested? && decorator_class.index_widgets.include?('tree')
     end
 
     def paged_formats
@@ -48,6 +49,10 @@ module Nunchaku
 
     def preloaded_associations
       nil
+    end
+
+    def index?
+      controller.action_name == 'index'
     end
   end
 end
