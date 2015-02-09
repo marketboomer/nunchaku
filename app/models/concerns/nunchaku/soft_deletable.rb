@@ -13,7 +13,7 @@ module Nunchaku
 
     def destroy
       run_callbacks(:destroy) do
-        soft_delete
+        soft_delete unless errors.any?
       end
     end
 
