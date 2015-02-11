@@ -16,6 +16,12 @@ $ ->
 	$('.tree-item-name span').tooltip()
 
 $ ->
+  $('td').not('td.cell.edit').click ->
+    if $(this).hasClass('clickable')
+      window.location = $(this).attr("resource-link")
+      return
+
+$ ->
   $("a[data-behaviour='editable']").editable
     params: (params) ->
       params['_method'] = 'put'
