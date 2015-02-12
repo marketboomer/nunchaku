@@ -1,6 +1,6 @@
 <tr id="<%= resource_class.name.underscore %>_<%= resource.id %>" class="<%= resource.tints %>">
 	<% column_names.each do |column| %>
-	  <td class="cell <%= column %> <%= "clickable" if resource.try(:clickable_row?) %>" resource-link = "<%= resource_path(resource) %>">
+	  <td class=" <%= cell_classes(column) %>" resource-link = "<%= resource_cell_link(resource) %>">
 			<%= resource.table_cell(column) %>
 	  </td>
 	<% end %>
