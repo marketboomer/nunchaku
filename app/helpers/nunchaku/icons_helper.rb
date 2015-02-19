@@ -206,4 +206,8 @@ module Nunchaku::IconsHelper
   def impersonate_icon(*args)
     icon :certificate, *args
   end
+
+  def attachment_icon(*args)
+    icon :paperclip, *args
+  end
 end
