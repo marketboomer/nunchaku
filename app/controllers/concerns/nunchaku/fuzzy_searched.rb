@@ -35,7 +35,7 @@ module Nunchaku::FuzzySearched
   end
 
   def search_terms
-    params[search_param].blank? ? [] : search_class.search_string(params[search_param]).split(' ')
+    @search_terms ||= params[search_param].blank? ? [] : search_class.search_string(params[search_param]).split(' ')
   end
 
   def stop_words
