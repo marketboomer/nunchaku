@@ -30,4 +30,12 @@ module Nunchaku::ResourcesHelper
   def nested_resource_path resource
     polymorphic_path resource
   end
+
+  def cell_classes column
+    ["cell", column, resource.try(:clickable_row?) ? "clickable" : nil].compact.join(' ')
+  end
+
+  def resource_cell_link resource
+    resource_path(resource) if resource.try(:clickable_row?)
+  end
 end
