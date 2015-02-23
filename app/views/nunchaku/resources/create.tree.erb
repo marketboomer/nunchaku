@@ -1,1 +1,1 @@
-<%= raw resource.attributes.merge(:url => nest_url(resource), :move_url => move_url(resource)).to_json %>
+<%= raw resource.attributes.merge(:name => resource.to_s, :url => nest_url(resource), :move_url => move_url(resource)).to_json %>
