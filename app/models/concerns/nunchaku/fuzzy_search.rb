@@ -10,7 +10,7 @@ module Nunchaku
         return all if terms.blank?
         terms = terms.first(8)
         col = opts[:column] || 'search_text'
-        where(terms.map { |term| "#{table_name}.#{col} ILIKE ?" }.join(' AND '), *(terms.map { |t| "%#{t}%" }))
+        where(terms.map { |term| "#{fuzzy_search_table(col)}.#{col} ILIKE ?" }.join(' AND '), *(terms.map { |t| "%#{t}%" }))
       end
 
       def ordered_search(terms, opts = {})
@@ -50,6 +50,10 @@ module Nunchaku
           m = order_string.match(SQL_REGEX)
           m[2] || m[1] if m
         end.compact.reject { |c| attribute_names.include?(c) }
+      end
+
+      def fuzzy_search_table(col)
+        table_name
       end
     end
   end

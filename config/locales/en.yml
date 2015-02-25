@@ -28,6 +28,7 @@ en:
   closed_at: Closed %{at}
   complete: complete
   confirm: Are you sure?
+  days: days
   delete: Delete
   done: Done
   edit: Edit
