@@ -39,6 +39,7 @@ en:
   missing: missing
   more_records: More
   no_more_records: No more records
+  notify: Notify
   new: New
   new_model: New %{model}
   open: open
