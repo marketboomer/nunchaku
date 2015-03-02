@@ -1,7 +1,7 @@
 class Nunchaku::ResourcesController < Nunchaku::ApplicationController
   include Nunchaku::Resources
 
-  around_filter :transactions_filter, :only => %w(create update)
+  around_filter :transactions_filter, :except => %w(index edit show new autocomplete)
 
 	helper_method :collection_fields, :decorator_context
 
