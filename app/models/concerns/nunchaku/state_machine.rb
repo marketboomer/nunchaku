@@ -24,6 +24,7 @@ module Nunchaku
           scope s, -> { where(:state => s) }
 
           module_eval <<-RUBY_EVAL
+
           def #{s}?
             state == '#{s.to_s}'
           end
