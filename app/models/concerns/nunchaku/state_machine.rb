@@ -24,6 +24,7 @@ module Nunchaku
           scope s, -> { where(:state => s) }
 
           module_eval <<-RUBY_EVAL
+
           def #{s}?
             state == '#{s.to_s}'
           end
@@ -32,7 +33,11 @@ module Nunchaku
 
         events.each do |e|
           module_eval <<-RUBY_EVAL
+          def before_#{e}
+          end
+
           def #{e}
+            before_#{e.to_s}
             self.state = self.class.state_after('#{e}')
           end
           RUBY_EVAL
