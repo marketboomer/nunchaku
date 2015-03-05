@@ -33,7 +33,7 @@ module Nunchaku
         events.each do |e|
           module_eval <<-RUBY_EVAL
           def #{e}
-            self.state = self.class.state_after('#{e}')
+            process_event('#{e}')
           end
           RUBY_EVAL
         end
@@ -51,6 +51,10 @@ module Nunchaku
 
     def general_class
       self.class
+    end
+
+    def process_event(event)
+      self.state = self.class.state_after(event)
     end
   end
 end
