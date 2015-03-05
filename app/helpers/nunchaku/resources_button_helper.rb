@@ -88,6 +88,24 @@ module Nunchaku::ResourcesButtonHelper
     end if diagnosing?
   end
 
+  def summary_edit_button
+    link_to edit_resource_path, :remote => true do
+      edit_icon
+    end
+  end
+
+  def maximize_widget
+    link_to '#', 'data-toggle' => 'maximize' do
+      expand_icon
+    end
+  end
+
+  def collapse_widget
+    link_to '#', 'data-toggle' => 'collapse' do
+      _icon
+    end
+  end
+
   protected
 
   def button_text(symbol)
