@@ -5,7 +5,7 @@ module Nunchaku
     AUTOCOMPLETE_LIMIT = 50
 
     def autocomplete
-      respond_with autocomplete_collection.limit(AUTOCOMPLETE_LIMIT).map { |a| {:id => a.id, :text => a.to_s } }
+      respond_with autocomplete_collection.limit(AUTOCOMPLETE_LIMIT).to_pairs
     end
 
     protected
