@@ -1,0 +1,33 @@
+<div class="widget">
+  <div class="widget-header hidden-xs">
+        <span class="widget-caption">
+          <%= human_attr(resource_class, rich_text_attribute).titleize %>
+        </span>
+
+    <% if can_edit?(resource) %>
+        <%= edit_toggler(resource) %>
+        <%= render 'widget_buttons' %>
+    <% end %>
+  </div>
+
+  <div class="widget-body">
+    <div class="widget_element">
+      <%= resource.send(rich_text_attribute).try(:html_safe) %>
+    </div>
+
+    <% if can_edit?(resource) %>
+        <div class="widget_element" style="display: none;">
+          <%= simple_form_for(resource.source) do |f| %>
+              <%= f.error_notification %>
+
+              <%= f.input rich_text_attribute, :as => :rich_text, :label => false %>
+
+              <div class="form-actions pull-right">
+                <%= f.button :submit, :class => 'btn btn-primary submit' %>
+              </div>
+              <div class="clearfix"></div>
+          <% end %>
+        </div>
+    <% end %>
+  </div>
+</div>

@@ -89,9 +89,9 @@ module Nunchaku::ResourcesButtonHelper
   end
 
   def summary_edit_button
-    link_to edit_resource_path, :remote => true do
+    link_to [:edit, nests.first], :remote => true do
       edit_icon
-    end
+    end if nests.present?
   end
 
   def maximize_widget
