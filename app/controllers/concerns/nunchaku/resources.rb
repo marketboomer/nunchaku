@@ -26,7 +26,7 @@ module Nunchaku
     end
 
     def treed_index?
-      index? && !nested? && decorator_class.index_widgets.include?('tree')
+      index? && !nested? && decorator_class.index_widgets.include?('tree') && params[:term].blank?
     end
 
     def paged_formats
