@@ -17,12 +17,12 @@ module Nunchaku
       end
     end
 
-    def copy(deep=false)
-      build_copy(self.class, self, self).tap { |c| copy_associations(c) if deep }
+    def copy
+      build_copy(self.class, self, self)
     end
 
-    def copy!(deep=false)
-      copy(deep).save!
+    def deep_copy
+      copy.tap { |c| copy_associations(c) }
     end
 
     def copy_associations(copy)
