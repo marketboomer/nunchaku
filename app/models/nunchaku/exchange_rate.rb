@@ -12,7 +12,7 @@ module Nunchaku
     class << self
       def populate(from, to)
         from.upto(to) do |date|
-          unless where(quote_date: date).first
+          unless where(quote_date: date).exists?
             response = HTTParty.get("http://api.fixer.io/#{date.to_s}?base=AUD")
             response['rates'].each do |code,rate|
               create(currency_code: code, quote_date: date, aud_rate: rate)
