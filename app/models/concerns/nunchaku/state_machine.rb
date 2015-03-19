@@ -35,6 +35,11 @@ module Nunchaku
           def #{e}
             process_event('#{e}')
           end
+
+          def record_#{e}!
+            send('#{e}')
+            save!
+          end
           RUBY_EVAL
         end
       end
