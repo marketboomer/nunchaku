@@ -6,5 +6,9 @@ module Nunchaku
     include Reflections
     include Pairable
     include Cacheable
+
+    def with_ancestors
+      respond_to?(:self_and_ancestors) ? self_and_ancestors : [resource]
+    end
   end
 end
