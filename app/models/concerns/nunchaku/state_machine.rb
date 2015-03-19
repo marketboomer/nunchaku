@@ -37,8 +37,8 @@ module Nunchaku
           end
 
           def record_#{e}!
-            self.send('#{e}')
-            self.save!
+            send('#{e}')
+            save!
           end
           RUBY_EVAL
         end
