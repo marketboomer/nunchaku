@@ -210,4 +210,8 @@ module Nunchaku::IconsHelper
   def attachment_icon(*args)
     icon :paperclip, *args
   end
+
+  def copy_icon(*args)
+    icon :copy, *args
+  end
 end
