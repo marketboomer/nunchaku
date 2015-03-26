@@ -1,24 +1,27 @@
-require 'httparty'
+require 'open-uri'
+require 'json'
 
 module Nunchaku
   class ExchangeRate < ActiveRecord
     self.table_name = 'exchange_rates'
-    include ::HTTParty
 
-    COUNTRY_CODES = {can: 'CAD', chn: 'CNY', gbr: 'GBP', hkg: 'HKD', idn: 'IDR', ind: 'INR', jpn: 'JPY',
-      mys: 'MYR', nzl: 'NZD', phl: 'PHP', sgp: 'SGD', tha: 'THB', usa: 'USD',
-      fra: 'EUR', deu: 'EUR', ita: 'EUR', esp: 'EUR'}
-
+    JSONRATES_API_KEY = 'jr-998a5a48b629ce433c0fd7d031944dff'
     class << self
       def populate(from, to)
+        base_uri = "http://jsonrates.com/historical/?base=AUD&apiKey=#{JSONRATES_API_KEY}"
+        stream = open(base_uri +
+                "&dateStart=#{from}" +
+                "&dateEnd=#{to}")
+        response = JSON.parse(stream.read)
         from.upto(to) do |date|
           unless where(quote_date: date).exists?
-            response = HTTParty.get("http://api.fixer.io/#{date.to_s}?base=AUD")
-            response['rates'].each do |code,rate|
-              create(currency_code: code, quote_date: date, aud_rate: rate)
+            # response = HTTParty.get("http://api.fixer.io/#{date.to_s}?base=AUD")
+            rates = response['rates'][date.to_s].except('utctime')
+            rates.each do |code,rate|
+              create(currency_code: code, quote_date: date, aud_rate: rate.to_d)
             end
           end
-        end
+        end unless response['error']
       end
     end
   end
