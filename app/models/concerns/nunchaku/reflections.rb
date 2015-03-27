@@ -4,7 +4,13 @@ module Nunchaku
 
     module ClassMethods
       def class_for(association)
-        reflections[association.to_sym].try(:klass)
+        (reflections[association.to_sym] || reflections_from_acting_as[association.to_sym]).try(:klass)
+      end
+
+      protected
+
+      def reflections_from_acting_as
+        acting_as_model.reflections if acting_as?
       end
     end
 
