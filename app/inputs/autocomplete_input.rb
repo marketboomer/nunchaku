@@ -42,7 +42,7 @@ class AutocompleteInput < ::SimpleForm::Inputs::StringInput
   end
 
   def input_length
-    options[:input_length] || (I18n.locale == :zh ? 2 : 3)
+    options[:input_length] || (I18n.locale.to_s[0,1] == 'zh' ? 2 : 3)
   end
 
   def url
