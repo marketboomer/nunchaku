@@ -12,7 +12,8 @@ module Nunchaku::ApplicationHelper
     klass = l.is_a?(Class) ? l : l.class
 
     send(path_prefix(klass)).polymorphic_path(args)
-  rescue
+
+  rescue NoMethodError => e
     polymorphic_path(args)
   end
 
