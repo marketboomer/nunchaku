@@ -21,7 +21,8 @@ class AutocompleteInput < ::SimpleForm::Inputs::StringInput
             quietMillis: 1000,
             data: function (term) {
               return {
-                term: term
+                term: term,
+                autocomplete_filters: window.nunchaku.autocomplete_filters
               };
             },
             results: function (data) {
