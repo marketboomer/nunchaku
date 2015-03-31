@@ -13,7 +13,7 @@ class AutocompleteInput < ::SimpleForm::Inputs::StringInput
 
         input.select2({
           placeholder: "#{I18n.t(:search_for, :models => label_text)}",
-          minimumInputLength: "#{input_length}" || 3,
+          minimumInputLength: "#{input_length}",
 
           ajax: {
             url: "#{url}",
@@ -21,7 +21,8 @@ class AutocompleteInput < ::SimpleForm::Inputs::StringInput
             quietMillis: 1000,
             data: function (term) {
               return {
-                term: term
+                term: term,
+                autocomplete_filters: window.nunchaku.autocomplete_filters
               };
             },
             results: function (data) {
@@ -42,7 +43,7 @@ class AutocompleteInput < ::SimpleForm::Inputs::StringInput
   end
 
   def input_length
-    options[:input_length]
+    options[:input_length] || (I18n.locale.to_s[0,1] == 'zh' ? 2 : 3)
   end
 
   def url
