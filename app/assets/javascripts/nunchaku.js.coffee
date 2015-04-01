@@ -102,5 +102,8 @@ window.nunchaku.closeModal = ->
   $('.modal-backdrop').remove()
   $('.modal-open').removeClass('modal-open')
 
+window.nunchaku.hideModal = ->
+  $('.modal').hide()
+
 window.nunchaku.busy = ->
   $('#spinner').modal({backdrop: 'static'});
