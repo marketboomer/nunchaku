@@ -51,11 +51,6 @@ module Nunchaku::Translatable
       %w(search_text)
     end
 
-    # Each model must define its own derived attributes to populate them via the update callback:
-    def derived_translation_attributes
-      []
-    end
-
     # Returns all translated instances (can be chained on to the end of a standard search method call:
     def t(locale=I18n.locale)
       select((parent_targets+translation_targets).join(',')).t_join(locale)
@@ -129,7 +124,7 @@ module Nunchaku::Translatable
     return self unless t # Just return the object if for some strange reason there is no translation
     assign_attributes(
       t.attributes.delete_if do |k, v|
-        (self.class.excluded_attributes + self.class.derived_translation_attributes).include?(k)
+        self.class.excluded_attributes.include?(k)
       end
     )
     self
@@ -155,7 +150,6 @@ module Nunchaku::Translatable
           !self.class.translation_class.column_names.include?(k) || self.class.excluded_attributes.include?(k)
         end
     )
-    self.class.derived_translation_attributes.each { |att| translation.send("#{att}=", send(att)) }
     translation.save
   end
 
