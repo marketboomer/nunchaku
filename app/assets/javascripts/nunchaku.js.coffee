@@ -33,7 +33,7 @@ window.nunchaku = {}
 window.nunchaku.enter_key = 13
 window.nunchaku.up_key = 38
 window.nunchaku.down_key = 40
-
+window.nunchaku.autocomplete_filters = null
 window.nunchaku.selection_affects_other = (selector, other, url) ->
   $(document).off "change", selector
   $(document).on "change", selector, ->

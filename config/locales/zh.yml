@@ -1,0 +1,52 @@
+﻿# encoding: UTF-8
+zh:
+  flash:
+    actions:
+      create:
+        notice: "我们已新建 %{resource_type} '%{resource_name}'"
+      update:
+        notice: "我们已更新 %{resource_type} '%{resource_name}'"
+      destroy:
+        notice: "我们已删除 %{resource_type} '%{resource_name}'"
+        alert: "我们无法删除 %{resource_type} '%{resource_name}'"
+
+  helpers:
+    submit:
+      create: "保存"
+      update: "更新"
+
+  instructions:
+    sort: 将产品拖到新的位置可重新调整清单.
+
+  admin: 系统管理
+  all: 全部
+  back: 上一步
+  cancel: 取消
+  cancelled: 已取消
+  close: 关闭
+  closed: 已关闭
+  closed_at: 已关闭 %{at}
+  complete: 完成
+  confirm: 你确定吗?
+  copy: 复制
+  copy_of: 复制
+  days: 天
+  delete: 删除
+  done: 完成
+  edit: 编辑
+  find: 查找
+  help: 帮助
+  import: 导入
+  item: 产品
+  missing: 丢失
+  more_records: 更多
+  no_more_records: 无记录
+  notify: 通知
+  new: 新的
+  new_model: 新的 %{model}
+  open: 打开
+  search: 搜索
+  search_by: 搜索 %{models}
+  search_for: 搜索 %{models}
+  sort: 排序
+  update: 更新
