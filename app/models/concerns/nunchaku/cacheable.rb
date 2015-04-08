@@ -6,12 +6,30 @@ module Nunchaku
       def with_cache(key, &block)
         Rails.cache.fetch(key) { block.call }
       end
+    end
 
-      protected
+    def with_cache(*args, &block)
+      self.class.with_cache(access_cache_key(*args), &block)
+    end
 
-      def user_cache_key_fragment(user)
-        "user#{user.id}_organisation#{user.current_access_organisation.try(:id)}"
-      end
+    def access_cache_key(adjective, target_class)
+      [
+        cache_key,
+        adjective,
+        target_class.name.underscore
+      ].compact.join('_')
+    end
+
+    def clear_access_cache
+      Rails.cache.delete_matched("#{cache_qualifier}#{id}_*")
+    end
+
+    def cache_key
+      "#{cache_qualifier}#{id}"
+    end
+
+    def cache_qualifier
+      self.class.name.demodulize.underscore
     end
   end
 end
