@@ -8,7 +8,7 @@ module Nunchaku
     include Cacheable
 
     def with_ancestors
-      respond_to?(:self_and_ancestors) ? self_and_ancestors : [resource]
+      respond_to?(:self_and_ancestors) ? self_and_ancestors : [self]
     end
   end
 end
