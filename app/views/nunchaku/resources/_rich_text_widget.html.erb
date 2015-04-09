@@ -4,7 +4,7 @@
           <%= human_attr(resource_class, rich_text_attribute).titleize %>
         </span>
 
-    <% if can_edit?(resource) %>
+    <% if can_edit? %>
         <%= edit_toggler(resource) %>
         <%= render 'widget_buttons' %>
     <% end %>
@@ -15,7 +15,7 @@
       <%= resource.send(rich_text_attribute).try(:html_safe) %>
     </div>
 
-    <% if can_edit?(resource) %>
+    <% if can_edit? %>
         <div class="widget_element" style="display: none;">
           <%= simple_form_for(resource.source) do |f| %>
               <%= f.error_notification %>
