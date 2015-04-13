@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'acts_as_list'
   s.add_dependency 'closure_tree'
-  s.add_dependency 'bootstrap-datepicker-rails'
+  s.add_dependency 'bootstrap-datepicker-rails', '~> 1.3.1'
   s.add_dependency 'bootstrap-sass', '~> 3.1.1'
   s.add_dependency 'bootstrap-x-editable-rails'
   # s.add_dependency 'chosen-rails'
