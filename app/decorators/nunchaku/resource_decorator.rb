@@ -47,6 +47,14 @@ class Nunchaku::ResourceDecorator < Draper::Decorator
     def table_style
       'table'
     end
+
+    def tree_node_classes(node)
+      ''
+    end
+
+    def tree_node_content(node)
+      node.to_s
+    end
   end
 
   def resource_class
