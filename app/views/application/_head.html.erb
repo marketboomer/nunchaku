@@ -1,6 +1,10 @@
 <head>
   <title><%= t("#{engine_name}_application_title") %></title>
   <%= stylesheet_link_tag 'application', :media => 'all' %>
+  <%= stylesheet_link_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css' %>
+
+  <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' %>
+  <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js' %>
   <%= javascript_include_tag 'application' %>
 
   <meta name="viewport" content="width=device-width, maximum-scale=1.0">

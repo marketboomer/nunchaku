@@ -33,7 +33,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'httparty'
   s.add_dependency 'jbuilder', '~> 1.2'
   s.add_dependency 'jquery-rails'
-  s.add_dependency 'jquery-ui-rails', '~> 4.2.0' # Locked to prevent jquery.ui.all not found errors
   s.add_dependency 'kaminari'
   s.add_dependency 'rails', '~> 4.1.0'
   s.add_dependency 'ransack'
