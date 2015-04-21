@@ -47,7 +47,7 @@ module Nunchaku
 
     def initialize(*args)
       super
-      self.state = self.class.states.first.to_s
+      self.state ||= self.class.states.first.to_s
     end
 
     def next_events
