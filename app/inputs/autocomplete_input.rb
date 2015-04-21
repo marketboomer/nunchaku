@@ -9,7 +9,7 @@ class AutocompleteInput < ::SimpleForm::Inputs::StringInput
   def javascript
     template.javascript_tag(<<-JS.html_safe)
       (function() {
-        var input = $("input[type='autocomplete']##{object_name}_#{attribute_name}");
+        var input = $("input[type='#{input_type}']##{input_id}");
 
         input.select2({
           placeholder: "#{I18n.t(:search_for, :models => label_text)}",
@@ -40,6 +40,10 @@ class AutocompleteInput < ::SimpleForm::Inputs::StringInput
       })();
 
     JS
+  end
+
+  def input_id
+    "#{object_name}_#{attribute_name}"
   end
 
   def input_length
