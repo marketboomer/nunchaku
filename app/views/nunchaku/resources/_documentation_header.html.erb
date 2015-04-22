@@ -1,17 +1,26 @@
 <div class="summary">
   <div class="widget">
-    <div class="widget-header">
-      <%= render 'widget_buttons' %>
-    </div>
+
     <div class="widget-body clearfix">
       <h4><%= documentation('title') %></h4>
       <p><%= documentation('description') %></p>
-      <h6>Authentication</h6>
+      <h5>Authentication</h5>
       <p><%= documentation('authorisation') %></p>
-      <h6>Instructions</h6>
-      <p><%= documentation('steps') %></p>
-      <h6>Errors</h6>
-      <p><%= documentation('errors') %></p>
+      <% if resource.api_errors %>
+        <h5>Errors</h5>
+        <table class="table table-bordered">
+          <tr>
+            <td>Error Code</td>
+            <td>Description</td>
+          </tr>
+          <% resource.api_errors.each do |k,v| %>
+          <tr>
+            <td><%= k %></td>
+            <td><%= v %></td>
+          </tr>
+          <% end %>
+        </table>
+      <% end %>
     </div>
   </div>
 </div>
