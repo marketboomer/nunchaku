@@ -11,6 +11,14 @@
 			                  placeholder: t(:search_for, :models => human(resource_class).pluralize)
 		%>
 
+    <% if decorator_class.index_filter_partials.present? %>
+        <div class="form-control" style="width: 100%;">
+        <% decorator_class.index_filter_partials.each do |p|  %>
+           <%= render :partial => p, :locals => {:form => f} %>
+        <% end %>
+        </div>
+    <% end %>
+
     <span class="input-group-btn">
 		  <%= f.button :submit, t(:find), class: 'btn btn-info btn-block' %>
     </span>
