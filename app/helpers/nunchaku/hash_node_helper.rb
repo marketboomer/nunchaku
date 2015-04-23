@@ -49,15 +49,13 @@ module Nunchaku
       [
         leaf_title_type(node, key),
         leaf_title_description(node, key)
-      ].compact.join(', ')
+      ].compact.join(', ') if node[:type]
     end
 
     def leaf_title_type(node, key)
       t = node[key].class.name.underscore.humanize
-
       if t == 'Nil class'
         ch = node[:type].safe_constantize.columns_hash
-
         t = ch[key].try(:type) if ch.present?
 
         t ||= node[key]

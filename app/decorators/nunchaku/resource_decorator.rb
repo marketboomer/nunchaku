@@ -24,6 +24,10 @@ class Nunchaku::ResourceDecorator < Draper::Decorator
       }
     end
 
+    def index_filter_partials
+      []
+    end
+
     def column_names
       source_class.attribute_names - %w(id created_at updated_at lock_version)
     end
@@ -46,6 +50,14 @@ class Nunchaku::ResourceDecorator < Draper::Decorator
 
     def table_style
       'table'
+    end
+
+    def tree_node_classes(node)
+      ''
+    end
+
+    def tree_node_content(node)
+      node.to_s
     end
   end
 
