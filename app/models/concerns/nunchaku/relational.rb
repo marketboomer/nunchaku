@@ -6,7 +6,7 @@ module Nunchaku
       def union_scope(*scopes)
         id_column = "#{table_name}.id"
 
-        if (sub_query = scopes.reject { |sc| sc.count == 0 }.map { |s| s.select(id_column).to_sql }.join(' UNION ')).present?
+        if (sub_query = scopes.reject { |sc| sc.count(:all) == 0 }.map { |s| s.select(id_column).to_sql }.join(' UNION ')).present?
           where "#{id_column} IN (#{sub_query})"
         else
           none
