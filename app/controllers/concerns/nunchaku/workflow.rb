@@ -9,7 +9,10 @@ module Nunchaku
       else
         gflash :error => {:value => [resource.to_s, resource.errors.full_messages()].flatten.join(' '),:class_name=>'error'}
       end
+      redirect_after_event
+    end
 
+    def redirect_after_event
       respond_with with_nesting(controller_name)
     end
   end
