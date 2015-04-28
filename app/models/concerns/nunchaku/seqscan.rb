@@ -1,20 +1,20 @@
 module Nunchaku
   module Seqscan
-    def seqscan_enabled?(connection = ActiveRecord::Base.connection)
+    def seqscan_enabled?(connection = ::ActiveRecord::Base.connection)
       !!(connection.execute('SHOW enable_seqscan') \
                    .first \
                    .fetch('enable_seqscan') =~ /on/i)
     end
 
-    def disable_seqscan!(connection = ActiveRecord::Base.connection)
+    def disable_seqscan!(connection = ::ActiveRecord::Base.connection)
       connection.execute('SET enable_seqscan = OFF')
     end
 
-    def enable_seqscan!(connection = ActiveRecord::Base.connection)
+    def enable_seqscan!(connection = ::ActiveRecord::Base.connection)
       connection.execute('SET enable_seqscan = ON')
     end
 
-    def without_seqscan(connection = ActiveRecord::Base.connection)
+    def without_seqscan(connection = ::ActiveRecord::Base.connection)
       return yield unless seqscan_enabled?
 
       begin
@@ -25,7 +25,7 @@ module Nunchaku
       end
     end
 
-    def with_seqscan(connection = ActiveRecord::Base.connection)
+    def with_seqscan(connection = ::ActiveRecord::Base.connection)
       return yield if seqscan_enabled?
 
       begin
