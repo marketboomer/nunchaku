@@ -89,7 +89,7 @@ module Nunchaku::ResourcesButtonHelper
   end
 
   def summary_edit_button
-    link_to [:edit, nests.first], :remote => true do
+    link_to [:edit, outer], :remote => true do
       edit_icon
     end if nests.present?
   end
