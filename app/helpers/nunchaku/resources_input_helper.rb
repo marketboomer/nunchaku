@@ -45,6 +45,18 @@ module Nunchaku::ResourcesInputHelper
     link_to link_text, '#', :data => options
   end
 
+  def with_editable_boolean(resource, attr_name, options={}, &block)
+    with_edit(resource,
+              attr_name,
+              options.reverse_merge!(
+                :type => :select,
+                :source => [{ value: 1, text: I18n.t(:yes) }, { value: 0, text: I18n.t(:no)}],
+                :value => resource.send(attr_name) ? 1 : 0)
+    ) do
+        block_given? ? yield : resource.send(attr_name) ? I18n.t(:yes) : I18n.t(:no)
+      end
+  end
+
   protected
 
   def form_heading(action)
