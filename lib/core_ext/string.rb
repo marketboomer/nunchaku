@@ -1,7 +1,7 @@
 #encoding: UTF-8
 class String
   def hanize
-    self.contains_cjk? ? self.annotate : self
+    self.split("").map{|c| c.contains_cjk? ? "#{c}^" : c}.join
   end
 
   def annotate(separator = '^')
