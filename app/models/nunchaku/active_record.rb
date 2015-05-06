@@ -4,7 +4,7 @@ module Nunchaku
 
     include Resourceable
     include Reflections
-    include Associations
+    include Composition
 
     def to_sym
       to_s.titleize.delete(' ').underscore.to_sym
