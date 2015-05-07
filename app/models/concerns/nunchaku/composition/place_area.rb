@@ -18,12 +18,12 @@ module Nunchaku
       module ClassMethods
         def places(name, scope = nil, options = {}, &extension)
           reflection = Places.build(self, name, scope, options, &extension)
-          Reflection.add_reflection(self, name, reflection)
+          ::ActiveRecord::Reflection.add_reflection(self, name, reflection)
         end
 
-        def is_placed_in(name, scope = nil, options = {})
+        def is_in_the_area_of(name, scope = nil, options = {})
           reflection = IsPlacedIn.build(self, name, scope, options)
-          Reflection.add_reflection(self, name, reflection)
+          ::ActiveRecord::Reflection.add_reflection(self, name, reflection)
         end
       end
     end

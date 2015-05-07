@@ -3,7 +3,7 @@ module Nunchaku
     module ComponentIntegral
       extend ActiveSupport::Concern
 
-      class HasComponents < Builder::CollectionAssociation
+      class Integrates < Builder::CollectionAssociation
         include Properties::Configurational
       end
 
@@ -12,8 +12,8 @@ module Nunchaku
       end
 
       module ClassMethods
-        def has_components(name, scope = nil, options = {}, &extension)
-          reflection = HasComponents.build(self, name, scope, options, &extension)
+        def integrates(name, scope = nil, options = {}, &extension)
+          reflection = Integrates.build(self, name, scope, options, &extension)
           ::ActiveRecord::Reflection.add_reflection(self, name, reflection)
         end
 

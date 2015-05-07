@@ -3,23 +3,23 @@ module Nunchaku
     module MemberPartnership
       extend ActiveSupport::Concern
 
-      class DividesInto < Builder::CollectionAssociation
+      class Partners < Builder::CollectionAssociation
         include Properties::Invariant
       end
 
-      class IsPieceOf < Builder::SingularAssociation
+      class IsPartnerIn < Builder::SingularAssociation
         include Properties::Invariant
       end
 
       module ClassMethods
-        def divides_into(name, scope = nil, options = {}, &extension)
-          reflection = DividesInto.build(self, name, scope, options, &extension)
-          Reflection.add_reflection(self, name, reflection)
+        def partners(name, scope = nil, options = {}, &extension)
+          reflection = Partners.build(self, name, scope, options, &extension)
+          ::ActiveRecord::Reflection.add_reflection(self, name, reflection)
         end
 
-        def is_piece_of(name, scope = nil, options = {})
-          reflection = IsPieceOf.build(self, name, scope, options)
-          Reflection.add_reflection(self, name, reflection)
+        def is_partner_in(name, scope = nil, options = {})
+          reflection = IsPartnerIn.build(self, name, scope, options)
+          ::ActiveRecord::Reflection.add_reflection(self, name, reflection)
         end
       end
     end

@@ -3,7 +3,7 @@ module Nunchaku
     module PortionObject
       extend ActiveSupport::Concern
 
-      class HasPortions < Builder::CollectionAssociation
+      class HasPortionsOf < Builder::CollectionAssociation
         include Properties::Configurational
         include Properties::Homeomeric
       end
@@ -14,8 +14,8 @@ module Nunchaku
       end
 
       module ClassMethods
-        def has_portions(name, scope = nil, options = {}, &extension)
-          reflection = HasPortions.build(self, name, scope, options, &extension)
+        def has_portions_of(name, scope = nil, options = {}, &extension)
+          reflection = HasPortionsOf.build(self, name, scope, options, &extension)
           ::ActiveRecord::Reflection.add_reflection(self, name, reflection)
         end
 
