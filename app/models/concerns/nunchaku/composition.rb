@@ -20,5 +20,15 @@ module Nunchaku
       #       ActiveRecord >= 4.2
       ::ActiveRecord::Reflection::MacroReflection.send(:include, Reflection)
     end
+
+    module ClassMethods
+      def alias_macros(config)
+        config.each { |macro, aliases| alias_macro(macro, *aliases) }
+      end
+
+      def alias_macro(macro, *aliases)
+        aliases.each { |a| singleton_class.send(:alias_method, a, macro) }
+      end
+    end
   end
 end
