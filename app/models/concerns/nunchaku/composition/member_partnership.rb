@@ -3,19 +3,23 @@ module Nunchaku
     module MemberPartnership
       extend ActiveSupport::Concern
 
-      module ClassMethods
-        def divides_into(*args, &block)
-          options = args.extract_options!
-          options.merge!(:association_kind => MemberPartnershipComposition.name.underscore)
+      class DividesInto < Builder::CollectionAssociation
+        include Properties::Invariant
+      end
 
-          has_many(*(args << options), &block)
+      class IsPieceOf < Builder::SingularAssociation
+        include Properties::Invariant
+      end
+
+      module ClassMethods
+        def divides_into(name, scope = nil, options = {}, &extension)
+          reflection = DividesInto.build(self, name, scope, options, &extension)
+          Reflection.add_reflection(self, name, reflection)
         end
 
-        def is_a_piece_of(*args, &block)
-          options = args.extract_options!
-          options.merge!(:association_kind => MemberPartnershipComposition.name.underscore)
-
-          belongs_to(*(args << options), &block)
+        def is_piece_of(name, scope = nil, options = {})
+          reflection = IsPieceOf.build(self, name, scope, options)
+          Reflection.add_reflection(self, name, reflection)
         end
       end
     end
