@@ -14,12 +14,12 @@ module Nunchaku
       module ClassMethods
         def has_components(name, scope = nil, options = {}, &extension)
           reflection = HasComponents.build(self, name, scope, options, &extension)
-          Reflection.add_reflection(self, name, reflection)
+          ::ActiveRecord::Reflection.add_reflection(self, name, reflection)
         end
 
         def is_component_of(name, scope = nil, options = {})
           reflection = IsComponentOf.build(self, name, scope, options)
-          Reflection.add_reflection(self, name, reflection)
+          ::ActiveRecord::Reflection.add_reflection(self, name, reflection)
         end
       end
     end

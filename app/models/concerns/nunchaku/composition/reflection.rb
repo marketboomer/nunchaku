@@ -1,20 +1,23 @@
 module Nunchaku
   module Composition
-    class Reflection < ::ActiveRecord::Reflection::AssociationReflection
-      def self.add_reflection(*args)
-        ::ActiveRecord::Reflection.add_reflection(*args)
+    module Reflection
+      extend ActiveSupport::Concern
+
+      def composition
+        @composition ||=
+          Array(options[:composition].presence).flatten
       end
 
       def configurational?
-        options[:composition].include?(:configurational)
+        composition.include?(:configurational)
       end
 
       def homeomeric?
-        options[:composition].include?(:homeomeric)
+        composition.include?(:homeomeric)
       end
 
       def invariant?
-        options[:composition].include?(:invariant)
+        composition.include?(:invariant)
       end
     end
   end

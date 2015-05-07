@@ -8,10 +8,6 @@ module Nunchaku
           super + [ :composition ]
         end
       end
-
-      def build(model)
-        Reflection.new(macro, name, scope, options, model)
-      end
     end
   end
 end

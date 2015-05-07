@@ -16,12 +16,12 @@ module Nunchaku
       module ClassMethods
         def has_portions(name, scope = nil, options = {}, &extension)
           reflection = HasPortions.build(self, name, scope, options, &extension)
-          Reflection.add_reflection(self, name, reflection)
+          ::ActiveRecord::Reflection.add_reflection(self, name, reflection)
         end
 
         def is_portion_of(name, scope = nil, options = {})
           reflection = IsPortionOf.build(self, name, scope, options)
-          Reflection.add_reflection(self, name, reflection)
+          ::ActiveRecord::Reflection.add_reflection(self, name, reflection)
         end
       end
     end
