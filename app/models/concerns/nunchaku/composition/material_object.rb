@@ -16,12 +16,12 @@ module Nunchaku
       module ClassMethods
         def is_made_of(name, scope = nil, options = {}, &extension)
           reflection = IsMadeOf.build(self, name, scope, options, &extension)
-          Reflection.add_reflection(self, name, reflection)
+          ::ActiveRecord::Reflection.add_reflection(self, name, reflection)
         end
 
         def makes_up(name, scope = nil, options = {})
           reflection = MakesUp.build(self, name, scope, options)
-          Reflection.add_reflection(self, name, reflection)
+          ::ActiveRecord::Reflection.add_reflection(self, name, reflection)
         end
       end
     end
