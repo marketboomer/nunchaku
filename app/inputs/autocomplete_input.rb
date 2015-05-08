@@ -1,6 +1,6 @@
 class AutocompleteInput < ::SimpleForm::Inputs::StringInput
 
-  def input
+  def input(*args)
     super << javascript
   end
 
@@ -9,11 +9,11 @@ class AutocompleteInput < ::SimpleForm::Inputs::StringInput
   def javascript
     template.javascript_tag(<<-JS.html_safe)
       (function() {
-        var input = $("input[type='autocomplete']##{object_name}_#{attribute_name}");
+        var input = $("input[type='#{input_type}']##{input_id}");
 
         input.select2({
           placeholder: "#{I18n.t(:search_for, :models => label_text)}",
-          minimumInputLength: 3,
+          minimumInputLength: "#{input_length}",
 
           ajax: {
             url: "#{url}",
@@ -21,7 +21,8 @@ class AutocompleteInput < ::SimpleForm::Inputs::StringInput
             quietMillis: 1000,
             data: function (term) {
               return {
-                term: term
+                term: term,
+                autocomplete_filters: window.nunchaku.autocomplete_filters
               };
             },
             results: function (data) {
@@ -29,8 +30,24 @@ class AutocompleteInput < ::SimpleForm::Inputs::StringInput
             }
           }
         });
+        if (input.parent().find('span.help-block').length == 0)
+          input.parent().find('span.select2-chosen').text(input.attr('hint'));
+        else {
+          input.parent().find('span.select2-chosen').text(input.parent().find('span.help-block').text());
+          input.parent().find('span.help-block').text('');
+        }
+
       })();
+
     JS
+  end
+
+  def input_id
+    "#{object_name}_#{attribute_name}"
+  end
+
+  def input_length
+    options[:input_length] || (I18n.locale.to_s[0,1] == 'zh' ? 2 : 3)
   end
 
   def url

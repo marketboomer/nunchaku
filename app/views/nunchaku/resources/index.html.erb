@@ -12,7 +12,12 @@
 			<%= render 'pagination' %>
 		</div>
 	</div>
-	<%= render :partial => 'table', :locals => { :column_names => column_names } %>
+
+  <% decorator_class.index_widgets.each do |w| %>
+    <div class="col-xs-<%= decorator_class.index_widget_width(w) %>">
+			<%= render :partial => w, :locals => { :column_names => column_names } %>
+    </div>
+  <% end %>
 </div>
 
 <% content_for :footer do %>

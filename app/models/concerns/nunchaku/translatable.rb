@@ -7,7 +7,10 @@ module Nunchaku::Translatable
     before_save :concatenate
     before_save :update_existing_translations, unless: Proc.new { |it| it.new_record? }
     after_save :update_translations, if: Proc.new { |it| it.id_changed? }
-    validates :locale, :presence => true 
+    validates :locale, :presence => true
+
+    alias_method :t!, :t
+    alias_method :translate!, :t
   end
 
   module ClassMethods
@@ -48,11 +51,6 @@ module Nunchaku::Translatable
       %w(search_text)
     end
 
-    # Each model must define its own derived attributes to populate them via the update callback:
-    def derived_translation_attributes
-      []
-    end
-
     # Returns all translated instances (can be chained on to the end of a standard search method call:
     def t(locale=I18n.locale)
       select((parent_targets+translation_targets).join(',')).t_join(locale)
@@ -72,6 +70,7 @@ module Nunchaku::Translatable
 
     def fuzzy_search terms, opts = {}
       locale = opts[:locale] || I18n.locale
+      terms = terms.first(8)
       if terms.empty?
         t_join(locale).where("#{translation_table_name}.id IS NOT NULL") # Vital for performance of order by with limit
       else
@@ -124,9 +123,9 @@ module Nunchaku::Translatable
     t = translations.where(:locale => locale).first
     return self unless t # Just return the object if for some strange reason there is no translation
     assign_attributes(
-        t.attributes.delete_if do |k, v|
-          (self.class.excluded_attributes + self.class.derived_translation_attributes).include?(k)
-        end
+      t.attributes.delete_if do |k, v|
+        self.class.excluded_attributes.include?(k)
+      end
     )
     self
   end
@@ -151,7 +150,6 @@ module Nunchaku::Translatable
           !self.class.translation_class.column_names.include?(k) || self.class.excluded_attributes.include?(k)
         end
     )
-    self.class.derived_translation_attributes.each { |att| translation.send("#{att}=", send(att)) }
     translation.save
   end
 
@@ -164,5 +162,4 @@ module Nunchaku::Translatable
   def restore_original
     attributes.except('id').each { |k,v| self.send("#{k}=", self.send("#{k}_was")) }
   end
-
 end

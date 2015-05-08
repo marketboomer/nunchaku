@@ -1,15 +1,17 @@
 class Nunchaku::ResourcesController < Nunchaku::ApplicationController
   include Nunchaku::Resources
 
-  AUTOCOMPLETE_LIMIT = 50
-
-  around_filter :transactions_filter, :only => %w(create update)
+  around_filter :transactions_filter, :except => %w(index edit show new autocomplete)
 
 	helper_method :collection_fields, :decorator_context
 
-
-  def autocomplete
-    respond_with autocomplete_collection.limit(AUTOCOMPLETE_LIMIT).map { |a| {:id => a.id, :text => a.to_s } }
+  def destroy(options = {}, &block)
+    if destroy_resource
+      options[:location] ||= collection_url
+    else
+      gflash :error => {:value => [resource.to_s, resource.errors.full_messages.join(', ')].join(': '), :class_name => 'error', :sticky => true}
+    end
+    respond_with(*(with_nesting(resource) << options), &block)
   end
 
   protected
@@ -34,15 +36,6 @@ class Nunchaku::ResourcesController < Nunchaku::ApplicationController
   end
 
   def decorator_context
-    nil
-  end
-
-  def autocomplete_collection
-    collection_translated_or_else_fuzzy
-  end
-
-  def collection_translated_or_else_fuzzy
-    collection.send (collection.respond_to?(:translated_search) ? :translated_search : :fuzzy_search), search_terms
+    {}
   end
 end
-

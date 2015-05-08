@@ -1,0 +1,14 @@
+<div class="summary">
+  <% cols = summary_names(summary) %>
+
+  <% cols.each do |col| %>
+    <div class="col-xs-<%= 12 / cols.size %>">
+      <dl class="capitalize">
+        <% col.each do |sn| %>
+          <dt class="<%= sn %>"><%= human_attr(summary.class, sn) %></dt>
+          <dd class="<%= sn %>"><%= summary.send(sn) %></dd>
+        <% end %>
+      </dl>
+    </div>
+  <% end %>
+</div>

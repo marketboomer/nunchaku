@@ -21,7 +21,7 @@ module Nunchaku::ResourcesButtonHelper
   end
 
   def sort_button(disabled=false)
-    link_to [:sortable, nests, resource_class].flatten, :class => 'btn navbar-btn btn-warning', :disabled => disabled do
+    link_to [:sortable, nests, resource_class].flatten, :class => 'btn navbar-btn btn-warning', :onclick => 'window.nunchaku.busy();', :disabled => disabled do
       sort_icon << ' ' << button_text(:sort)
     end
   end
@@ -33,7 +33,7 @@ module Nunchaku::ResourcesButtonHelper
   end
 
   def back_button(return_link)
-    link_to return_link, :class => 'btn navbar-btn btn-default' do
+    link_to return_link, :class => 'btn navbar-btn btn-default', :onclick => 'window.nunchaku.busy();' do
       back_icon << ' ' << button_text(:back)
     end
   end
@@ -63,6 +63,46 @@ module Nunchaku::ResourcesButtonHelper
   def print_button
     content_tag(:div, :class => 'btn navbar-btn btn-info') do
       link_to print_icon,'javascript:print();'
+    end
+  end
+
+  def diagnosing?
+    controller.class.name.include?('Diagnostics')
+  end
+
+  def diagnose_button
+    if diagnosing?
+      link_to [with_nesting(resource_collection_name)].flatten, :class => 'btn navbar-btn btn-default', :onclick => 'window.nunchaku.busy();' do
+        diagnose_icon << ' ' << button_text(:return)
+      end
+    else
+      link_to [:diagnostics, with_nesting(resource_collection_name)].flatten, :class => 'btn navbar-btn btn-default', :onclick => 'window.nunchaku.busy();' do
+        diagnose_icon << ' ' << button_text(:diagnose)
+      end
+    end
+  end
+
+  def repair_button(resource)
+    link_to [:diagnostics, resource].flatten, :method => :patch, :class => 'btn navbar-btn btn-danger', :onclick => 'window.nunchaku.busy();' do
+      repair_icon << ' ' << button_text(:repair)
+    end if diagnosing?
+  end
+
+  def summary_edit_button
+    link_to [:edit, outer], :remote => true do
+      edit_icon
+    end if nests.present?
+  end
+
+  def maximize_widget
+    link_to '#', 'data-toggle' => 'maximize' do
+      expand_icon
+    end
+  end
+
+  def collapse_widget
+    link_to '#', 'data-toggle' => 'collapse' do
+      _icon
     end
   end
 

@@ -2,10 +2,24 @@ module Nunchaku::TableDecorator
   extend ActiveSupport::Concern
 
   module ClassMethods
-    def table_heading(column, links=true)
+    def table_heading(*args)
+      column = args.first
+
+      h.tooltip(:title => h.t("tooltip.#{source_class.name.underscore}.#{column}.heading", :default => '')) do
+        heading_label(*args)
+      end
+    end
+
+    def edit_in_table
+      {}
+    end
+
+    protected
+
+    def heading_label(column, links=true)
       label = source_class.human_attribute_name(column.to_sym).titleize
       return label unless links
-      case      
+      case
       when respond_to?("#{column}_heading")
         send("#{column}_heading", label)
 
@@ -16,18 +30,24 @@ module Nunchaku::TableDecorator
         label
       end
     end
-
-    def edit_in_table
-      {}
-    end
   end
 
   def table_cell(column)
-    unless column.in?(self.class.edit_in_table)
-      send(column)
-    else
-      h.text_field_tag("#{resource.class.name.underscore}_#{column}[#{resource.id}]", send(column), :model_id => resource.id, :class => "#{resource.class.name.underscore.gsub('/', '_')}_#{column}_input")
+    h.tooltip(:title => h.t("tooltip.#{resource.class.name.underscore}.#{column}.cell", :default => ''), 'data-placement' => 'left') do
+      unless column.in?(self.class.edit_in_table)
+        send(column).to_s
+      else
+        h.text_field_tag(editable_cell_id(column), send(column), editable_cell_options(column))
+      end
     end
+  end
+
+  def editable_cell_options column
+    {:model_id => resource.id, :class => "#{resource.class.name.underscore.gsub('/', '_')}_#{column}_input"}
+  end
+
+  def editable_cell_id column
+    "#{resource.class.name.underscore}_#{column}[#{resource.id}]"
   end
 
   def tints(*args)

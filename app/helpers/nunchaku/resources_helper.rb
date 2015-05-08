@@ -1,7 +1,6 @@
 module Nunchaku::ResourcesHelper
   include Nunchaku::ResourcesPageHelper
   include Nunchaku::ResourcesInputHelper
-  include Nunchaku::ResourcesSummaryHelper
   include Nunchaku::ResourcesButtonHelper
   include Nunchaku::ResourcesTabsHelper
   include Nunchaku::ResourcesCsvHelper
@@ -21,10 +20,22 @@ module Nunchaku::ResourcesHelper
   end
 
   def nested_collection_name(klass = resource_class)
-    nested? ? parent.decorate.to_s : human(klass).pluralize
+    nested? ? outer.decorate.to_s : human(klass).pluralize
+  end
+
+  def nested_collection_type(klass = resource_class)
+    nested? ? human(outer.class) : ''
   end
 
   def nested_resource_path resource
     polymorphic_path resource
+  end
+
+  def cell_classes column
+    ["cell", column, resource.try(:clickable_row?) ? "clickable" : nil].compact.join(' ')
+  end
+
+  def resource_cell_link resource
+    resource_path(resource) if resource.try(:clickable_row?)
   end
 end

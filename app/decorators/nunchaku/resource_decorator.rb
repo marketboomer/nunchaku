@@ -10,8 +10,30 @@ class Nunchaku::ResourceDecorator < Draper::Decorator
       self
     end
 
+    def index_widgets
+      index_widget_proportions.stringify_keys.keys
+    end
+
+    def index_widget_width(w)
+      index_widget_proportions[w.to_sym]
+    end
+
+    def index_widget_proportions
+      {
+        :table => 12
+      }
+    end
+
+    def index_filter_partials
+      []
+    end
+
     def column_names
       source_class.attribute_names - %w(id created_at updated_at lock_version)
+    end
+
+    def form_column_names
+      column_names + %w(save)
     end
 
     def form_element_names
@@ -24,6 +46,18 @@ class Nunchaku::ResourceDecorator < Draper::Decorator
 
     def report_name
       ''
+    end
+
+    def table_style
+      'table'
+    end
+
+    def tree_node_classes(node)
+      ''
+    end
+
+    def tree_node_content(node)
+      node.to_s
     end
   end
 

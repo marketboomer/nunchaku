@@ -1,6 +1,6 @@
-<tr id="<%= resource_class.name.underscore %>_<%= resource.id %>" class="<%= resource.tints %>">
+<tr id="<%= resource_class.name.underscore.gsub('/', '_') %>_<%= resource.id %>" class="<%= resource_class.name.underscore.gsub('/', '_') %>_row <%= resource.tints %>">
 	<% column_names.each do |column| %>
-	  <td class="cell <%= column %>">
+	  <td class=" <%= cell_classes(column) %>" resource-link = "<%= resource_cell_link(resource) %>">
 			<%= resource.table_cell(column) %>
 	  </td>
 	<% end %>

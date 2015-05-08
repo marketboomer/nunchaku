@@ -1,4 +1,4 @@
-<%= simple_form_for(r) do |f| %>
+<%= simple_form_for r, :html => form_options do |f| %>
 	<%= f.error_notification %>
 
 	<% form_element_names.each do |e| %>

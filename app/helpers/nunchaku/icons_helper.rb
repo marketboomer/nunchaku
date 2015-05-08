@@ -31,6 +31,14 @@ module Nunchaku::IconsHelper
     icon :phone, *args
   end
 
+  def full_name_icon(*args)
+    icon :child, *args
+  end
+
+  def position_icon(*args)
+    icon :institution, *args
+  end
+
   def globe_icon(*args)
     icon :globe, *args
   end
@@ -181,5 +189,29 @@ module Nunchaku::IconsHelper
 
   def calender_icon(*args)
     icon :calendar, *args
+  end
+
+  def check_icon(*args)
+    icon :check, *args
+  end
+
+  def diagnose_icon(*args)
+    icon :stethoscope, *args
+  end
+
+  def repair_icon(*args)
+    icon :medkit, *args
+  end
+
+  def impersonate_icon(*args)
+    icon :certificate, *args
+  end
+
+  def attachment_icon(*args)
+    icon :paperclip, *args
+  end
+
+  def copy_icon(*args)
+    icon :copy, *args
   end
 end

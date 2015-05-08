@@ -1,8 +1,5 @@
 # encoding: UTF-8
 en:
-  instructions:
-    sort: Drag an item to its new position, to re-arrange the list.
-
   flash:
     actions:
       create:
@@ -13,7 +10,16 @@ en:
         notice: "We destroyed the %{resource_type} '%{resource_name}'"
         alert: "We could not destroy the %{resource_type} '%{resource_name}'"
 
+  helpers:
+    submit:
+      create: "Save"
+      update: "Update"
+
+  instructions:
+    sort: Drag an item to its new position, to re-arrange the list.
+
   admin: Admin
+  all: All
   back: Back
   cancel: Cancel
   cancelled: cancelled
@@ -22,6 +28,9 @@ en:
   closed_at: Closed %{at}
   complete: complete
   confirm: Are you sure?
+  copy: Copy
+  copy_of: Copy of
+  days: days
   delete: Delete
   done: Done
   edit: Edit
@@ -29,6 +38,10 @@ en:
   help: Help
   import: Import
   item: Item
+  missing: missing
+  more_records: More
+  no_more_records: No more records
+  notify: Notify
   new: New
   new_model: New %{model}
   open: open
