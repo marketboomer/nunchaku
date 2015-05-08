@@ -23,12 +23,12 @@ module Nunchaku
 
       module ClassMethods
         def has_attributes(name, scope = nil, options = {}, &extension)
-          reflection = HasAttributes.build(self, name, scope, options, &extension)
+          reflection = HasAttributes.build(self, name, scope, options.merge(:association_macro => :has_attributes), &extension)
           ::ActiveRecord::Reflection.add_reflection(self, name, reflection)
         end
 
         def is_attribute_of(name, scope = nil, options = {})
-          reflection = IsAttributeOf.build(self, name, scope, options)
+          reflection = IsAttributeOf.build(self, name, scope, options.merge(:association_macro => :is_attribute_of))
           ::ActiveRecord::Reflection.add_reflection(self, name, reflection)
         end
       end
