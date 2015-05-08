@@ -8,8 +8,8 @@ module Nunchaku
           has_many(*args, &block)
         end
 
-        def is_bunched_in(*args, &block)
-          belongs_to(*args, &block)
+        def is_bunched_in(*args)
+          belongs_to(*args)
         end
       end
     end

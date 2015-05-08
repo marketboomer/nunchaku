@@ -8,8 +8,8 @@ module Nunchaku
           has_many(*args, &block)
         end
 
-        def is_in(*args, &block)
-          belongs_to(*args, &block)
+        def is_in(*args)
+          belongs_to(*args)
         end
       end
     end
