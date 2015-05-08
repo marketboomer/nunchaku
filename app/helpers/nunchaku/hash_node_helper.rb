@@ -22,7 +22,7 @@ module Nunchaku
         [
           content_tag(:div, :class => 'tree-folder-header') do
             content_tag(:div, :class => 'tree-folder-name') do
-              [key].compact.join(' ')
+              key.to_s
             end
           end,
 
