@@ -15,12 +15,12 @@ module Nunchaku
 
       module ClassMethods
         def has_materials(name, scope = nil, options = {}, &extension)
-          reflection = HasMaterials.build(self, name, scope, options, &extension)
+          reflection = HasMaterials.build(self, name, scope, options.merge(:association_macro => :has_materials), &extension)
           ::ActiveRecord::Reflection.add_reflection(self, name, reflection)
         end
 
         def makes(name, scope = nil, options = {})
-          reflection = Makes.build(self, name, scope, options)
+          reflection = Makes.build(self, name, scope, options.merge(:association_macro => :makes))
           ::ActiveRecord::Reflection.add_reflection(self, name, reflection)
         end
       end

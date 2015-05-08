@@ -13,12 +13,12 @@ module Nunchaku
 
       module ClassMethods
         def integrates(name, scope = nil, options = {}, &extension)
-          reflection = Integrates.build(self, name, scope, options, &extension)
+          reflection = Integrates.build(self, name, scope, options.merge(:association_macro => :integrates), &extension)
           ::ActiveRecord::Reflection.add_reflection(self, name, reflection)
         end
 
         def is_component_of(name, scope = nil, options = {})
-          reflection = IsComponentOf.build(self, name, scope, options)
+          reflection = IsComponentOf.build(self, name, scope, options.merge(:association_macro => :is_component_of))
           ::ActiveRecord::Reflection.add_reflection(self, name, reflection)
         end
       end
