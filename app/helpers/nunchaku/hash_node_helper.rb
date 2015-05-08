@@ -55,7 +55,7 @@ module Nunchaku
     def leaf_title_type(node, key)
       t = node[key].class.name.underscore.humanize
       if t == 'Nil class'
-        ch = node[:type].safe_constantize.columns_hash if node[:type]
+        ch = node[:type].safe_constantize.columns_hash
         t = ch[key].try(:type) if ch.present?
         t ||= node[key]
       elsif t == 'Big decimal'
