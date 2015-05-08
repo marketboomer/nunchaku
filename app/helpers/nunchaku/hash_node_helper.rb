@@ -64,10 +64,6 @@ module Nunchaku
       t ||= 'string'
     end
 
-    def big_decimal
-      leaf_title_type(node, key) == 'Big decimal'
-    end
-
     def leaf_title_description(node, key)
       ltd = t("tooltip.#{node[:type].underscore if node[:type]}.#{key}.description", :default => '')
       ltd unless ltd.empty?
