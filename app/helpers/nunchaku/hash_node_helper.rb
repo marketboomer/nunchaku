@@ -22,7 +22,7 @@ module Nunchaku
         [
           content_tag(:div, :class => 'tree-folder-header') do
             content_tag(:div, :class => 'tree-folder-name') do
-              [ key, ('*' if v.kind_of?(Array)) ].compact.join(' ')
+              [key].compact.join(' ')
             end
           end,
 
@@ -41,7 +41,7 @@ module Nunchaku
 
     def leaf_tip(node, key)
       tooltip(:title => leaf_title(node, key)) do
-        key.to_s
+        "#{[key.to_s, ('*' if resource.required_attributes.include?(key.to_s))].compact.join}".html_safe
       end
     end
 
