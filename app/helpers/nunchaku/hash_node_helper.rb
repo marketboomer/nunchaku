@@ -49,23 +49,27 @@ module Nunchaku
       [
         leaf_title_type(node, key),
         leaf_title_description(node, key)
-      ].compact.join(', ') if node[:type]
+      ].compact.join(', ')
     end
 
     def leaf_title_type(node, key)
       t = node[key].class.name.underscore.humanize
       if t == 'Nil class'
-        ch = node[:type].safe_constantize.columns_hash
+        ch = node[:type].safe_constantize.columns_hash if node[:type]
         t = ch[key].try(:type) if ch.present?
-
         t ||= node[key]
+      elsif t == 'Big decimal'
+        t = 'Big decimal 19,4'
       end
-
       t ||= 'string'
     end
 
+    def big_decimal
+      leaf_title_type(node, key) == 'Big decimal'
+    end
+
     def leaf_title_description(node, key)
-      ltd = t("tooltip.#{node[:type].underscore}.#{key}.description", :default => '')
+      ltd = t("tooltip.#{node[:type].underscore if node[:type]}.#{key}.description", :default => '')
       ltd unless ltd.empty?
     end
   end
