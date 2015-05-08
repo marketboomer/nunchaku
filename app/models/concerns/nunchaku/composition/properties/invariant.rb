@@ -7,6 +7,8 @@ module Nunchaku
         def initialize(*args)
           super.tap do
             (options[:composition] ||= []) << :invariant
+
+            options[:dependent] = :destroy if macro == :has_many
           end
         end
 
