@@ -41,7 +41,7 @@ module Nunchaku
 
     def leaf_tip(node, key)
       tooltip(:title => leaf_title(node, key)) do
-        "#{[key.to_s, ('*' if resource.required_attributes.include?(key.to_s))].compact.join}".html_safe
+        "#{[key.to_s, ('*' if resource.api_required_attributes.include?(key.to_s))].compact.join}".html_safe
       end
     end
 

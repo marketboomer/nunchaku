@@ -68,4 +68,8 @@ class Nunchaku::ResourceDecorator < Draper::Decorator
   def human_names(attrs_nonhuman = columns_names)
     self.class.human_names(attrs_nonhuman = columns_names)
   end
+
+  def api_required_attributes
+    %w()
+  end
 end
