@@ -65,7 +65,7 @@ module Nunchaku
     end
 
     def leaf_title_description(node, key)
-      ltd = t("tooltip.#{node[:type].underscore if node[:type]}.#{key}.description", :default => '')
+      ltd = t("tooltip.#{node[:type].underscore}.#{key}.description", :default => '')
       ltd unless ltd.empty?
     end
   end
