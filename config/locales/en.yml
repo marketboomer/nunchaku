@@ -40,7 +40,7 @@ en:
   item: Item
   missing: missing
   more_records: More
-  'no': No
+  !!str no: "No"
   no_more_records: No more records
   notify: Notify
   new: New
@@ -51,4 +51,4 @@ en:
   search_for: Search for %{models}
   sort: Sort
   update: Update
-  'yes': Yes
+  !!str yes: "Yes"

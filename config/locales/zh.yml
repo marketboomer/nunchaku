@@ -40,7 +40,7 @@ zh:
   item: 产品
   missing: 丢失
   more_records: 更多
-  'no': No
+  !!str no: "No"
   no_more_records: 无记录
   notify: 通知
   new: 新的
@@ -51,4 +51,4 @@ zh:
   search_for: 搜索 %{models}
   sort: 排序
   update: 更新
-  'yes': Yes
+  !!str yes: "Yes"
