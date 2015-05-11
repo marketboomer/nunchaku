@@ -1,35 +1,8 @@
-<%= render :partial => 'report_css' %>
-<%= render :partial => 'report_header' %>
-
-<div class="tab-content">
-
-  <table class="table table-bordered table-striped table-condensed table-hover">
-    <%=
-        render :partial => 'table_header',
-               :locals => {
-                       :resource_class => resource_class,
-                       :column_names => decorator_class.column_names
-               }
-    %>
-
-    <%=
-        render :partial => 'table_body',
-               :locals => {
-                       :collection => collection,
-                       :resource_class => resource_class,
-                       :column_names => decorator_class.column_names
-               }
-    %>
-
-    <%=
-        render :partial => 'table_footer',
-               :locals => {
-                       :collection => collection,
-                       :resource_class => resource_class,
-                       :column_names => decorator_class.column_names
-               }
-    %>
-  </table>
-</div>
-
-<%= render :partial => 'report_footer' %>
+<%=
+    render :partial => 'pdf_report',
+           :locals => {
+                   :collection => collection,
+                   :resource_class => resource_class,
+                   :column_names => decorator_class.column_names
+           }
+%>
