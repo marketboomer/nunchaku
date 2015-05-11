@@ -14,7 +14,7 @@ module Nunchaku
 
         def define_extensions(model)
           super.tap do
-            model.validates(name, :presence => true)
+            model.validates(name, :presence => true) if macro == :belongs_to
           end
         end
       end
