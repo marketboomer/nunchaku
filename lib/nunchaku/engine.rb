@@ -30,7 +30,7 @@ module Nunchaku
       g.fixture_replacement :factory_girl, :dir => 'spec/factories'
     end
 
-    initializer 'nunchaku_association_aliases' do |app|
+    config.to_prepare do
       Nunchaku::ActiveRecord.alias_macros(
       #  has_many:
 
