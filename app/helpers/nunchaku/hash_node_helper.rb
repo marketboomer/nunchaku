@@ -22,7 +22,9 @@ module Nunchaku
         [
           content_tag(:div, :class => 'tree-folder-header') do
             content_tag(:div, :class => 'tree-folder-name') do
-              key.to_s
+              tooltip("data-original-title" => branch_title_description(node, key)) do
+                key.to_s
+              end
             end
           end,
 
@@ -67,6 +69,17 @@ module Nunchaku
     def leaf_title_description(node, key)
       ltd = t("tooltip.#{node[:type].underscore}.#{key}.description", :default => '')
       ltd unless ltd.empty?
+    end
+
+    def branch_title_description(node, key)
+      case
+        when node[key].kind_of?(Array)
+          t("tooltip.datatype.array")
+        when node[key].kind_of?(Hash)
+          t("tooltip.datatype.hash")
+        else
+          nil
+      end
     end
   end
 end
