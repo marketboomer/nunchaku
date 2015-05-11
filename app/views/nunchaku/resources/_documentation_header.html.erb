@@ -5,7 +5,9 @@
       <h4><%= documentation('title') %></h4>
       <p><%= documentation('description') %></p>
       <h5>Authentication</h5>
-      <p><%= documentation('authorisation') %></p>
+      <p><%= simple_format(I18n.t('api_documentation.trade/api/invoices.authorisation', email: 'help@marketboomer.com'))%> </p>
+      <h5>Testing</h5>
+      <p><%= documentation('testing') %></p>
       <% if resource.api_errors %>
         <h5>Errors</h5>
         <table class="table table-bordered">
