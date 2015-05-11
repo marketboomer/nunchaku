@@ -3,10 +3,8 @@ module Nunchaku
     module Builder
       extend ActiveSupport::Concern
 
-      module ClassMethods
-        def valid_options
-          super + [ :composition ]
-        end
+      def valid_options
+        super + [ :composition, :association_macro ]
       end
     end
   end
