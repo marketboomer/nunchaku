@@ -12,8 +12,12 @@
 #= require_self
 
 $ ->
-	$(".select2-container").width("100%")
-	$('.tree-item-name span').tooltip()
+  $(".select2-container").width("100%")
+  $('.tree-item-name span').tooltip()
+
+$ ->
+  $(".select2-container").width("100%")
+  $('.tree-folder-name span').tooltip()
 
 $ ->
   $('td').not('td.cell.edit').click ->
