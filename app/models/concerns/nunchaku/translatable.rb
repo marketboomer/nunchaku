@@ -51,7 +51,7 @@ module Nunchaku::Translatable
     end
 
     def fuzzy_search_cols
-      translatable_attributes.map(&:to_sym) - [:search_text, :locale]
+      fuzzy_search_cols_from_hash(translation_class.columns_hash)
     end
 
     # Returns all translated instances (can be chained on to the end of a standard search method call:

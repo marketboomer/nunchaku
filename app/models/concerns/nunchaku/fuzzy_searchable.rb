@@ -10,7 +10,11 @@ module Nunchaku
     module ClassMethods
       # By default, concatenate text or string values that arent coincatenations, put them in search_text and hanize
       def fuzzy_search_cols
-        columns_hash.reject do |k, v|
+        fuzzy_search_cols_from_hash(columns_hash)
+      end
+
+      def fuzzy_search_cols_from_hash col_hash
+         col_hash.reject do |k, v|
           %w(search_text locale slug).include?(v.name) || (v.name.split('_').first == 'concatenated') || ![:string, :text].include?(v.type)
         end.map { |k, v| k }
       end
