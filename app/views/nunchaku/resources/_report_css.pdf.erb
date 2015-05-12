@@ -23,9 +23,17 @@
       page-break-inside: avoid;
   }
   .report-footer {
-    position: absolute;
-    bottom: 20px;
+    padding-top: 30px;
   }
+
+  .report-break {
+    page-break-after: always;
+  }
+
+  .report-break:last-of-type {
+    page-break-after: auto;
+  }
+
 </style>
 <%= render 'body_css' %>
 <%= render 'cell_css' %>
