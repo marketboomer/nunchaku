@@ -10,7 +10,11 @@ module Nunchaku
     module ClassMethods
       # By default, concatenate text or string values that arent coincatenations, put them in search_text and hanize
       def fuzzy_search_cols
-        columns_hash.reject do |k, v|
+        fuzzy_search_cols_from_hash(columns_hash)
+      end
+
+      def fuzzy_search_cols_from_hash col_hash
+         col_hash.reject do |k, v|
           %w(search_text locale slug).include?(v.name) || (v.name.split('_').first == 'concatenated') || ![:string, :text].include?(v.type)
         end.map { |k, v| k }
       end
@@ -20,11 +24,15 @@ module Nunchaku
       end
 
       def search_string(string)
-        string.hanize.split(separator).uniq.reject { |w| stop?(w) }.first(8).join(' ')
+        string.hanize.split(separator).uniq.reject{ |w| stop?(w) }.map { |w| w.size == 2 ? w.annotate : w }.compact.join(' ')
       end
 
       def stop?(word)
-        word.size < 3 || stop_words.include?(word)
+        (word.size < min_word_length || stop_words.include?(word.downcase)) if !(word =~ /\^/)
+      end
+
+      def min_word_length
+        3
       end
 
       def separator
@@ -35,7 +43,11 @@ module Nunchaku
     def concatenate
       klass = self.class
       return unless klass.attribute_names.include? 'search_text'
-      self.search_text = klass.search_string(klass.fuzzy_search_cols.map { |att| send(att).to_s }.join(' '))
+      self.search_text = klass.search_string(raw_search_string)
+    end
+
+    def raw_search_string
+      self.class.fuzzy_search_cols.map { |att| send(att).to_s }.join(' ')
     end
   end
 end
