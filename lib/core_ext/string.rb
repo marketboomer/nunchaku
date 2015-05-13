@@ -8,6 +8,10 @@ class String
     self.split("").join(separator) << separator
   end
 
+  def annotate
+    self.split("").map{|c| (c.contains_cjk? || c == '^') ? c : "#{c}^"}.join
+  end
+
   def contains_cjk?
     !!(self =~ /\p{Han}|\p{Katakana}|\p{Hiragana}|\p{Hangul}/)
   end

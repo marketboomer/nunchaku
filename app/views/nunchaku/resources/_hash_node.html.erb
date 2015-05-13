@@ -1,5 +1,5 @@
 <div class="tree-folder">
   <% hash_node.each do |k, v| %>
-    <%= leaf_or_branch(hash_node, k) unless k == :type %>
+    <%= leaf_or_branch(hash_node, k, type)%>
   <% end %>
 </div>

@@ -4,7 +4,6 @@ module Nunchaku::Translatable
 
   included do
     has_many :translations, :dependent => :destroy, :class_name => translation_class_name
-    before_save :concatenate
     before_save :update_existing_translations, unless: Proc.new { |it| it.new_record? }
     after_save :update_translations, if: Proc.new { |it| it.id_changed? }
     validates :locale, :presence => true
@@ -51,6 +50,10 @@ module Nunchaku::Translatable
       %w(search_text)
     end
 
+    def fuzzy_search_cols
+      fuzzy_search_cols_from_hash(translation_class.columns_hash)
+    end
+
     # Returns all translated instances (can be chained on to the end of a standard search method call:
     def t(locale=I18n.locale)
       select((parent_targets+translation_targets).join(',')).t_join(locale)
@@ -64,13 +67,11 @@ module Nunchaku::Translatable
     end
 
     def t_search(terms) # NOTE: This method needs to be used for any chaining of search to translated entities.
-      return where(nil) if terms.blank?
-      where(terms.map { |term| "#{translation_table_name}.search_text ILIKE ?" }.join(' AND '), *(terms.map { |t| "%#{t}%" }))
+      where(terms.blank? ? nil : terms.map { |term| "#{table_name}.search_text ILIKE ?" }.join(' AND '), *(terms.map { |t| "%#{t}%" }))
     end
 
     def fuzzy_search terms, opts = {}
       locale = opts[:locale] || I18n.locale
-      terms = terms.first(8)
       if terms.empty?
         t_join(locale).where("#{translation_table_name}.id IS NOT NULL") # Vital for performance of order by with limit
       else
@@ -139,6 +140,10 @@ module Nunchaku::Translatable
 
   def has_translation?(locale=I18n.locale)
     self.class.translation_class.where(self.class.translation_foreign_key => id, 'locale' => locale).exists?
+  end
+
+  def raw_search_string
+    (translations.reject{|t| t.locale == locale}.map { |t| self.class.fuzzy_search_cols.map { |att| t.send(att).to_s }.join(' ') } << super).compact.join(' ')
   end
 
   private
