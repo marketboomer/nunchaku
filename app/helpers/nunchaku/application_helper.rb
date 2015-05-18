@@ -3,6 +3,10 @@ module Nunchaku::ApplicationHelper
   include Nunchaku::ThemeHelper
   include Nunchaku::IconsHelper
 
+  def title
+    t("#{engine_name}_application_title")
+  end
+
   def engine_name
     controller.class.name.split('::').first.underscore
   end

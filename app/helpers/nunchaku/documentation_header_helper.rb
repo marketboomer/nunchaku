@@ -4,7 +4,7 @@ module Nunchaku
     protected
 
     def documentation(section)
-      r = t("api_documentation.#{params[:controller]}#{params[:type]}.#{section}")
+      r = simple_format(t("api_documentation.#{params[:controller]}.#{section}"))
       r unless r.empty?
     end
   end
