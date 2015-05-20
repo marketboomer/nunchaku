@@ -214,4 +214,8 @@ module Nunchaku::IconsHelper
   def copy_icon(*args)
     icon :copy, *args
   end
+
+  def attention_icon(*args)
+    icon :exclamation_triangle, *args
+  end
 end
