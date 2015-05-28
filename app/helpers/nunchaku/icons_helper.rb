@@ -103,6 +103,10 @@ module Nunchaku::IconsHelper
     icon :th, *args
   end
 
+  def look_icon(*args)
+    icon :eye, *args
+  end
+
   def edit_icon(*args)
     icon :edit, *args
   end
