@@ -5,6 +5,7 @@ module Nunchaku::ResourcesHelper
   include Nunchaku::ResourcesTabsHelper
   include Nunchaku::ResourcesCsvHelper
   include Nunchaku::ResourcesPdfHelper
+  include Nunchaku::ResourcesInlineEditorHelper
   include Nunchaku::DebugHelper
 
   def create_or_update_resource_path(object, without_nesting=false)
