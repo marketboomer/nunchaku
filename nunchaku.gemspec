@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'bootstrap-datepicker-rails', '~> 1.3.1'
   s.add_dependency 'bootstrap-sass', '~> 3.1.1'
   s.add_dependency 'bootstrap-x-editable-rails'
+  s.add_dependency 'momentjs-rails', '~> 2.10.3'
   # s.add_dependency 'chosen-rails'
   s.add_dependency 'kramdown'
   s.add_dependency 'coffee-rails', '~> 4.0.0'
