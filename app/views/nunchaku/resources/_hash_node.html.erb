@@ -1,5 +1,23 @@
-<div class="tree-folder">
-  <% hash_node.each do |k, v| %>
-    <%= leaf_or_branch(hash_node, k, type)%>
+<% size = hash_node.size - 1 %>
+<div>
+  <div style="margin-left:<%= 20 * (indent - 1) %>px">{</div>
+  <% hash_node.each_with_index do |v, i| %>
+      <span class="api" style="margin-left:<%= 20 * indent %>px"><%= json_tooltip(type, v.first, v.last) %>:</span>
+      <% if v.last.is_a?(Hash) %>
+          <%= render :partial => 'hash_node', :object => v.last, :locals => {:type => type, :indent => indent + 1, :comma => i != size} %>
+      <% elsif v.last.is_a?(Array) %>
+          <%= render :partial => 'array_node', :object => v.last, :locals => {:type => type, :indent => indent + 1, :comma => i != size} %>
+      <% elsif v.last.is_a?(String) %>
+          <div>"<%= v.last %>"<%= "," unless i == size %></div>
+      <% elsif v.last.nil? %>
+          <div>null<%= "," unless i == size %></div>
+      <% else %>
+          <div><%= v.last %><%= "," unless i == size %></div>
+      <% end %>
   <% end %>
+  <div style="margin-left:<%= 20 * (indent - 1) %>px">}<%= "," if comma %></div>
 </div>
+
+
+
+

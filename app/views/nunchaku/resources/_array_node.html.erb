@@ -1,0 +1,18 @@
+<% size = array_node.size - 1 %>
+<div>
+  <div style="margin-left:<%= 20 * (indent - 1) %>px">[</div>
+  <% array_node.each_with_index do |v, i| %>
+      <% if v.is_a?(Hash) %>
+        <%= render :partial => 'hash_node', :object => v, :locals => {:type => type, :indent => indent + 1, :comma => i != size} %>
+      <% elsif v.is_a?(Array) %>
+        <%= render :partial => 'array_node', :object => v, :locals => {:type => type, :indent => indent + 1, :comma => i != size} %>
+      <% elsif v.is_a?(String) %>
+          <span class="api">"<%= v %>"<%= ", " unless i == size %></span>
+      <% elsif v.nil? %>
+          <span class="api">null<%= ", " unless i == size %></span>
+      <% else %>
+          <span class="api"><%= v %><%= ", " unless i == size %></span>
+      <% end %>
+  <% end %>
+  <div style="margin-left:<%= 20 * (indent - 1) %>px">]<%= "," if comma %></div>
+</div>

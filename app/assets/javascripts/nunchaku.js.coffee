@@ -12,6 +12,9 @@
 #= require_self
 
 $ ->
+  $('span[data-toggle="tooltip"]').tooltip()
+
+$ ->
   $(".select2-container").width("100%")
   $('.tree-item-name span').tooltip()
 
