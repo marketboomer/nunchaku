@@ -6,7 +6,7 @@
       <dl class="capitalize">
         <% col.each do |sn| %>
           <dt class="<%= sn %>"><%= human_attr(summary.class, sn) %></dt>
-          <dd class="<%= sn %>"><%= inline_editor_for(summary.source, self).send(sn) %></dd>
+          <dd class="<%= sn %>"><%= inline_editor_for(summary.source, self).send(sn, {:disabled => !summary.class.form_element_names.include?(sn.to_s)}) %></dd>
         <% end %>
       </dl>
     </div>
