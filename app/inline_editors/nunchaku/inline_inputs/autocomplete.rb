@@ -2,9 +2,7 @@ module Nunchaku
   module InlineInputs
     class Autocomplete < Base
       def config
-        super.merge({
-                        :type => 'select2'
-                    })
+        super.merge({:type => 'select2'})
       end
 
       def javascript
