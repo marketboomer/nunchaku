@@ -8,6 +8,7 @@
 #= require bootstrap
 #= require bootstrap3-editable/bootstrap-editable
 #= require gritter
+#= require moment
 #= require_tree .
 #= require_self
 
