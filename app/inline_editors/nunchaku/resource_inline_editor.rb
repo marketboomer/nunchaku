@@ -28,7 +28,7 @@ module Nunchaku
     end
 
     def method_missing(method, *args, &block)
-      with_edit(editor_type(method), object, method, args.first, &block)
+      with_edit(editor_type(method), object, method, args.first || {}, &block)
     end
 
     def with_edit(type, resource, attr_name, options={}, &block)
