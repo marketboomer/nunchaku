@@ -5,7 +5,10 @@
       <h4><%= documentation('title') %></h4>
       <p><%= documentation('description') %></p>
       <h5>Authentication</h5>
-      <p><%= documentation('authorisation') %></p>
+      <p><%= simple_format(I18n.t('api_documentation.trade/api/invoices.authorisation', email: 'it@marketboomer.com'))%>
+      <code><%= t('api_documentation.trade/api/invoices.authorisation_code')%></code></p>
+      <h5>Testing</h5>
+      <p><%= documentation('testing') %></p>
       <% if resource.api_errors %>
         <h5>Errors</h5>
         <table class="table table-bordered">
@@ -21,6 +24,7 @@
           <% end %>
         </table>
       <% end %>
+      <p><code> <%= link_to(t('api_documentation.trade/api/invoices.download_button'), '/trade/api/invoices/1/json', :format => :text) %></code></p>
     </div>
   </div>
 </div>

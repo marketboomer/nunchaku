@@ -103,6 +103,10 @@ module Nunchaku::IconsHelper
     icon :th, *args
   end
 
+  def look_icon(*args)
+    icon :eye, *args
+  end
+
   def edit_icon(*args)
     icon :edit, *args
   end
@@ -213,5 +217,9 @@ module Nunchaku::IconsHelper
 
   def copy_icon(*args)
     icon :copy, *args
+  end
+
+  def attention_icon(*args)
+    icon :exclamation_triangle, *args
   end
 end

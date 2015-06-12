@@ -44,6 +44,14 @@ class Nunchaku::ResourceFormBuilder < SimpleForm::FormBuilder
     as_row_form ? input_field(*args) : super
   end
 
+  def start_date
+    input :start_date, as: :date_picker
+  end
+
+  def end_date
+    input :end_date, as: :date_picker
+  end
+
   def method_missing(method, *args, &block)
     if object.respond_to?(method)
       input method
