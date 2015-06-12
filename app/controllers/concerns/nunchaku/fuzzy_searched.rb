@@ -35,7 +35,11 @@ module Nunchaku::FuzzySearched
   end
 
   def search_terms
-    @search_terms ||= params[search_param].blank? ? [] : search_class.search_string(params[search_param]).split(' ').first(search_term_limit)
+    @search_terms ||= params[search_param].blank? ? [] : search_string(params[search_param]).split(' ').first(search_term_limit)
+  end
+
+  def search_string string
+    string.hanize.split(' ').uniq.map { |w| w.size < 3 ? w.annotate : w }.compact.join(' ')
   end
 
   def search_term_limit
