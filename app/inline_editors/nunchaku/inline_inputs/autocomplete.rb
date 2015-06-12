@@ -1,6 +1,7 @@
 module Nunchaku
   module InlineInputs
     class Autocomplete < Base
+
       def config
         super.merge({:type => 'select2'})
       end
@@ -17,6 +18,8 @@ module Nunchaku
               return params;
             },
             select2: {
+              placeholder: "#{I18n.t(:search_for, :models => "#{resource.class.human_attribute_name(association.name.to_s)}")}",
+              minimumInputLength: 2,
               ajax: {
                 url: "#{self.options[:source]}",
                 dataType: 'json',
@@ -35,6 +38,12 @@ module Nunchaku
           });
         })();
         JS
+      end
+
+      protected
+
+      def association
+        resource.class.reflect_on_all_associations(:belongs_to).uniq(&:foreign_key).select {|a| a.foreign_key.to_s == attr_name.to_s}.first
       end
     end
   end
