@@ -32,7 +32,7 @@ module Nunchaku::Paginated
   end
 
   def sweet_ux_count
-    cc = collection.size
+    cc = collection.length
     cc <= show_ahead_count ? cc : per_page
   end
 
