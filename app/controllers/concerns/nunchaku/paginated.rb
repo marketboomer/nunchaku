@@ -32,7 +32,8 @@ module Nunchaku::Paginated
   end
 
   def sweet_ux_count
-    cc = collection.length
+    cc = collection.size
+    cc =  cc.is_a?(Hash) ? cc.size : cc
     cc <= show_ahead_count ? cc : per_page
   end
 
