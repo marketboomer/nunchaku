@@ -5,21 +5,20 @@ module Nunchaku
   class ExchangeRate < ActiveRecord
     self.table_name = 'exchange_rates'
 
-    JSONRATES_API_KEY = 'jr-998a5a48b629ce433c0fd7d031944dff'
+    JSONRATES_API_KEY = '424e4f63972152d6c326980cf6f8a536'
     class << self
-      def populate(from, to)
-        base_uri = "http://jsonrates.com/historical/?base=AUD&apiKey=#{JSONRATES_API_KEY}"
+      def populate(date)
+        base_uri = "http://apilayer.net/api/historical?access_key=#{JSONRATES_API_KEY}"
         stream = open(base_uri +
-                "&dateStart=#{from}" +
-                "&dateEnd=#{to}")
+                "&date=#{date}")
         response = JSON.parse(stream.read)
-        from.upto(to) do |date|
-          unless where(quote_date: date).exists?
-            # response = HTTParty.get("http://api.fixer.io/#{date.to_s}?base=AUD")
-            rates = response['rates'][date.to_s].except('utctime')
-            rates.each do |code,rate|
-              create(currency_code: code, quote_date: date, aud_rate: rate.to_d)
-            end
+        unless where(quote_date: date).exists?
+          rates = response['quotes']
+          aud_rate_conversion = rates["USDAUD"]
+          rates.each do |code,rate|
+            currency_code = code.slice(3..6)
+            new_rate = rate.to_d / aud_rate_conversion.to_d
+            create(currency_code: currency_code, quote_date: date, aud_rate: new_rate)
           end
         end unless response['error']
       end
