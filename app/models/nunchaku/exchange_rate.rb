@@ -5,10 +5,10 @@ module Nunchaku
   class ExchangeRate < ActiveRecord
     self.table_name = 'exchange_rates'
 
-    JSONRATES_API_KEY = '424e4f63972152d6c326980cf6f8a536'
+    API_KEY = '424e4f63972152d6c326980cf6f8a536'
     class << self
       def populate(date)
-        base_uri = "http://apilayer.net/api/historical?access_key=#{JSONRATES_API_KEY}"
+        base_uri = "http://apilayer.net/api/historical?access_key=#{API_KEY}"
         stream = open(base_uri +
                 "&date=#{date}")
         response = JSON.parse(stream.read)
