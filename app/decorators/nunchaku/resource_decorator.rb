@@ -32,12 +32,20 @@ class Nunchaku::ResourceDecorator < Draper::Decorator
       source_class.attribute_names - %w(id created_at updated_at lock_version)
     end
 
+    def csv_column_names
+      column_names
+    end
+
     def form_column_names
       column_names + %w(save)
     end
 
     def form_element_names
       column_names
+    end
+
+    def summary_element_names
+      form_element_names
     end
 
     def human_names(attrs_nonhuman = columns_names)
