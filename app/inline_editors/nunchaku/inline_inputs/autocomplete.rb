@@ -18,7 +18,7 @@ module Nunchaku
               return params;
             },
             select2: {
-              placeholder: "#{I18n.t(:search_for, :models => "#{resource.class.human_attribute_name(association.name.to_s)}")}",
+              placeholder: "#{placeholder}",
               minimumInputLength: 2,
               ajax: {
                 url: "#{self.options[:source]}",
@@ -41,6 +41,14 @@ module Nunchaku
       end
 
       protected
+
+      def placeholder
+        association ?  translated_model : I18n.t(attr_name)
+      end
+
+      def translated_model
+        I18n.t(:search_for, :models => resource.class.human_attribute_name(association.name.to_s))
+      end
 
       def association
         resource.class.reflect_on_all_associations(:belongs_to).uniq(&:foreign_key).select {|a| a.foreign_key.to_s == attr_name.to_s}.first
