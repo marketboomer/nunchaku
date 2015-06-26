@@ -46,7 +46,7 @@ module Nunchaku
         has_materials: %i(is_made_of is_partly is_defined_by is_detailed_by is_modified_by),
         has_portions_of: %i(has_slices_of),
       #  places:
-        bunches: %i(groups collects describes_many plays_many),
+        bunches: %i(groups collects describes_many plays_many spawns),
         partners: %i(connects_through),
 
       #  owns:
