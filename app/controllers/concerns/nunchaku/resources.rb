@@ -22,7 +22,11 @@ module Nunchaku
     protected
 
     def collection
-      treed_index? ? super.roots : super.preload(preloaded_associations)
+      roots_only? ? super.roots : super.preload(preloaded_associations)
+    end
+
+    def roots_only?
+      treed_index?
     end
 
     def treed_index?
