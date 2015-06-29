@@ -51,7 +51,7 @@ module Nunchaku
       end
 
       def association
-        resource.class.reflect_on_all_associations(:belongs_to).uniq(&:foreign_key).select {|a| a.foreign_key.to_s == attr_name.to_s}.first
+        @association ||= resource.class.reflect_on_all_associations(:belongs_to).uniq(&:foreign_key).select {|a| a.foreign_key.to_s == attr_name.to_s}.first
       end
     end
   end
