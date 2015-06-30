@@ -14,6 +14,7 @@ class AutocompleteInput < ::SimpleForm::Inputs::StringInput
         input.select2({
           placeholder: "#{I18n.t(:search_for, :models => label_text)}",
           minimumInputLength: "#{input_length}",
+          multiple: #{multiple},
 
           ajax: {
             url: "#{url}",
@@ -52,6 +53,10 @@ class AutocompleteInput < ::SimpleForm::Inputs::StringInput
 
   def url
     options[:url] || "/#{controller}/autocomplete"
+  end
+
+  def multiple
+    options[:multiple] || false
   end
 
   def controller
