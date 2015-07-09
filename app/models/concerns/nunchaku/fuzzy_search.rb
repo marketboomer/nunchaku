@@ -8,7 +8,7 @@ module Nunchaku
 
       def fuzzy_search(terms, opts = {})
         return all if terms.blank?
-        col = opts[:column] || 'search_text'
+        col = search_column(opts)
         where(terms.map { |term| "#{fuzzy_search_table(col)}.#{col} ILIKE ?" }.join(' AND '), *(terms.map { |t| "%#{t}%" }))
       end
 
@@ -53,6 +53,10 @@ module Nunchaku
 
       def fuzzy_search_table(col)
         table_name
+      end
+
+      def search_column(opts)
+        opts[:column] || 'search_text'
       end
     end
   end
