@@ -56,7 +56,6 @@ module Nunchaku
       end
 
       def search_column(opts)
-        puts "search_column"
         opts[:column] || 'search_text'
       end
     end
