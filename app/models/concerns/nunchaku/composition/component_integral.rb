@@ -3,11 +3,11 @@ module Nunchaku
     module ComponentIntegral
       extend ActiveSupport::Concern
 
-      class Integrates < Builder::CollectionAssociation
+      class Integrates < Nunchaku::Composition::Builder::CollectionAssociation
         include Properties::Configurational
       end
 
-      class IsComponentOf < Builder::SingularAssociation
+      class IsComponentOf < Nunchaku::Composition::Builder::SingularAssociation
         include Properties::Configurational
       end
 

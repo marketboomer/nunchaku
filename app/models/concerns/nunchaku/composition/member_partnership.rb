@@ -3,11 +3,11 @@ module Nunchaku
     module MemberPartnership
       extend ActiveSupport::Concern
 
-      class Partners < Builder::CollectionAssociation
+      class Partners < Nunchaku::Composition::Builder::CollectionAssociation
         include Properties::Invariant
       end
 
-      class IsPartnerIn < Builder::SingularAssociation
+      class IsPartnerIn < Nunchaku::Composition::Builder::SingularAssociation
         include Properties::Invariant
       end
 

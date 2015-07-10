@@ -3,12 +3,12 @@ module Nunchaku
     module MaterialObject
       extend ActiveSupport::Concern
 
-      class HasMaterials < Builder::CollectionAssociation
+      class HasMaterials < Nunchaku::Composition::Builder::CollectionAssociation
         include Properties::Configurational
         include Properties::Invariant
       end
 
-      class Makes < Builder::SingularAssociation
+      class Makes <Nunchaku::Composition:: Builder::SingularAssociation
         include Properties::Configurational
         include Properties::Invariant
       end

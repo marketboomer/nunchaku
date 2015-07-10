@@ -3,13 +3,13 @@ module Nunchaku
     module PlaceArea
       extend ActiveSupport::Concern
 
-      class Places < Builder::CollectionAssociation
+      class Places < Nunchaku::Composition::Builder::CollectionAssociation
         include Properties::Configurational
         include Properties::Homeomeric
         include Properties::Invariant
       end
 
-      class IsPlacedIn < Builder::SingularAssociation
+      class IsPlacedIn < Nunchaku::Composition::Builder::SingularAssociation
         include Properties::Configurational
         include Properties::Homeomeric
         include Properties::Invariant

@@ -3,12 +3,12 @@ module Nunchaku
     module PortionObject
       extend ActiveSupport::Concern
 
-      class HasPortionsOf < Builder::CollectionAssociation
+      class HasPortionsOf < Nunchaku::Composition::Builder::CollectionAssociation
         include Properties::Configurational
         include Properties::Homeomeric
       end
 
-      class IsPortionOf < Builder::SingularAssociation
+      class IsPortionOf < Nunchaku::Composition::Builder::SingularAssociation
         include Properties::Configurational
         include Properties::Homeomeric
       end
