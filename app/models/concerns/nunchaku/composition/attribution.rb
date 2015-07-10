@@ -13,11 +13,11 @@ module Nunchaku
         end
       end
 
-      class HasAttributes < Builder::CollectionAssociation
+      class HasAttributes < Nunchaku::Composition::Builder::CollectionAssociation
         include Properties::Invariant
       end
 
-      class IsAttributeOf < Builder::SingularAssociation
+      class IsAttributeOf < Nunchaku::Composition::Builder::SingularAssociation
         include Properties::Invariant
       end
 
